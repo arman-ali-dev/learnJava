@@ -37,4 +37,5 @@ The memory management part of the JVM, divided into different sections:
 #### PC Register → Tracks the current instruction being executed.
 #### Native Method Stack → Manages the execution of native (non-Java) methods.
 
-### Execution Engine → Converts bytecode into machine code and executes it through the CPU. It consists of an Interpreter (executes code line by line) and a JIT Compiler (optimizes for faster execution). 
+### Execution Engine:
+Converts bytecode into machine code and executes it through the CPU. It consists of an Interpreter (executes code line by line) and a JIT Compiler (optimizes for faster execution). 
