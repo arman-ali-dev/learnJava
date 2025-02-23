@@ -39,3 +39,34 @@ The memory management part of the JVM, divided into different sections:
 
 ### Execution Engine:
 Converts bytecode into machine code and executes it through the CPU. It consists of an Interpreter (executes code line by line) and a JIT Compiler (optimizes for faster execution). 
+
+## 5. How is Java a platform-independent language?
+Java is platform-independent because its code is converted into bytecode, which can run on any operating system using the JVM (Java Virtual Machine).
+Its main principle is "Write Once, Run Anywhere."
+
+## 6. What is the difference between JVM, JRE, and JDK?
+JVM (Java Virtual Machine) → Runs Java programs by converting bytecode into machine code. It is platform-dependent.
+JRE (Java Runtime Environment) → Provides everything needed to run Java programs, including JVM + libraries.
+JDK (Java Development Kit) → Contains JRE + development tools (compiler, debugger, etc.) to write and compile Java programs.
+
+<b>👉 JDK is for developers, JRE is for running Java apps, and JVM is the core engine that executes Java code.</b>
+
+## 7. What is the difference between final, finally, and finalize?
+final → A keyword that makes a variable constant, prevents method overriding, and stops class inheritance.
+finally → A block that always executes after exception handling, whether an exception occurs or not.
+finalize() → A method that runs before an object is garbage collected to perform cleanup tasks.
+
+## 8. What is the difference between String, StringBuffer, and StringBuilder?
+String → Immutable class, meaning once created, it cannot be changed; any modification creates a new object.
+StringBuffer → Mutable class, meaning it can be changed without creating a new object and is thread-safe (synchronized).
+StringBuilder → Similar to StringBuffer (mutable), but not thread-safe, making it faster in single-threaded environments.
+
+## 9. How does garbage collection work in Java?
+Garbage collection in Java automatically frees memory by removing objects that are no longer reachable. The JVM's garbage collector identifies and deletes unused objects to prevent memory leaks.
+
+## 10. What is the difference between HashMap and HashTable?
+## 11. How do multithreading and synchronization work in Java?
+## 12. What is the difference between checked and unchecked exceptions?
+
+## 13. What are Java 8 features? How do lambda expressions and streams work?
+## 14. How does Dependency Injection work in the Spring Framework?
