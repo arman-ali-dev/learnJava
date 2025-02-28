@@ -70,3 +70,25 @@ Garbage collection in Java automatically frees memory by removing objects that a
 
 ## 13. What are Java 8 features? How do lambda expressions and streams work?
 ## 14. How does Dependency Injection work in the Spring Framework?
+
+## 15. What are the main features of Java?
+### Platform Independent –
+Java code runs on any device with a JVM, no need to rewrite.
+### Object-Oriented –
+Java follows real-world object-based programming (OOP concepts).
+### Simple & Easy to Learn –
+Java has clean syntax and no complex features like pointers.
+### Secure –
+Java has built-in security features to protect from threats.
+### Robust & Reliable –
+Java handles errors well and manages memory automatically.
+### Multithreading Support –
+Java can run multiple tasks at the same time.
+### High Performance –
+Java uses JIT compiler to make execution faster.
+### Distributed Computing –
+Java supports features to create network-based applications.
+### Rich API & Open Source Libraries –
+Java provides many built-in tools and frameworks.
+### Automatic Memory Management –
+Java automatically removes unused objects to free memory. 🚀
