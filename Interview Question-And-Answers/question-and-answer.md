@@ -45,9 +45,9 @@ Java is platform-independent because its code is converted into bytecode, which 
 Its main principle is "Write Once, Run Anywhere."
 
 ## 6. What is the difference between JVM, JRE, and JDK?
-JVM (Java Virtual Machine) → Runs Java programs by converting bytecode into machine code. It is platform-dependent.
-JRE (Java Runtime Environment) → Provides everything needed to run Java programs, including JVM + libraries.
-JDK (Java Development Kit) → Contains JRE + development tools (compiler, debugger, etc.) to write and compile Java programs.
+JVM (Java Virtual Machine) → Runs Java programs by converting bytecode into machine code. It is platform-dependent.</br>
+JRE (Java Runtime Environment) → Provides everything needed to run Java programs, including JVM + libraries.</br>
+JDK (Java Development Kit) → Contains JRE + development tools (compiler, debugger, etc.) to write and compile Java programs.</br>
 
 <b>👉 JDK is for developers, JRE is for running Java apps, and JVM is the core engine that executes Java code.</b>
 
@@ -64,14 +64,14 @@ StringBuilder → Similar to StringBuffer (mutable), but not thread-safe, making
 ## 9. How does garbage collection work in Java?
 Garbage collection in Java automatically frees memory by removing objects that are no longer reachable. The JVM's garbage collector identifies and deletes unused objects to prevent memory leaks.
 
-## 10. What is the difference between HashMap and HashTable?
-## 11. How do multithreading and synchronization work in Java?
-## 12. What is the difference between checked and unchecked exceptions?
+## 10. What is the difference between checked and unchecked exceptions?
+### Checked Exception –
+These are checked at compile-time, and you must handle them using try-catch or throws. (e.g., IOException, SQLException).
 
-## 13. What are Java 8 features? How do lambda expressions and streams work?
-## 14. How does Dependency Injection work in the Spring Framework?
+### Unchecked Exception –
+These occur at runtime, and the compiler does not force you to handle them. (e.g., NullPointerException, ArrayIndexOutOfBoundsException).
 
-## 15. What are the main features of Java?
+## 11. What are the main features of Java?
 ### Platform Independent –
 Java code runs on any device with a JVM, no need to rewrite.
 ### Object-Oriented –
@@ -91,4 +91,34 @@ Java supports features to create network-based applications.
 ### Rich API & Open Source Libraries –
 Java provides many built-in tools and frameworks.
 ### Automatic Memory Management –
-Java automatically removes unused objects to free memory. 🚀
+Java automatically removes unused objects to free memory. 
+
+## 12. What is the difference between == and .equals() in Java?
+### == (Reference Comparison) –
+It checks if two variables point to the same memory location.
+
+### .equals() (Content Comparison) – 
+It checks if the values inside the objects are the same (if overridden). 
+
+## 13. What is a constructor in Java? Can we have multiple constructors in a class?
+A constructor in Java is a special method used to initialize objects when they are created. It has the same name as the class and no return type.
+
+Yes, we can have multiple constructors in a class using constructor overloading, where each constructor has different parameters.
+
+## 14. What is diffrence between Error and Exception?
+### Error –
+Big problems in the program that cannot be fixed or handled, like system crashes. (e.g., OutOfMemoryError).
+
+### Exception –
+Small issues in the program that can be fixed using try-catch, like wrong inputs. (e.g., NullPointerException). 
+
+## 15. What is dependency injection in Spring Boot? How does it work?
+
+### What is Dependency Injection in Spring Boot?
+Dependency Injection (DI) is a design pattern in Spring Boot that automatically provides required objects (dependencies) to a class instead of creating them manually. It makes the code more flexible and easier to maintain. Spring handles object creation and management, so we don’t need to use the new keyword. DI is implemented using annotations like @Autowired, @Service, and @Component.
+
+### How Does Dependency Injection Work?
+1️. Spring creates and manages objects (Beans) automatically.</br>
+2️. It injects these objects where needed, instead of us manually creating them.</br>
+3️. @Autowired tells Spring to inject the required dependency.</br>
+4️. This improves code reusability, testability, and maintainability.</br>
