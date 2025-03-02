@@ -122,3 +122,26 @@ Dependency Injection (DI) is a design pattern in Spring Boot that automatically 
 2️. It injects these objects where needed, instead of us manually creating them.</br>
 3️. @Autowired tells Spring to inject the required dependency.</br>
 4️. This improves code reusability, testability, and maintainability.</br>
+
+## 16. What is Wrapper Class?
+Wrapper classes in Java are used to convert primitive data types into objects. They allow primitives to be used in collections like ArrayList and provide useful utility methods.
+
+## 17. What is Autoboxing and Unboxing?
+<b>Autoboxing:</b>
+Autoboxing is the automatic conversion of a primitive type into its corresponding wrapper class object. For example, int automatically converts to Integer.
+
+<b>Unboxing:</b>
+Unboxing is the automatic conversion of a wrapper class object back into its corresponding primitive type. For example, Integer automatically converts to int.
+
+## 18. What is a throw vs. throws?
+<b>throw:</b>
+The throw keyword is used to manually generate (throw) an exception inside a method. It is followed by an exception object, like throw new ArithmeticException("Error");.
+
+<b>throws:</b>
+The throws keyword is used in a method declaration to indicate that the method might throw one or more exceptions. It tells the caller to handle the exception, like void readFile() throws IOException {}.
+
+## 19. What is Lambda Expression?
+A lambda expression is a short way to write anonymous functions in Java, allowing you to pass behavior as an argument. It is mainly used with functional interfaces to make code shorter and more readable.
+
+## 20. What is Functional Intreface?
+A functional interface is an interface with only one abstract method, mainly used with lambda expressions. It makes code shorter and cleaner by allowing us to pass function logic as a parameter.
