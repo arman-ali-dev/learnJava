@@ -159,5 +159,5 @@ Yes, the main() method can be declared as final in Java, but it has no special e
 Object Cloning in Java means creating an exact copy of an object using the clone() method of the Object class. The class must implement Cloneable and override clone() to avoid errors. By default, cloning creates a shallow copy.
 
 ## 25. Differentiate between deep copy and shallow copy in Java.
-<strong>Shallow Copy:</strong> Copies references of nested objects, so changes in one reflect in the other.</br>
-<strong>Deep Copy:</strong> Creates a fully independent copy, so changes don’t affect the original object.
+<strong>Shallow Copy:</strong> Shallow copy copies object references instead of creating new objects. If one object changes, the other also gets affected.</br>
+<strong>Deep Copy:</strong>: creates a completely new object with its own copies of data. Changes in one object don’t affect the other.
