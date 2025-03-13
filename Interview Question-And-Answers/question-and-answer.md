@@ -145,3 +145,19 @@ A lambda expression is a short way to write anonymous functions in Java, allowin
 
 ## 20. What is Functional Intreface?
 A functional interface is an interface with only one abstract method, mainly used with lambda expressions. It makes code shorter and cleaner by allowing us to pass function logic as a parameter.
+
+## 21. Can the "main()" method be overridden in Java?
+In Java, the main() method cannot be overridden because it is static, meaning it belongs to the class, not an object. However, a subclass can define its own main() method, but this is called method hiding, not overriding.
+
+## 22. Is it possible to overload the "main()" method in Java?
+Yes, main() method can be overloaded in Java by defining multiple main() methods with different parameters. However, JVM only calls main(String[] args) as the entry point, and other overloaded versions must be called manually.
+
+## 23. Can the "main" method be declared as "final" in Java?
+Yes, the main() method can be declared as final in Java, but it has no special effect. Since main() is static, it cannot be overridden anyway, and the program will run normally.
+
+## 24. Explain the concept of object cloning in Java.
+Object Cloning in Java means creating an exact copy of an object using the clone() method of the Object class. The class must implement Cloneable and override clone() to avoid errors. By default, cloning creates a shallow copy.
+
+## 25. Differentiate between deep copy and shallow copy in Java.
+<strong>Shallow Copy:</strong> Copies references of nested objects, so changes in one reflect in the other.</br>
+<strong>Deep Copy:</strong> Creates a fully independent copy, so changes don’t affect the original object.
