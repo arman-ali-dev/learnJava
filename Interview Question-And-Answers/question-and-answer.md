@@ -161,3 +161,9 @@ Object Cloning in Java means creating an exact copy of an object using the clone
 ## 25. Differentiate between deep copy and shallow copy in Java.
 <strong>Shallow Copy:</strong> Shallow copy copies object references instead of creating new objects. If one object changes, the other also gets affected.</br>
 <strong>Deep Copy:</strong>: creates a completely new object with its own copies of data. Changes in one object don’t affect the other.
+
+## 26. Highlight the importance of using a singleton object in Java.
+A Singleton object ensures that only one object of a class is created and used everywhere. This saves memory, avoids duplicate objects, and is useful for logging, databases, and caching.
+
+## 27. Is it possible to override a private method in a class if the class itself is declared as final?
+A private method cannot be overridden because it is not inherited by subclasses. A final class cannot be extended, so no methods (including public or protected ones) can be overridden.
