@@ -182,3 +182,21 @@ The rt.jar file in Java (before Java 9) contained all core classes required by t
 
 ## 32. Explain the significance of the Manifest file in Java.
 The Manifest file (MANIFEST.MF) in Java stores metadata about a JAR file, like the main class, classpath, and version details. It helps in making JARs executable and managing dependencies.
+
+## 33. Differentiate between method overriding and method overloading in Java.
+Method Overriding happens when a subclass provides a new implementation for a method already defined in the parent class (same method name, parameters, and return type).</br>
+Method Overloading happens when multiple methods in the same class have the same name but different parameters (number or type of arguments).
+
+## 34. Why might you choose to use an interface over an abstract class in Java? 
+You might use an interface instead of an abstract class in Java because:</br>
+
+Multiple Inheritance – A class can use many interfaces, but only one abstract class.</br>
+</br>
+Full Abstraction – Interfaces only have method declarations, while abstract classes can have both methods and code.</br>
+Loose Coupling – Interfaces make code more flexible and less dependent on specific classes.</br>
+Default Methods (Java 8+) – Interfaces can have default and static methods for extra features.</br>
+</br>
+Interfaces are best when you want to define rules without forcing a strict class structure! 
+
+## 35. Can you reassign a value to a final variable in Java?
+No, you cannot reassign a value to a final variable in Java after it is initialized. The value remains constant throughout the program.
