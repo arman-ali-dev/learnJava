@@ -200,3 +200,15 @@ Interfaces are best when you want to define rules without forcing a strict class
 
 ## 35. Can you reassign a value to a final variable in Java?
 No, you cannot reassign a value to a final variable in Java after it is initialized. The value remains constant throughout the program.
+
+## 36. What is type inference in Java?
+Type inference in Java means the compiler automatically detects a variable's data type based on its assigned value. It was introduced in Java 10 using the var keyword.
+
+## 37. Compare and contrast stateful and stateless programming in Java.
+
+### Stateful vs. Stateless Programming in Java
+Stateful Programming means the application remembers past interactions by storing data (state) between method calls or requests. Example: Session-based web apps where user data is stored. </br>
+Stateless Programming means each request is independent, and no past data is stored. Example: REST APIs where every request contains all necessary data.</br>
+Stateful systems use more memory since they store session data, while stateless systems use less memory and scale better.</br>
+Stateful apps are useful for banking systems, shopping carts, etc., while stateless apps are best for cloud-based services and microservices.</br>
+Stateless apps are faster since they don’t need to manage past data, but stateful apps are better for personalized experiences. 
