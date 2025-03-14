@@ -167,3 +167,18 @@ A Singleton object ensures that only one object of a class is created and used e
 
 ## 27. Is it possible to override a private method in a class if the class itself is declared as final?
 A private method cannot be overridden because it is not inherited by subclasses. A final class cannot be extended, so no methods (including public or protected ones) can be overridden.
+
+## 28. Can changes be made to a final or immutable class using reflection in Java?
+Using reflection, we can modify even final or immutable classes in Java by accessing and changing their private fields. However, this is not recommended because it can break security and stability.
+
+## 29. What is the garbage collector algorithm used by the JVM, and is it the same for every operating system?
+JVM uses different Garbage Collection (GC) algorithms like Serial GC, Parallel GC, CMS GC, G1 GC, and ZGC to automatically manage memory. The default GC depends on the Java version and system configuration. It is not the same for every OS, as performance tuning and implementation may vary. Developers can also manually select a GC algorithm using JVM options.
+
+## 30. When does the Garbage Collector invoke itself in Java?
+Java's Garbage Collector (GC) runs automatically when memory is low or an object is no longer needed. You can request it using System.gc(), but Java may not run it immediately.
+
+## 31. What is the purpose of the "rt.jar" file in Java?
+The rt.jar file in Java (before Java 9) contained all core classes required by the JVM to run programs. In Java 9+, it was replaced by the modular system (jmods/) for better performance.
+
+## 32. Explain the significance of the Manifest file in Java.
+The Manifest file (MANIFEST.MF) in Java stores metadata about a JAR file, like the main class, classpath, and version details. It helps in making JARs executable and managing dependencies.
