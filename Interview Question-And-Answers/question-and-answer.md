@@ -212,3 +212,15 @@ Stateless Programming means each request is independent, and no past data is sto
 Stateful systems use more memory since they store session data, while stateless systems use less memory and scale better.</br>
 Stateful apps are useful for banking systems, shopping carts, etc., while stateless apps are best for cloud-based services and microservices.</br>
 Stateless apps are faster since they don’t need to manage past data, but stateful apps are better for personalized experiences. 
+
+## 38. What is a lambda expression, and when was it introduced in Java?
+A lambda expression is a short way to write anonymous functions in Java, mainly used for functional programming. It was introduced in Java 8 (2014) to simplify code, especially with functional interfaces.
+
+## 39. What is the difference between a lambda expression and an anonymous class?
+A lambda expression is a short and cleaner way to implement a functional interface, while an anonymous class can implement multiple methods and extend classes. Lambda is more readable and efficient, while an anonymous class creates an extra class file.
+
+## 40. Can we use a lambda expression without a functional interface? Why or why not?
+No, we cannot use a lambda expression without a functional interface because lambda needs a single abstract method (SAM) to work. Java uses functional interfaces to provide a proper context for lambda execution.
+
+## 41. What is Functional Programming?
+Functional programming is a programming style where we write code using pure functions.
