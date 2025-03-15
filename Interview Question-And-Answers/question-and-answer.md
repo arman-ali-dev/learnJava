@@ -224,3 +224,77 @@ No, we cannot use a lambda expression without a functional interface because lam
 
 ## 41. What is Functional Programming?
 Functional programming is a programming style where we write code using pure functions.
+
+## 42. Explain the concept of Wrapper Classes in Java.
+Wrapper classes in Java convert primitive data types (like int, double) into objects (Integer, Double, etc.) and vice versa. They enable autoboxing (primitive to object) and unboxing (object to primitive) and are useful in collections where objects are required.
+
+## 43. Distinguish between primitive and non-primitive data types in Java.
+Primitive Data Types: These are basic data types like int, char, and double that store actual values and have a fixed size. They are stored in stack memory and do not have built-in methods.</br>
+
+Non-Primitive Data Types: These are complex types like String, Array, and Class that store references to objects. They are stored in heap memory and come with useful methods.
+
+## 44. What is an Anonymous Object in Java?
+An Anonymous Object is an object created without a name (reference variable) and used immediately. It is useful when an object is needed only once, like calling a method directly.
+
+## 45. Is it possible to overload methods in a child class in Java?
+Yes, a child class can overload methods by defining multiple methods with the same name but different parameters.
+
+## 46. Can you change the return type of an overloaded method in Java?
+Yes, you can change the return type of an overloaded method, but just changing the return type alone doesn’t count as overloading. The method must have different parameters (type or number).
+
+## 47. Can you change the return type of an overriding method in Java?
+Yes, you can change the return type in method overriding, but only to a subclass of the parent method’s return type (covariant return type). If the return type is unrelated, it will cause a compilation error.
+
+## 48. Discuss the differences between compile-time binding and runtime binding, as well as compile-time polymorphism and runtime polymorphism.
+### Compile-time Binding vs. Runtime Binding
+Compile-time Binding: Method or variable is resolved at compile time. Example: method overloading.</br>
+Runtime Binding: Method is resolved at runtime using dynamic method dispatch. Example: method overriding.
+
+### Compile-time Polymorphism vs. Runtime Polymorphism
+Compile-time Polymorphism: Achieved using method overloading, where multiple methods have the same name but different parameters.</br>
+Runtime Polymorphism: Achieved using method overriding, where a child class provides a specific implementation of a method from the parent class.
+
+## 49. what is dynamic method dispatch?
+Dynamic Method Dispatch is a process where the method to be called is determined at runtime, based on the actual object type (not the reference type). It enables method overriding and helps achieve runtime polymorphism.
+
+## 50. What is a covariant return type in method overriding, and does it support overloading as well?
+### Covariant Return Type in Overriding:
+In method overriding, the child class can change the return type of a method, but only to a subclass of the parent’s return type. This is called a covariant return type.
+
+### Does It Support Overloading?
+No, method overloading does not support covariant return types because overloading depends only on different parameters, not the return type.
+
+## 51. What are the advantages and disadvantages of using log4j for logging in Java?
+
+### Advantages of Log4j:
+Highly Configurable: Supports XML and properties file-based configurations for flexibility.</br>
+Multiple Logging Levels: Provides levels like DEBUG, INFO, WARN, ERROR, FATAL to control logging output.</br>
+Performance Efficient: Uses asynchronous logging to improve performance.</br>
+Multiple Output Destinations: Logs can be written to console, files, databases, sockets, etc.</br>
+Filter and Formatting Support: Allows custom log filters and formatters for better readability.</br>
+
+### Disadvantages of Log4j:
+Complex Configuration: XML-based configurations can be difficult to manage.</br>
+Security Issues: Older versions (Log4j 1.x and 2.x) had vulnerabilities like Log4Shell.</br>
+Memory Usage: Improper configuration can cause high memory consumption.</br>
+Thread Safety Concerns: In some cases, improper handling may lead to concurrent logging issues.</br>
+Alternative Options Available: Modern frameworks like SLF4J with Logback provide better performance and flexibility.</br>
+
+## 52. Explain the concepts of coupling and collision in software engineering.
+### Coupling:
+Coupling means how much one part of a program depends on another. Less coupling is better because it makes the code easier to change and fix.
+
+### Collision:
+Collision happens when two or more parts of a program try to use the same resource at the same time, causing errors or conflicts.
+
+## 53. Which sorting algorithm is considered the best in Java, and why?
+
+## 54. What is the significance of the "java.lang" package in Java?
+### Significance of java.lang Package in Java:
+Automatically Imported: It is automatically imported in every Java program, so you don’t need to manually import it.</br>
+Core Classes: It contains essential classes like String, Math, Object, System, Thread, Exception, etc.</br>
+Fundamental Functionality: Provides basic functionalities like string handling, mathematical operations, multi-threading, exception handling, etc.</br>
+Wrapper Classes: Includes wrapper classes like Integer, Double, Boolean, which help in converting primitives to objects.</br>
+
+## 55. Describe the purpose and usage of the "final" keyword in Java.
+The final keyword in Java is used to restrict modification of variables, methods, and classes. A final variable cannot be reassigned, a final method cannot be overridden, and a final class cannot be inherited. It is useful for security, immutability, and optimization in Java programs.
