@@ -298,3 +298,18 @@ Wrapper Classes: Includes wrapper classes like Integer, Double, Boolean, which h
 
 ## 55. Describe the purpose and usage of the "final" keyword in Java.
 The final keyword in Java is used to restrict modification of variables, methods, and classes. A final variable cannot be reassigned, a final method cannot be overridden, and a final class cannot be inherited. It is useful for security, immutability, and optimization in Java programs.
+
+## 56. Why can private members be accessed through reflection in Java?
+In Java, private members can be accessed through Reflection API because it allows modifying access controls at runtime. By using setAccessible(true), Java bypasses access restrictions, enabling access to private variables and methods for debugging, testing, and frameworks like Hibernate and Spring.
+
+## 57. Discuss the different scopes of member variables in Java. 
+1. Instance Variables: Declared inside a class but outside methods; belong to an object and exist as long as the object exists.</br>
+2. Class Variables (Static): Declared with static inside a class; shared among all objects and exist throughout the program.</br>
+3. Local Variables: Declared inside a method; exist only during method execution and must be initialized before use.</br>
+4. Block Variables: Declared inside a block ({ }); exist only within that block and are inaccessible outside it.
+
+## 58. What is reflection in Java, and what are its common uses?
+Reflection in Java is a runtime mechanism that allows inspecting and modifying classes, methods, and fields dynamically. It is part of the java.lang.reflect package and enables accessing private members, invoking methods, and creating objects dynamically. Reflection is widely used in frameworks like Spring, Hibernate, and JUnit for dependency injection, ORM, and testing. However, it can impact performance and security if not used carefully.
+
+## 59. Is the FileNotFoundException a checked or unchecked exception in Java?
+FileNotFoundException is a checked exception in Java that occurs when a specified file is missing or inaccessible.
