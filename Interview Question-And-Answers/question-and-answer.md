@@ -313,3 +313,28 @@ Reflection in Java is a runtime mechanism that allows inspecting and modifying c
 
 ## 59. Is the FileNotFoundException a checked or unchecked exception in Java?
 FileNotFoundException is a checked exception in Java that occurs when a specified file is missing or inaccessible.
+
+## 60. What is an inner class in Java?
+An inner class in Java is a class defined inside another class. It helps in grouping related logic and can access all members (even private) of the outer class.
+
+## 61. How do you create an object of an inner class in Java?
+To create an object of an inner class in Java, first, you need to create an object of the outer class, and then use it to create the inner class object.
+
+## 62. What is the name of the compiled inner class in Java?
+The compiled name of an inner class in Java follows the format Outer$Inner.class, where $ separates the outer and inner class names.
+
+### You would use an inner class in Java when:
+
+1. Logical Grouping: When a class is only relevant to its outer class (e.g., Engine inside Car).</br>
+2. Encapsulation: To hide helper classes from outside access.</br>
+3. Access to Private Members: Inner classes can directly access private members of the outer class.</br>
+4. Event Handling in GUI: Used in Swing/AWT for handling button clicks (like ActionListener).
+
+## 63. Explain the difference between a static class and a static inner class in Java.
+In Java, a static class does not exist because top-level classes cannot be static. However, a static inner class is a nested class declared with the static keyword inside another class. It does not require an instance of the outer class and cannot access non-static members of the outer class directly.
+
+## 64. What are the access modifiers available in Java?
+1. public → Accessible from anywhere in the program.</br>
+2. private → Accessible only within the same class.</br>
+3. protected → Accessible within the same package and in subclasses.</br>
+4. (Default - No modifier) → Accessible only within the same package.
