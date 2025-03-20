@@ -375,3 +375,11 @@ No, you cannot declare a class as both private and protected in Java.</br>
   -> private class → Only allowed for inner (nested) classes, not for top-level classes.</br>
   -> protected class → Not allowed in Java; only methods, variables, and inner classes can be protected.</br>
 If you try to declare a class as both private and protected, it will cause a compilation error.
+
+## 71. What is the purpose of the "transient" keyword in Java?
+The transient keyword in Java is used to prevent a field from being serialized. When an object is serialized, transient fields are ignored and set to their default values during deserialization. 
+
+## 72. What is the meaning of the Serial Version UID in Java Serialization?
+The Serial Version UID (serialVersionUID) is a unique identifier used in Java serialization to ensure version compatibility of serialized objects.
+
+If a class's serialVersionUID does not match during deserialization, an InvalidClassException occurs.
