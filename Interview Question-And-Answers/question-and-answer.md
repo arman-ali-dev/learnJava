@@ -338,3 +338,40 @@ In Java, a static class does not exist because top-level classes cannot be stati
 2. private → Accessible only within the same class.</br>
 3. protected → Accessible within the same package and in subclasses.</br>
 4. (Default - No modifier) → Accessible only within the same package.
+
+## 65. What is Serialization and Deserialization in Java?
+### Serialization:
+Serialization is a mechanism to convert state of an object into byte stream.
+
+### Deserialization:
+Deserialization is reverse process of serialization.
+
+## 66. How do you implement Serialization in Java?
+### Steps to Implement Serialization in Java:
+1. Implement Serializable interface in your class.</br>
+2. Use ObjectOutputStream to serialize the object.</br>
+3. Use ObjectInputStream to deserialize the object.</br>
+4. (Optional) Use transient keyword to exclude fields from serialization.
+
+## 67. How does the JVM operate on serialized objects in Java?
+The JVM converts an object into a byte stream during serialization using ObjectOutputStream, so it can be saved or sent over a network. During deserialization, ObjectInputStream converts the byte stream back into an object. If the serialVersionUID does not match, an InvalidClassException occurs. Fields marked as transient are not serialized. If a class does not implement Serializable, an exception is thrown.
+
+## 68. Explain the difference between a method and a function in Java.
+### Function:
+A function is an independent block of code that performs a specific task and can exist outside a class (not applicable in Java).
+
+### Method:
+A method is a function that belongs to a class or object in Java and is used to define behavior. 
+
+## 69. What is an Annotation in Java, and how do you create a custom annotation?
+### What is an Annotation in Java?
+Annotations in Java are metadata that provide information about code but do not affect its execution. They are used for compilation instructions, runtime processing, and code analysis.</br>
+</br>
+Common examples: @Override, @Deprecated, @FunctionalInterface.
+
+## 70. Can you declare a class as both private and protected in Java?
+No, you cannot declare a class as both private and protected in Java.</br>
+
+  -> private class → Only allowed for inner (nested) classes, not for top-level classes.</br>
+  -> protected class → Not allowed in Java; only methods, variables, and inner classes can be protected.</br>
+If you try to declare a class as both private and protected, it will cause a compilation error.
