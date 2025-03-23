@@ -383,3 +383,77 @@ The transient keyword in Java is used to prevent a field from being serialized. 
 The Serial Version UID (serialVersionUID) is a unique identifier used in Java serialization to ensure version compatibility of serialized objects.
 
 If a class's serialVersionUID does not match during deserialization, an InvalidClassException occurs.
+
+## 73. Define and differentiate between Static Import, Static Block, Static Method, Static Variable, and Static Class in Java.
+Static Import – It allows using static members of another class without specifying the class name.</br>
+Static Block – It executes once when the class is loaded, used for initialization.</br>
+Static Method – It belongs to the class and can be called without creating an object.</br>
+Static Variable – It is a class-level variable shared among all objects of the class.</br>
+Static Class – Only nested classes can be static, making them independent of the outer class instance.
+
+## 74. What are the differences between HTTP and HTTPS (HTTP Secure)?
+Security – HTTP transmits data in plain text, while HTTPS encrypts it for security.</br>
+Port – HTTP uses port 80, whereas HTTPS uses port 443.</br>
+SSL/TLS – HTTPS uses SSL/TLS certificates to encrypt data and ensure secure communication.</br>
+SEO & Trust – Google prefers HTTPS for better rankings, and users trust secure sites more.</br>
+Performance – HTTPS may be slightly slower due to encryption but is much safer.
+
+## 75. What is the JVM (Java Virtual Machine)?
+JVM (Java Virtual Machine) is a runtime environment that executes Java bytecode on any platform. It provides features like memory management, garbage collection, and platform independence.
+
+## 76. Explain the concept of platform independence in Java.
+Platform independence in Java means that Java code can run on any operating system without modification. This is possible because Java programs are compiled into bytecode, which the JVM (Java Virtual Machine) interprets and executes on any platform that has a compatible JVM.
+
+## 77. Is the JVM platform-independent?
+No, the JVM (Java Virtual Machine) is not platform-independent because each operating system has its own specific implementation of the JVM. 
+
+## 78. Who calls the main method in Java?
+In Java, the JVM (Java Virtual Machine) calls the main method when a program starts execution. It looks for the public static void main(String[] args) method and runs it as the entry point of the program.
+
+## 79. Differentiate between JDK, JRE, and JVM in Java.
+JDK (Java Development Kit) – It includes JRE, compiler, and development tools for writing and compiling Java programs.</br>
+JRE (Java Runtime Environment) – It contains JVM and libraries needed to run Java applications.</br>
+JVM (Java Virtual Machine) – It executes Java bytecode and provides platform independence.
+
+## 80. What are the different memory areas inside the JVM in Java?
+### JVM memory is divided into several areas for efficient execution of Java programs:
+
+Method Area – Stores class metadata, static variables, and method code.</br>
+Heap – Stores objects and instance variables; shared among all threads.</br>
+Stack – Stores method call frames, local variables, and partial results for each thread.</br>
+PC Register – Holds the address of the currently executing instruction.</br>
+Native Method Stack – Stores native (non-Java) method calls used via JNI (Java Native Interface).
+
+## 81. Describe the Heap Area in the JVM.
+The Heap Area in JVM is where all Java objects and instance variables are stored. It is shared by all threads and managed by the Garbage Collector (GC).</br>
+
+It has two main parts:</br>
+Young Generation – Stores new objects, and unused ones are quickly removed.</br>
+Old Generation – Stores long-lived objects that survive multiple GC cycles.</br>
+
+From Java 8 onwards, Metaspace is used to store class metadata instead of the old Permanent Generation.
+
+## 82. What happens to the JVM when an error or exception occurs in Java?
+### When an error or exception happens in Java, the JVM reacts in different ways:
+
+Handled Exception – If the exception is caught using try-catch, the program continues running normally.</br>
+Unhandled Exception – If not handled, the JVM stops execution and prints an error message (stack trace).</br>
+Error – Serious issues like OutOfMemoryError or StackOverflowError usually cause the JVM to crash.</br>
+If exceptions are handled properly, the program keeps running; otherwise, the JVM may stop.
+
+## 83. Is the String constant pool part of the Heap Area in Java?
+Yes, the String Constant Pool is a part of the Heap Area in Java, where string literals are stored to save memory. When a string is created using "", it is stored in the pool, but using new String(), it is stored separately in the heap.
+
+## 84. How does the class loader work in Java?
+### In Java, the Class Loader loads Java classes into memory when required. It follows three main steps:
+Loading – Finds the .class file and loads it into memory.</br>
+Linking – Verifies bytecode, allocates memory for static variables, and prepares the class.</br>
+Initialization – Executes static blocks and initializes static variables.</br>
+
+### There are three types of Class Loaders:
+Bootstrap ClassLoader – Loads core Java classes (java.lang, java.util).</br>
+Extension ClassLoader – Loads classes from ext directory (javax.*).</br>
+Application ClassLoader – Loads user-defined classes from the classpath.
+
+## 85. What details are stored inside the Method Area in Java?
+The Method Area in Java stores class metadata, static variables, method bytecode, and the runtime constant pool. From Java 8 onwards, it is part of Metaspace, replacing the older PermGen ( Permanent Generation ).
