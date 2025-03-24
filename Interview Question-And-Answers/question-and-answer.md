@@ -499,3 +499,84 @@ hashCode() returns an integer (hash value) used for storing objects in hashing-b
 equals() checks if two objects are logically equal (same data).</br>
 </br>
 If equals() returns true, then hashCode() must be the same. But same hashCode() does not guarantee equals() will be true.
+
+## 96. Describe the real use of interfaces and abstract classes in Java.
+### Interface
+An interface in Java is a blueprint that defines method signatures without implementation. It allows multiple inheritance and helps in achieving abstraction and polymorphism. Classes that implement an interface must provide implementations for its methods.
+
+### Abstract Class
+An abstract class is a class that can have both implemented and unimplemented (abstract) methods. It is used when multiple classes share common behavior but also need their own specific implementations. Objects cannot be created from an abstract class directly.
+
+## 97. What is Marker Interface With Example?
+A Marker Interface is an empty interface (without methods or fields) used to indicate or tag a class for special behavior by the JVM or frameworks.
+</br>
+Example: Serializable in Java.
+
+## 98. How can you achieve multiple inheritance in Java?
+Multiple inheritance in Java means inheriting features from more than one source. It is achieved using interfaces, as Java does not support multiple class inheritance to avoid ambiguity.
+
+## 99. Explain all the object-oriented programming concepts in Java.
+### Java follows Object-Oriented Programming (OOP) principles, which include the following four main concepts:
+#### 1. Encapsulation (Data Hiding)
+Encapsulation means wrapping data (variables) and methods into a single unit (class) and restricting direct access to them. It is achieved using private variables and public getter/setter methods.
+
+#### 2. Inheritance (Code Reusability)
+Inheritance allows a class (child) to acquire properties and methods from another class (parent), promoting code reuse and reducing redundancy.
+
+#### 3. Polymorphism (One Name, Many Forms)
+Polymorphism allows one method to be used for multiple functionalities. It is of two types:</br>
+✔ Compile-time Polymorphism (Method Overloading)
+✔ Runtime Polymorphism (Method Overriding)
+
+#### 4. Abstraction (Hiding Implementation)
+Abstraction means hiding implementation details and showing only necessary information. It can be achieved using abstract classes and interfaces.
+
+## 100. Differentiate between Encapsulation and Abstraction in Java.
+✔ Encapsulation: It hides data by making variables private and allows controlled access through getter/setter methods. It ensures data security and prevents unauthorized modification.</br></br>
+
+✔ Abstraction: It hides the implementation details and only shows the necessary functionality using abstract classes or interfaces. It helps in reducing complexity and improving code maintainability.
+
+## 101. Discuss the significance of object-oriented programming in Java.
+OOP in Java makes code modular, reusable, and secure by using encapsulation, inheritance, polymorphism, and abstraction. It helps in reducing redundancy, improving scalability, and simplifying complex systems. By modeling real-world entities using classes and objects, OOP enhances code organization and maintainability. 
+
+## 102. Is it possible to create an object of an abstract class inside the same abstract class in Java?
+No, you cannot create an object of an abstract class directly in Java because abstract classes are incomplete (they may have abstract methods without implementation). However, you can create an object inside the same abstract class using an anonymous inner class.
+
+## 103. What does OOP (Object-Oriented Programming) refer to?
+Object-Oriented Programming (OOP) is a programming paradigm that organizes code using objects and classes to model real-world entities. It follows four key principles: Encapsulation, Inheritance, Polymorphism, and Abstraction, making code reusable, modular, and maintainable.
+
+## 104. Define the concept of a Class in object-oriented programming.
+A class in Object-Oriented Programming is a blueprint or template for creating objects. It defines variables (attributes) and methods (behaviors) that objects of that class will have. In Java, a class is created using the class keyword.
+
+## 105. Define the concept of an Object in object-oriented programming.
+An object in Object-Oriented Programming is an instance of a class that contains state (variables) and behavior (methods). It represents a real-world entity and is created using the new keyword in Java. 
+
+## 106. Explain the concept of Encapsulation in object-oriented programming.
+Encapsulation in Object-Oriented Programming is the concept of hiding data by making class variables private and providing access through public getter and setter methods. This ensures data security, controlled access, and better maintainability.
+
+## 107. Explain the concept of Abstraction in object-oriented programming.
+Abstraction in Object-Oriented Programming means hiding implementation details and only showing the essential functionality. It is achieved using abstract classes and interfaces in Java, helping to reduce complexity and improve code maintainability.
+
+## 108. What is Inheritance in object-oriented programming?
+Inheritance in Object-Oriented Programming is the concept where a child class (subclass) acquires the properties and behaviors of a parent class (superclass).
+
+## 109. Explain the concept of Polymorphism in object-oriented programming.
+Polymorphism in Object-Oriented Programming means one method or function behaving differently based on the object or input. It allows code flexibility and reusability and is of two types:</br>
+</br>
+Method Overloading (Compile-time Polymorphism) – Same method name with different parameters.</br>
+Method Overriding (Runtime Polymorphism) – Subclass provides a specific implementation of a method from the parent class.
+
+## 110. What is Overriding and Overloading in Java, and what is the difference between them?
+✔ Method Overriding: When a subclass provides a new implementation of a method inherited from the parent class. It is used for runtime polymorphism and requires inheritance.
+</br>
+</br>
+✔ Method Overloading: When multiple methods in the same class have the same name but different parameters. It is used for compile-time polymorphism and does not require inheritance.
+
+## 111. Explain the rules for access modifiers when overriding methods in Java.
+If the parent method is public, the child method must also be public.</br>
+If the parent method is protected, the child method can be protected or public, but not private.</br>
+Private methods cannot be overridden because they are only accessible within the same class.</br>
+Default (no modifier) methods can only be overridden within the same package.
+
+## 112. What is a Covariant Type in Java?
+A Covariant Return Type in Java allows an overridden method in a subclass to return a subtype (child class) of the return type declared in the parent class.
