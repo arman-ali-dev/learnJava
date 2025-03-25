@@ -784,3 +784,43 @@ Even though an abstract class cannot be instantiated, it can have a constructor.
 
 ## 145. Explain the concept of constructor chaining in Java.
 Constructor chaining means calling one constructor from another constructor within the same class or from a parent class. This helps in code reuse and reducing redundancy.
+
+## 146. Explain the concepts of try-catch, try with multiple catch blocks, and try with resources in Java.
+### 1. try-catch Block
+The try-catch block is used to handle exceptions in Java. The code that might throw an exception is placed inside the try block, and the corresponding handling logic is written in the catch block.
+### 2. try with Multiple catch Blocks
+A try block can have multiple catch blocks to handle different types of exceptions separately.
+### 3. try with Resources (try-with-resources)
+The try-with-resources statement is used to automatically close resources (like files, sockets, or database connections) after the try block completes. This feature was introduced in Java 7.
+
+## 147. Describe the hierarchy of exceptions in Java.
+### 1. Throwable (Root Class)
+#### The Throwable class is the root of the exception hierarchy. It has two main subclasses:
+1. Exception
+2. Error
+
+### 2. Exception (Recoverable)
+#### The Exception class represents conditions that a program can catch and handle.
+
+### Types of Exceptions:
+
+#### Checked Exceptions:
+1. Must be handled using try-catch or declared using throws.</br>
+2. Occur during compile-time.
+#### Examples:
+1. IOException</br>
+2. SQLException</br>
+3. FileNotFoundException
+
+#### Unchecked Exceptions (Runtime Exceptions):
+
+1. Do not need to be handled explicitly.</br>
+2. Occur during runtime.
+
+#### Examples:
+
+1. NullPointerException</br>
+2. ArrayIndexOutOfBoundsException
+3. ArithmeticException
+
+
