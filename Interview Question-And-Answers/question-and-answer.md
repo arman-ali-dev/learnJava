@@ -775,4 +775,12 @@ A constructor that takes arguments to initialize an object with specific values 
 Restricts object creation from outside the class, mainly used in Singleton patterns or utility classes.
 ### 4. Copy Constructor (Not Built-in in Java)
 Manually created to copy values from one object to another by passing an object as a parameter.
-### 
+### 5. Static Constructor (Not Supported in Java)
+Java does not support static constructors, but static blocks can be used for static initialization.
+
+## 144. Is it possible to have a constructor inside an abstract class in Java?
+Yes, an Abstract Class Can Have a Constructor in Java!
+Even though an abstract class cannot be instantiated, it can have a constructor. This constructor is used to initialize common properties for subclasses.
+
+## 145. Explain the concept of constructor chaining in Java.
+Constructor chaining means calling one constructor from another constructor within the same class or from a parent class. This helps in code reuse and reducing redundancy.
