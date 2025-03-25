@@ -580,3 +580,199 @@ Default (no modifier) methods can only be overridden within the same package.
 
 ## 112. What is a Covariant Type in Java?
 A Covariant Return Type in Java allows an overridden method in a subclass to return a subtype (child class) of the return type declared in the parent class.
+
+## 113. Explain the concepts of IS-A and HAS-A relationships in Java.
+IS-A Relationship: It represents inheritance where one class is a subtype of another (e.g., Dog is an Animal).</br>
+HAS-A Relationship: It represents a relationship where one class contains an instance of another (e.g., Car has an Engine).
+
+## 114. What are Association, Composition, and Aggregation in Java?
+#### 1. Association
+It is a general relationship between two classes where both can exist independently. Example: Student and Teacher—a student can have multiple teachers, and a teacher can have multiple students.
+
+#### 2. Composition (Strong HAS-A Relationship)
+It is a relationship where one class contains another, and the contained class cannot exist independently. Example: Car and Engine—if the Car is destroyed, the Engine is also destroyed.
+
+#### 3. Aggregation (Weak HAS-A Relationship)
+It is a relationship where one class contains another, but the contained class can exist independently. Example: Library and Books—if the Library is destroyed, the Books can still exist elsewhere.
+
+## 115. Define multi-level and multiple level inheritance in Java.
+### Multi-Level Inheritance:
+When a class inherits from another class, which itself is inherited from another class. Example: Grandparent → Parent → Child.
+
+### Multiple Inheritance:
+Java does not support multiple inheritance with classes but allows it using interfaces. Example: class C implements A, B.
+
+## 116. What is the diamond problem in object-oriented programming, and how is it resolved?
+Diamond Problem occurs when a class inherits from two parent classes that both inherit from the same base class, causing confusion about which method to inherit.
+</br>
+In Java, this issue is avoided because multiple inheritance with classes is not allowed. However, with interfaces, it can be resolved using default methods and method overriding.
+
+## 117. Explain the protected access specifier in the context of inheritance in Java.
+The protected access specifier allows a member to be accessed within the same package and by subclasses in other packages. When a child class inherits a parent class, it can directly access protected methods and variables. It is more accessible than private but less than public. It helps in code reusability and maintaining encapsulation in inheritance.
+
+## 118. Define Data Hiding in the context of inheritance in Java.
+Data Hiding in inheritance means restricting direct access to a class's data members by using private access modifiers. It ensures that subclasses cannot directly access private fields of the parent class and must use getter/setter methods for controlled access.
+
+## 119. What does it mean for a class to be immutable, and how can you make a class immutable in Java?
+
+#### What is an Immutable Class?
+An immutable class is a class whose objects cannot be modified after they are created. Any change results in a new object instead of modifying the existing one.
+
+#### How to Make a Class Immutable in Java?
+
+1. Declare the class as final so it cannot be extended.</br>
+2. Make all fields private and final to prevent modification after object creation.</br>
+3. Do not provide setter methods, so field values cannot be changed.</br>
+4. Initialize fields via a constructor and assign values only once.
+
+## 120. Its state cannot change after creation.
+#### An immutable object in Java has the following properties:
+
+1. Its state cannot change after creation.</br>
+2. All fields are private and final to prevent modification.</br>
+3. No setter methods are provided.</br>
+4. Any mutable fields return a copy instead of a direct reference.
+
+## 121. Explain the differences between String literals and String objects in Java.
+String literals are stored in the String Pool and reused if already present. String objects created using new are stored in Heap Memory and always create a new object. Literals are memory-efficient, while objects offer flexibility but use more memory.
+
+## 122. Describe the concept of the String pool in Java.
+The String Pool in Java is a special memory area inside the heap where String literals are stored. If a new String literal is created and already exists in the pool, Java reuses the existing object instead of creating a new one. This helps in saving memory and improving performance. However, new String("Hello") always creates a new object in the heap, not in the pool.
+
+## 123. What happens when you compare "==" and ".equals" for String and new String objects in Java?
+### Comparison of == vs .equals() for Strings in Java
+== (Reference Comparison)
+
+#### == (Reference Comparison)
+1. Compares memory addresses (references), not actual content.
+2. Works for String literals (same reference in String Pool).
+3. Fails for new String() because it creates a new object in Heap.
+
+#### .equals() (Content Comparison)
+1. Compares the actual content (characters) of the String.
+2. Works correctly for both literals and new String() objects.
+
+## 124. What are the results of comparing "==" and ".equals" for String and StringBuffer objects in Java?
+== always returns false for String and StringBuffer because they are different classes and have different memory references. .equals() also returns false because StringBuffer does not override .equals(), so it behaves like == (compares references). To compare content, convert StringBuffer to String using .toString() before using .equals().
+
+## 125. Explain the output of the expression "A"+"B"+"C"+"D" in Java.
+In Java, "A" + "B" + "C" + "D" performs String concatenation, resulting in "ABCD". Since all are String literals, Java optimizes and directly replaces the expression with "ABCD" at compile time.
+
+## 126. Why are StringBuilder and StringBuffer classes declared as "final" in Java?
+StringBuilder and StringBuffer are declared final to prevent inheritance, ensuring performance optimization and data integrity. This avoids method overriding, which could affect efficiency (StringBuilder) or thread safety (StringBuffer).
+
+## Why is String immutable in Java, whereas StringBuilder and StringBuffer are not?
+String is immutable to enable String Pooling, security, and thread safety, ensuring safe reuse and preventing unintended modifications. If String were mutable, changing one reference would affect all others. StringBuilder and StringBuffer are mutable, designed for better performance when modifying strings frequently, avoiding unnecessary object creation.
+
+## 127. How can you perform a Deep copy in the case of String objects in Java?
+In Java, String is immutable, so a deep copy happens automatically when assigning or copying it. Using new String(original) creates a new object in Heap memory, ensuring the copy is independent of the original.
+
+## 128. What is the purpose of the "ensureCapacity" method in Java?
+The ensureCapacity() method in StringBuilder and StringBuffer reserves extra space in memory to avoid frequent resizing. This helps in faster string operations when adding more characters.
+
+## 129. What is the primary use of constructors in Java?
+In Java, constructors are used to initialize objects when they are created. They set initial values for object attributes and ensure proper setup. A constructor has the same name as the class and is called automatically when an object is instantiated.
+
+## 130. Explain the concept of a default constructor in Java.
+A default constructor in Java is a no-argument constructor that initializes objects with default values. If no constructor is defined, Java provides one automatically.
+
+## 131. What is a parameterized constructor in Java, and can you explain its properties?
+A parameterized constructor in Java is a constructor that accepts arguments to initialize an object with specific values. It allows setting custom values at the time of object creation, enabling better flexibility and control.
+
+#### Properties:
+
+1. Takes parameters to assign values to instance variables.</br>
+2. Eliminates the need for setter methods to initialize objects.</br>
+3. Can be overloaded by defining multiple constructors with different parameters.
+
+## 132. How does your code behave when both a default constructor and a parameterized constructor are present in a Java class?
+When both a default constructor and a parameterized constructor are present in a Java class, the constructor that gets executed depends on how the object is instantiated.
+</br>
+</br>
+-> If an object is created without arguments, the default constructor is called.</br>
+-> If an object is created with arguments, the parameterized constructor is called.
+
+## 133. Define constructor overloading, constructor overriding, and constructor chaining in Java.
+### 1. Constructor Overloading
+Having multiple constructors in a class with different parameter lists. Java calls the appropriate constructor based on the arguments passed.
+
+### 2. Constructor Overriding (Not Possible)
+Constructors cannot be overridden as they are not inherited, but a subclass can call the parent constructor using super().
+
+### 3. Constructor Chaining
+One constructor calls another within the same class (this()) or a parent class (super()) to improve code reusability.
+
+## 134. Why are "this" and "super" used in constructors in Java? What access modifiers can be used with constructors?
+### Why are this and super used in constructors?
+this() → Calls another constructor in the same class, avoiding code duplication.</br>
+super() → Calls the parent class's constructor, ensuring proper initialization in inheritance.
+
+#### Access Modifiers for Constructors
+1. public → Accessible from anywhere.</br>
+2. private → Prevents object creation outside the class (used in Singleton).</br>
+3. protected → Accessible within the same package and subclasses.</br>
+4. default (no modifier) → Accessible within the same package only.
+
+## 135. Is it possible to give a constructor a different name other than the class name in Java?
+No, in Java, a constructor must have the same name as the class. If you try to give it a different name, it will be treated as a regular method, not a constructor.
+
+## 136. What is a parameterized constructor in Java, and how is object creation related to constructors?
+A parameterized constructor in Java takes arguments to initialize an object with specific values at the time of creation. When an object is created using new, the corresponding constructor is automatically called to allocate memory and set initial values.
+
+## 137. Explain the logical flow of constructors in the context of inheritance in Java. Is there a return type for constructors?
+### Logical Flow of Constructors in Inheritance
+#### In Java inheritance, when a subclass object is created:
+
+1. The parent class constructor is called first using super(), even if not explicitly written (Java adds it automatically).
+2. Then, the child class constructor executes.
+
+### Is There a Return Type for Constructors?
+No, constructors do not have a return type, not even void. They automatically return the instance of the class. If a return type is specified, it becomes a regular method, not a constructor.
+
+## 138. What is a private constructor, a static constructor, and a final constructor in Java?
+### 1. Private Constructor
+A private constructor restricts object creation from outside the class, mainly used in Singleton patterns or utility classes.
+
+### 2. Static Constructor (Not in Java)
+Java does not support static constructors, but a static block can be used to initialize static variables.
+
+### 3. Final Constructor (Not Allowed in Java)
+Java does not allow final constructors because constructors cannot be inherited or overridden. Using final with a constructor will cause a compilation error.
+
+## 139. Can you have an abstract constructor, and can constructors exist within interfaces in Java?
+### Can You Have an Abstract Constructor in Java?
+No, Java does not allow abstract constructors because constructors are meant to initialize objects, while abstract indicates that a method must be implemented by subclasses. Since constructors cannot be inherited, making them abstract is meaningless.
+
+### Can Constructors Exist Within Interfaces in Java?
+#### No, constructors cannot exist in interfaces because:
+1. Interfaces cannot have instances—they are meant to be implemented by classes.</br>
+2. Constructors belong to classes, whereas interfaces do not have direct object creation.
+
+## 140. Is it possible to have both "this" and "super" in the same constructor in Java?
+No, it is not possible to use both this() and super() in the same constructor in Java because:</br>
+
+1. this() → Calls another constructor of the same class.</br>
+2. super() → Calls the parent class's constructor.</br>
+3. Both must be the first statement in a constructor, and since Java allows only one first statement, using both together causes a compilation error.
+
+## 141. Can you call a subclass constructor from a superclass constructor in Java? Can an abstract class in Java have a constructor?
+### Can You Call a Subclass Constructor from a Superclass Constructor?
+No, you cannot call a subclass constructor from a superclass constructor directly because Java enforces a top-down execution order in inheritance. The superclass constructor always executes first, ensuring that the parent class is properly initialized before the child class.
+
+### Can an Abstract Class Have a Constructor?
+Yes, an abstract class can have a constructor because it is still a class and may need to initialize common fields for subclasses. However, it cannot be instantiated directly—only its subclasses can call the constructor using super().
+
+## 142. How are exceptions handled in constructors in Java?
+Handling Exceptions in Constructors in Java
+In Java, exceptions in constructors can be handled using try-catch blocks or by declaring throws to propagate exceptions.
+
+## 143. Explain the different types of constructors available in Java.
+### 1. Default Constructor
+A constructor with no parameters, provided by Java if no constructor is defined. It initializes objects with default values.
+### 2. Parameterized Constructor
+A constructor that takes arguments to initialize an object with specific values during creation.
+### 3. Private Constructor
+Restricts object creation from outside the class, mainly used in Singleton patterns or utility classes.
+### 4. Copy Constructor (Not Built-in in Java)
+Manually created to copy values from one object to another by passing an object as a parameter.
+### 
