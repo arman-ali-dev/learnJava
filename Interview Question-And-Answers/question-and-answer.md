@@ -823,4 +823,70 @@ The try-with-resources statement is used to automatically close resources (like 
 2. ArrayIndexOutOfBoundsException
 3. ArithmeticException
 
+## 148. Differentiate between an exception and an error in Java.
+### Exception:
+It is a recoverable issue that occurs during program execution and can be handled using try-catch. Examples: IOException, NullPointerException.
 
+### Error:
+It is a serious system failure that cannot be recovered from and should not be caught. Examples: StackOverflowError, OutOfMemoryError.
+
+## 149. What is the difference between a runtime exception and a compile-time (CE) exception in Java?
+### Runtime Exception:
+These occur during program execution (at runtime) and are unchecked, meaning they don't require handling. Examples: NullPointerException, ArithmeticException.
+
+### Compile-time Exception (Checked Exception):
+These are detected by the compiler and must be handled using try-catch or throws. Examples: IOException, SQLException.
+
+## 150. Explain the differences between checked exceptions and unchecked exceptions in Java.
+### Checked Exception:
+These are checked at compile-time and must be handled using try-catch or throws. Examples: IOException, SQLException.
+
+### Unchecked Exception:
+These occur at runtime and do not require mandatory handling. Examples: NullPointerException, ArithmeticException.
+
+## 151. Which exceptions are children of checked exceptions in Java?
+1. IOException → (FileNotFoundException, EOFException)</br>
+2. SQLException</br>
+3. ClassNotFoundException</br>
+4. InterruptedException</br>
+5. CloneNotSupportedException
+
+## 152. Describe the usage and purpose of try-catch-finally blocks in Java.
+### try Block:
+Contains code that may throw an exception. If an exception occurs, execution jumps to catch.
+### catch Block:
+Handles the exception and prevents program crashes. Multiple catch blocks can be used.
+### finally Block:
+Always executes (whether an exception occurs or not) and is used for resource cleanup.
+
+## 153. Provide examples of errors in Java.
+1. StackOverflowError – Occurs due to infinite recursion, exhausting stack memory.</br>
+2. OutOfMemoryError – Happens when heap memory is exhausted due to excessive object creation.</br>
+3. VirtualMachineError – Indicates serious JVM failures like memory exhaustion.</br>
+4. NoClassDefFoundError – Occurs when a compiled class is missing at runtime.</br>
+5. ExceptionInInitializerError – Happens when an exception occurs in a static initializer block.
+
+## 154. Can you control errors in Java, and how would you do so?
+Errors in Java cannot be controlled like exceptions, but they can be minimized. Avoid StackOverflowError by using proper base conditions in recursion. Prevent OutOfMemoryError by optimizing memory usage and clearing unused objects. Ensure all required class files are available to avoid NoClassDefFoundError. Avoid risky operations in static blocks to prevent ExceptionInInitializerError.
+
+## 155. Explain the usage of "throw" and "throws" in Java for exception handling.
+### throw:
+Used to explicitly throw an exception inside a method or block. Example: throw new NullPointerException("Error");
+
+### throws:
+Declares that a method may throw exceptions, forcing the caller to handle them. Example: public void myMethod() throws IOException { ... }
+
+## 156. Can you use "try" without a "catch" block in Java?
+Yes, you can use try without catch in Java, but only if you use a finally block.
+
+## 157. Explain the concept of "try with resources" in Java.
+try-with-resources is a feature introduced in Java 7 that automatically closes resources (like files, sockets, database connections) after execution, preventing resource leaks.
+
+## 158. What types of resources can be used in a "try with resources" block in Java?
+In Java, only resources that implement the AutoCloseable or Closeable interface can be used in a try-with-resources block. These resources are automatically closed after execution.
+### Common Resource Types
+1. File Handling → BufferedReader, FileReader, FileWriter</br>
+2. Streams → FileInputStream, FileOutputStream, ObjectInputStream, ObjectOutputStream</br>
+3. Database Connections → Connection, Statement, ResultSet (JDBC API)</br>
+4. Networking → Socket, ServerSocket</br>
+5. Other APIs → Scanner, PrintWriter, ZipFile
