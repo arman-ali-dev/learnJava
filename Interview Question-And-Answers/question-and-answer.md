@@ -889,4 +889,35 @@ In Java, only resources that implement the AutoCloseable or Closeable interface 
 2. Streams → FileInputStream, FileOutputStream, ObjectInputStream, ObjectOutputStream</br>
 3. Database Connections → Connection, Statement, ResultSet (JDBC API)</br>
 4. Networking → Socket, ServerSocket</br>
-5. Other APIs → Scanner, PrintWriter, ZipFile
+5. Other APIs → Scanner, PrintWriter, ZipFile.
+
+## 159. How can you create custom exceptions in Java?
+In Java, you can create custom exceptions by extending the built-in Exception class (for checked exceptions) or RuntimeException class (for unchecked exceptions).
+
+### Steps to Create a Custom Exception:
+1. Extend Exception (for checked exceptions) or RuntimeException (for unchecked exceptions).</br>
+2. Provide Constructors to initialize the exception with custom messages.</br>
+3. Optionally, override methods like toString() if needed.
+
+## 160. Describe the process of throwing an exception in Java.
+#### In Java, throwing an exception involves the following steps:
+
+1. Use the throw keyword to explicitly throw an exception.</br>
+2. Create an exception object (either built-in or custom).</br>
+3. Ensure the method declares the exception (for checked exceptions) using throws.
+
+## 161. What would happen if an unchecked exception is not handled properly in Java?
+#### If an unchecked exception (a subclass of RuntimeException) is not handled properly in Java, the following will happen:
+
+1. Method Execution Stops → The method where the exception occurs terminates immediately without completing its execution.</br>
+2. Exception Propagation (Call Stack Unwinding) → The exception propagates up the call stack until it is caught. If no method handles it, the program terminates.</br>
+3. JVM Prints Stack Trace → If the exception remains unhandled, the Java Virtual Machine (JVM) prints an error message along with a stack trace, showing where the error occurred.
+
+## 162. What is Exception Propagation, and how does it work in Java?
+### Exception Propagation
+Exception propagation in Java means passing an exception from one method to another until it is either handled or the program terminates.
+
+#### How Does It Work?
+1. If a method throws an exception without handling it, the exception propagates to the caller method.</br>
+2. This process continues up the call stack until a method catches the exception or the main method is reached, causing the program to crash.</br>
+3. The exception propagates from bottom to top in the call stack.
