@@ -624,7 +624,7 @@ class B extends A {
 }
 ```
 
-## 52. What is Serialization and Deserialization in Java?
+## 54. What is Serialization and Deserialization in Java?
 
 - **Serialization** is the process of converting a Java object into a byte stream so it can be saved to a file or sent over a network.
 - **Deserialization** is the process of reconstructing the object from that byte stream.
@@ -636,7 +636,7 @@ class B extends A {
 
 ---
 
-## 53. How do you implement Serialization in Java?
+## 55. How do you implement Serialization in Java?
 
 To make a class serializable:
 
@@ -682,7 +682,7 @@ public class SerializationExample {
 }
 ```
 
-## 54. How does the JVM operate on serialized objects in Java?
+## 56. How does the JVM operate on serialized objects in Java?
 
 When working with serialized objects, the **JVM** follows these steps during **deserialization**:
 
