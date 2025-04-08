@@ -144,3 +144,68 @@ public class Test {
     }
 }
 
+## 11. Can the "main" method be declared as "final" in Java?
+
+Yes, the `main` method can be declared as `final`.  
+It means the method can't be overridden, but it will still work and run normally.
+
+---
+
+## 12. What is object cloning in Java?
+
+Object cloning means making a copy of an object using the `clone()` method.  
+It creates a new object with the same values as the original.
+
+---
+
+## 13. Difference between Deep Copy and Shallow Copy
+
+- **Shallow Copy**: Only copies the main object. Inner objects still refer to the same memory.
+- **Deep Copy**: Copies the main object and all inner objects too (separate memory).
+
+---
+
+## 14. Why implement `equals()` when `compareTo()` is already implemented?
+
+Because:
+- `compareTo()` is used for sorting (like in `TreeSet`, `Collections.sort()`).
+- `equals()` is used to check if two objects are exactly equal (like in `HashSet`, `HashMap`).
+They work differently and both may be needed.
+
+---
+
+## 15. Importance of Singleton Object in Java
+
+Singleton ensures that only one object of a class is created during the whole program.  
+It is useful when you need a single point of access, like for database connections or logging.
+
+### Example Code:
+
+```java
+public class Singleton {
+
+    // Step 1: Create a private static instance of the class
+    private static Singleton instance;
+
+    // Step 2: Make the constructor private so that new objects can't be created
+    private Singleton() {
+        // private constructor
+    }
+
+    // Step 3: Create a public static method to return the instance
+    public static Singleton getInstance() {
+        if (instance == null) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    // Example method
+    public void showMessage() {
+        System.out.println("I am a Singleton object!");
+    }
+}
+
+---
+
+
