@@ -143,6 +143,7 @@ public class Test {
         System.out.println("Overloaded main: " + x);
     }
 }
+```
 
 ## 11. Can the "main" method be declared as "final" in Java?
 
@@ -205,7 +206,4 @@ public class Singleton {
         System.out.println("I am a Singleton object!");
     }
 }
-
----
-
-
+```
