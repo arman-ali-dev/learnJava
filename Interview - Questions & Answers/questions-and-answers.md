@@ -1763,3 +1763,1113 @@ class C implements A, B {
   ✔️ Accessible **within the same package**  
   ✔️ Accessible in **subclasses (child classes)** even if they are in **different packages**
 
+## 119. How is Exception Handling implemented in inheritance in Java, and what are the rules associated with it?
+
+### ✅ Basic Rule:
+- If a method in the **parent class** throws a **checked exception**, the **overridden method** in the **child class**:
+  - Can throw the **same exception**,
+  - Or a **subclass** of that exception,
+  - Or **no exception at all**.
+
+### ❌ But:
+- The child class **cannot** throw a **broader exception** than the parent.
+
+### ✅ For unchecked exceptions (like RuntimeException):
+- No restriction. Can throw anything.
+
+### ✅ Example:
+
+```java
+class Parent {
+    void show() throws IOException { }
+}
+
+class Child extends Parent {
+    void show() throws FileNotFoundException { } // ✅ Allowed (subclass of IOException)
+}
+```
+
+## 120. Define Data Hiding in the context of inheritance in Java.
+Data Hiding means restricting access to class members using access modifiers like `private`. In inheritance, private members of the parent class are not accessible in the child class. Access is given through public methods like getters and setters.
+
+Example:
+```java
+class Parent {
+    private int age = 30;
+
+    public int getAge() {
+        return age;
+    }
+}
+
+class Child extends Parent {
+    // cannot access 'age' directly
+}
+```
+
+## 121. Compare and contrast String, StringBuilder, and StringBuffer in Java.
+String is immutable (cannot be changed).  
+StringBuilder is mutable and faster but not thread-safe.  
+StringBuffer is mutable and thread-safe (synchronized), but slower than StringBuilder.
+
+Example:
+```java
+String s = "Hello";
+s = s + " World"; // new object created
+
+StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World"); // modifies same object
+
+StringBuffer sf = new StringBuffer("Hello");
+sf.append(" World"); // thread-safe modification
+```
+
+## 122. What does it mean for a class to be immutable, and how can you make a class immutable in Java?
+Immutable class means its objects cannot be changed once created.  
+To make a class immutable:
+
+1. Make class `final`
+2. Make all fields `private` and `final`
+3. No setters
+4. Initialize fields via constructor
+5. Return copies of mutable fields (if any)
+
+Example:
+```java
+final class Person {
+    private final String name;
+
+    public Person(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+```
+
+## 123. What are the properties of an Immutable object in Java?
+1. Its state cannot change after creation.  
+2. All fields are `final` and `private`.  
+3. No setters are provided.  
+4. Class is often marked as `final` to prevent subclassing.  
+5. It is thread-safe by default.  
+6. Only getters are used to access data.
+
+Example:
+```java
+final class Point {
+    private final int x, y;
+
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() { return x; }
+    public int getY() { return y; }
+}
+```
+
+## 124. Explain the differences between String literals and String objects in Java.
+String literal is stored in the String pool.  
+String object (created with `new`) is stored in the heap.
+
+- Literals reuse memory if value is same.  
+- Objects always create a new memory space.
+
+Example:
+```java
+String s1 = "Hello";       // String literal
+String s2 = "Hello";       // refers to same object as s1
+
+String s3 = new String("Hello"); // new object in heap
+
+System.out.println(s1 == s2); // true (same reference)
+System.out.println(s1 == s3); // false (different reference)
+```
+
+## 125. Describe the concept of the String pool in Java.
+String pool is a special memory area in Java where String literals are stored.  
+If a new String literal is created and the same value exists in the pool,  
+Java reuses the existing object to save memory.
+
+Example:
+```java
+String s1 = "Java";
+String s2 = "Java";
+
+System.out.println(s1 == s2); // true (same pool reference)
+```
+
+## 126. What happens when you compare "==" and ".equals" for String and new String objects in Java?
+`==` compares references (memory location).  
+`.equals()` compares actual string content.
+
+Example:
+```java
+String s1 = "Hello";
+String s2 = "Hello";
+String s3 = new String("Hello");
+
+System.out.println(s1 == s2);      // true (same reference)
+System.out.println(s1 == s3);      // false (different object)
+System.out.println(s1.equals(s3)); // true (same content)
+```
+
+## 127. What are the results of comparing "==" and ".equals" for String and StringBuffer objects in Java?
+`==` compares references.  
+`.equals()` in StringBuffer does **not** compare content like String.
+
+Example:
+```java
+String s = "Java";
+StringBuffer sb = new StringBuffer("Java");
+
+System.out.println(s == sb);         // false (different types)
+System.out.println(s.equals(sb));    // false (String doesn't equal StringBuffer)
+System.out.println(sb.equals(s));    // false (StringBuffer uses Object's equals)
+```
+
+## 128. Explain the output of the expression "A"+"B"+"C"+"D" in Java.
+The expression `"A" + "B" + "C" + "D"` uses String concatenation.
+
+Java combines them left to right:
+→ "A" + "B" = "AB"  
+→ "AB" + "C" = "ABC"  
+→ "ABC" + "D" = "ABCD"
+
+So, the output is:
+```java
+System.out.println("A" + "B" + "C" + "D"); // ABCD
+```
+
+## 129. Why are StringBuilder and StringBuffer classes declared as "final" in Java?
+StringBuilder and StringBuffer are declared as `final` to prevent inheritance.  
+This ensures their internal behavior (like thread safety in StringBuffer)  
+is not changed or broken by subclassing.
+
+It keeps them reliable, fast, and secure for string manipulation.
+
+## 130. Why is String immutable in Java, whereas StringBuilder and StringBuffer are not?
+String is immutable to ensure:
+
+- Security (used in URLs, passwords)
+- Thread safety (no need to sync)
+- String pool optimization (memory reuse)
+- Safe hashing (used in HashMap keys)
+
+StringBuilder and StringBuffer are mutable for performance:  
+they allow in-place changes without creating new objects.
+
+## 131. How can you perform a Deep copy in the case of String objects in Java?
+To perform a deep copy of a String, create a **new String object**.
+
+Example:
+```java
+String original = "Hello";
+String copy = new String(original);
+```
+
+## 131. What is the primary use of constructors in Java?
+Constructors are used to **initialize objects** in Java.  
+They set initial values for object fields when an object is created.
+
+Example:
+```java
+class Person {
+    String name;
+
+    Person(String n) {
+        name = n;
+    }
+}
+```
+
+## 132. Explain the concept of a default constructor in Java.
+A default constructor is a **no-argument constructor** automatically provided by Java  
+if no constructor is defined in the class.
+
+It initializes object with default values (like 0, null).
+
+Example:
+```java
+class Car {
+    int speed;
+}
+
+// Java adds: Car() { }
+Car c = new Car(); // uses default constructor
+```
+
+## 133. What is a parameterized constructor in Java, and can you explain its properties?
+A parameterized constructor accepts **arguments** to initialize object fields.
+
+Properties:
+- Used to set custom values at object creation.
+- If any constructor is defined, Java won't add a default one.
+
+Example:
+```java
+class Student {
+    String name;
+    int age;
+
+    Student(String n, int a) {
+        name = n;
+        age = a;
+    }
+}
+
+Student s = new Student("Alice", 20);
+```
+
+## 134. What is a BitSet in Java, and what is its purpose?
+BitSet is a class in Java used to store bits (0 or 1) efficiently.
+
+Purpose:
+- It handles large sets of boolean values.
+- Saves memory compared to using boolean arrays.
+
+Example:
+```java
+BitSet bs = new BitSet();
+bs.set(0); // sets bit at index 0 to true
+bs.set(3);
+
+System.out.println(bs); // {0, 3}
+```
+
+## 135. How does your code behave when both a default constructor and a parameterized constructor are present in a Java class?
+If both constructors are present, you can choose which one to use when creating an object.
+
+Example:
+```java
+class Book {
+    String title;
+
+    Book() {
+        title = "Unknown";
+    }
+
+    Book(String t) {
+        title = t;
+    }
+}
+
+Book b1 = new Book();          // uses default constructor
+Book b2 = new Book("Java");    // uses parameterized constructor
+```
+
+## 136. Define constructor overloading, constructor overriding, and constructor chaining in Java.
+
+1. **Constructor Overloading**:  
+   - Same class, multiple constructors with different parameters.
+   ```java
+   class A {
+       A() {}
+       A(int x) {}
+   }
+   ```
+
+2. **Constructor Overriding**:
+   -  Not possible in Java. Constructors are not inherited, so they can't be overridden.
+  
+3. **Constructor Chaining**:
+   - One constructor calls another using this() (same class) or super() (parent class).
+   ```java
+   class A {
+    A() {
+        this(10); // calls A(int)
+    }
+    A(int x) {
+        System.out.println(x);
+    }
+   ```
+
+## 137. Why are "this" and "super" used in constructors in Java? What access modifiers can be used with constructors?
+**this** is used to:
+- Call another constructor in the same class (`this(...)`)
+- Refer to current object
+
+**super** is used to:
+- Call parent class constructor (`super(...)`)
+- Must be the first statement in constructor
+
+**Access modifiers** for constructors:
+- `public`: object can be created from anywhere  
+- `protected`: object can be created within package or subclasses  
+- `default` (no modifier): object can be created within same package  
+- `private`: object creation restricted (e.g., Singleton)
+
+## 138. Is it possible to give a constructor a different name other than the class name in Java? Explain what a default constructor is.
+❌ No, a constructor must have the **same name as the class**.  
+If not, it's treated as a regular method.
+
+**Default Constructor**:
+- A no-argument constructor added by Java **if no constructor is defined**.
+- It initializes object with default values.
+
+Example:
+```java
+class Dog {
+    int age;
+}
+
+// Java adds: Dog() { }
+
+Dog d = new Dog(); // uses default constructor
+System.out.println(d.age); // 0
+```
+
+## 139. What is a parameterized constructor in Java, and how is object creation related to constructors?
+A parameterized constructor takes arguments to initialize object fields.
+
+Example:
+```java
+class Car {
+    String model;
+
+    Car(String m) {
+        model = m;
+    }
+}
+
+Car c = new Car("BMW"); // object created using parameterized constructor
+```
+
+## 140. Explain the logical flow of constructors in the context of inheritance in Java. Is there a return type for constructors?
+In inheritance, when a child object is created:
+
+1. Parent class constructor runs first (`super()` is called automatically).
+2. Then child class constructor runs.
+
+Example:
+```java
+class A {
+    A() {
+        System.out.println("Parent");
+    }
+}
+
+class B extends A {
+    B() {
+        System.out.println("Child");
+    }
+}
+
+B obj = new B(); // Output: Parent → Child
+```
+
+## 141. What is a private constructor, a static constructor, and a final constructor in Java?
+### 1. Private Constructor
+- Restricts object creation from outside the class.
+- Used in Singleton or Utility classes.
+
+```java
+class MyClass {
+    private MyClass() { }
+}
+```
+
+### 2. Static Constructor in Java
+
+❌ Java does **not support static constructors** (unlike C#).
+
+### Why?
+- In Java, class-level initialization is handled using **static blocks**, not static constructors.
+
+### Use static block instead:
+```java
+class Demo {
+    static {
+        System.out.println("Static block runs once when class is loaded");
+    }
+
+    public static void main(String[] args) {
+        Demo d = new Demo(); // static block runs before this
+    }
+}
+```
+
+
+### 3. Final Constructor in Java
+
+❌ Java does **not allow final constructors**.
+
+### Why?
+- `final` means "cannot be overridden."
+- But constructors **cannot be inherited or overridden** in Java anyway.
+- So making a constructor `final` has no meaning.
+
+### If you try this:
+```java
+class Test {
+    final Test() {
+        // Error: modifier final not allowed here
+    }
+}
+```
+
+## 142. Can you have an abstract constructor, and can constructors exist within interfaces in Java?
+## Abstract Constructor and Constructors in Interfaces (Java)
+
+### 1. Abstract Constructor
+❌ Not allowed in Java.
+
+**Why?**
+- Constructors are used to create objects.
+- Abstract classes **cannot be instantiated**, so having a constructor in them makes no sense.
+
+```java
+abstract class A {
+    // ❌ abstract A(); // Not allowed
+}
+```
+
+#### ✅ But abstract classes can have regular constructors to help subclasses initialize fields.
+
+```java
+abstract class A {
+    A() {
+        System.out.println("Abstract class constructor");
+    }
+}
+```
+
+### Can Constructors Exist Within Interfaces in Java?
+
+❌ **No**, constructors cannot exist in interfaces.
+
+### Why?
+- Interfaces **cannot be instantiated** directly.
+- Constructors are used to **create objects**, so they don't make sense in interfaces.
+
+### Example (Invalid):
+```java
+interface MyInterface {
+    MyInterface() { } // ❌ Error: constructors not allowed
+}
+```
+
+## 143. Is it possible to have both "this" and "super" in the same constructor in Java?
+
+❌ **No**, you cannot use both `this()` and `super()` in the same constructor.
+
+### Why?
+- Both must be the **first statement** in a constructor.
+- You can only call **one constructor** (either from same class or parent) as the first line.
+
+### Example (Invalid):
+```java
+class A {
+    A() { }
+}
+
+class B extends A {
+    B() {
+        this(10);     // ❌ Error if used with super()
+        super();      // ❌ Only one allowed
+    }
+
+    B(int x) { }
+}
+
+// Use only one of them as the first statement:
+class B extends A {
+    B() {
+        super();  // OK
+    }
+}
+```
+
+## 144. Can you call a subclass constructor from a superclass constructor in Java? 
+
+❌ **No**, you cannot call a subclass constructor from a superclass constructor.
+
+### Why?
+- The subclass is **not yet created** when the superclass constructor runs.
+- Java always creates the **superclass first**, then the subclass.
+
+### Java Flow:
+- When you create a subclass object, the superclass constructor runs **first** (via `super()`).
+- Subclass constructors can call the superclass constructor using `super()`, but **not the other way around**.
+
+### Example:
+```java
+class A {
+    A() {
+        System.out.println("A constructor");
+        // super() allowed here only if A extends another class
+        // Cannot call subclass constructor like B();
+    }
+}
+
+class B extends A {
+    B() {
+        System.out.println("B constructor");
+    }
+}
+```
+
+## 145. How are exceptions handled in constructors in Java?
+
+### Can constructors throw exceptions?
+✅ Yes, constructors can throw **checked or unchecked exceptions**.
+
+### How to handle them?
+
+1. **Declare the exception** in constructor using `throws`.
+2. **Handle** it using `try-catch` when creating the object.
+
+### Example:
+```java
+class Test {
+    Test() throws Exception {
+        throw new Exception("Error in constructor");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        try {
+            Test t = new Test();
+        } catch (Exception e) {
+            System.out.println(e.getMessage()); // Output: Error in constructor
+        }
+    }
+}
+```
+
+## 146. Explain the different types of constructors available in Java.
+### Types of Constructors in Java
+
+#### 1. Default Constructor
+- No arguments.
+- Added by Java if no constructor is written.
+- Initializes object with default values.
+
+```java
+class A {
+    // Java provides: A() { }
+}
+A obj = new A();
+```
+
+#### 2. Parameterized Constructor
+   - Takes arguments to set field values during object creation.
+   ```java
+   class A {
+    A(int x) {
+        System.out.println(x);
+    }
+}
+
+A obj = new A(10);
+```
+
+#### 3. Copy Constructor (Custom in Java)
+   - Copies values from one object to another.
+   - Not built-in like C++, but you can define your own.
+```java
+class A {
+    int x;
+    A(int x) { this.x = x; }
+
+    A(A obj) {
+        this.x = obj.x;
+    }
+}
+```
+
+#### 4. Private Constructor
+   - Used to restrict object creation.
+   - Common in Singleton or Utility classes.
+```java
+class A {
+    private A() { }
+}
+```
+
+## 147. Is it possible to have a constructor inside an abstract class in Java?
+## Can You Have a Constructor Inside an Abstract Class in Java?
+
+✅ **Yes**, abstract classes **can have constructors**.
+
+### Why?
+- Even though abstract classes **can't be instantiated directly**, their constructors are called when a **subclass** is instantiated.
+- Used to **initialize common fields** or logic for all subclasses.
+
+### Example:
+```java
+abstract class Animal {
+    Animal() {
+        System.out.println("Animal constructor");
+    }
+}
+
+class Dog extends Animal {
+    Dog() {
+        System.out.println("Dog constructor");
+    }
+}
+
+Dog d = new Dog();
+// Output:
+// Animal constructor
+// Dog constructor
+```
+
+## 148. Explain the concept of constructor chaining in Java.
+
+Constructor chaining in Java means calling one constructor from another constructor.  
+It helps in reusing constructor logic either within the same class using `this()` or from the parent class using `super()`.
+
+## 149. Explain the concepts of try-catch, try with multiple catch blocks, and try with resources in Java.
+### try-catch
+Used to handle exceptions. Code in `try` is monitored for errors, and `catch` handles them.
+
+```java
+try {
+    int x = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Cannot divide by zero");
+}
+```
+
+### try with Multiple catch Blocks (Definition)
+
+It allows handling **different types of exceptions** separately using multiple `catch` blocks after a single `try`.
+
+Each `catch` block handles a specific exception type.
+
+### Example:
+```java
+try {
+    int[] arr = new int[2];
+    arr[5] = 10;
+} catch (ArrayIndexOutOfBoundsException e) {
+    System.out.println("Array index error");
+} catch (Exception e) {
+    System.out.println("General exception");
+}
+```
+
+### try with Resources (Definition)
+
+It is a try block that automatically **closes resources** (like files, streams) after use.  
+The resources must implement the `AutoCloseable` interface.
+
+### Example:
+```java
+try (BufferedReader br = new BufferedReader(new FileReader("file.txt"))) {
+    System.out.println(br.readLine());
+} catch (IOException e) {
+    System.out.println("File error");
+}
+```
+
+## 150. Describe the hierarchy of exceptions in Java.
+### Exception Hierarchy in Java
+
+- All exceptions are part of the `Throwable` class.
+
+### Hierarchy:
+Object └── Throwable ├── Error (serious issues, not handled by programs) └── Exception (problems that can be handled) ├── CheckedException (must be handled using try-catch or throws) │ ├── IOException │ └── SQLException └── UncheckedException (runtime errors, optional to handle) ├── NullPointerException └── ArithmeticException
+
+
+### Summary:
+- `Error`: Serious issues (e.g., OutOfMemoryError)
+- `Exception`: Issues programs can handle
+  - **Checked**: Must handle
+  - **Unchecked**: Optional to handle
+
+## 151. Differentiate between an exception and an error in Java.
+## Difference Between Exception and Error in Java
+
+- **Exception** is a condition that a program can handle using try-catch.  
+- **Error** is a serious issue that cannot be handled by the program.  
+- Exceptions belong to `java.lang.Exception`, errors to `java.lang.Error`.  
+- Examples of exceptions: `NullPointerException`, `IOException`.  
+- Examples of errors: `OutOfMemoryError`, `StackOverflowError`.
+
+## 152. What is the difference between a runtime exception and a compile-time (CE) exception in Java?
+
+   - **Runtime Exception** occurs during program execution.  
+   - **Compile-Time Exception** (Checked Exception) is checked by the compiler.  
+   - Runtime exceptions belong to `java.lang.RuntimeException`.  
+   - Compile-time exceptions must be handled using try-catch or `throws`.  
+   - Example (Runtime): `NullPointerException`, `ArithmeticException`.  
+   - Example (Compile-Time): `IOException`, `SQLException`.
+
+## 153. Explain the differences between checked exceptions and unchecked exceptions in Java.
+   - **Checked Exceptions** are checked at compile-time.  
+   - **Unchecked Exceptions** occur at runtime.  
+   - Checked exceptions must be handled using try-catch or `throws`.  
+   - Unchecked exceptions do not require handling.  
+   - Checked: Subclasses of `Exception` (excluding `RuntimeException`).  
+   - Unchecked: Subclasses of `RuntimeException`.  
+   - Example (Checked): `IOException`, `SQLException`.  
+   - Example (Unchecked): `NullPointerException`, `ArrayIndexOutOfBoundsException`.
+
+## 154. Which exceptions are children of checked exceptions in Java?
+#### Children of Checked Exceptions in Java
+
+These are exceptions that must be handled during compilation.
+
+#### Common Checked Exceptions:
+- `IOException`
+- `FileNotFoundException`
+- `SQLException`
+- `ClassNotFoundException`
+- `InterruptedException`
+- `ParseException`
+- `InvocationTargetException`
+- `NoSuchMethodException`
+
+These all extend from the `Exception` class (excluding `RuntimeException`).
+
+## 155. Describe the usage and purpose of try-catch-finally blocks in Java.
+## try-catch-finally in Java
+
+- **try**: Block of code that might throw an exception.  
+- **catch**: Handles the exception thrown by try block.  
+- **finally**: Executes code **always**, whether exception occurs or not (used for cleanup).
+
+### Example:
+```java
+try {
+    int x = 10 / 0;
+} catch (ArithmeticException e) {
+    System.out.println("Cannot divide by zero");
+} finally {
+    System.out.println("This block always runs");
+}
+```
+
+## 156. Provide examples of errors in Java.
+- `OutOfMemoryError` – when JVM runs out of memory  
+- `StackOverflowError` – infinite recursion  
+- `VirtualMachineError` – JVM internal error  
+- `AssertionError` – failed assertion  
+- `LinkageError` – class file changes incompatibly  
+- `NoClassDefFoundError` – class not found at runtime
+
+## 157. Can you control errors in Java, and how would you do so?
+❌ No, errors in Java are generally **not meant to be controlled**.
+
+### Why?
+- Errors represent **serious problems** (e.g., memory issues, JVM failures).
+- Handling them may not make the program stable or safe.
+
+### What You Can Do:
+- **Avoid** errors through good design (e.g., avoid deep recursion to prevent `StackOverflowError`).
+- **Log** errors for debugging if caught accidentally.
+- **Do not** rely on catching or recovering from errors in code.
+
+## 158. Explain the usage of "throw" and "throws" in Java for exception handling.
+#### throw vs throws in Java
+
+- **throw**: Used to explicitly **throw an exception** from code.
+- **throws**: Declares that a method **might throw an exception**.
+
+## 159. Can you use "try" without a "catch" block in Java?
+## Can You Use try Without catch in Java?
+
+✅ Yes, you can use `try` without `catch` **if you use `finally`**.
+
+### Syntax:
+```java
+try {
+    // risky code
+} finally {
+    // cleanup code
+}
+```
+
+## 160. Explain the concept of "try with resources" in Java.
+## try with Resources in Java
+
+It is a special `try` block used to **automatically close resources** like files, streams, etc.
+
+### Requirements:
+- The resource must implement `AutoCloseable` interface.
+
+### Example:
+```java
+try (BufferedReader br = new BufferedReader(new FileReader("data.txt"))) {
+    System.out.println(br.readLine());
+} catch (IOException e) {
+    System.out.println("File error");
+}
+```
+
+## 161. What types of resources can be used in a "try with resources" block in Java?
+Any resource that implements the **`AutoCloseable`** interface can be used.
+
+### Common Examples:
+- `FileInputStream`
+- `FileOutputStream`
+- `BufferedReader`
+- `BufferedWriter`
+- `PrintWriter`
+- `Scanner`
+- `Connection` (from JDBC)
+- `Statement` and `ResultSet` (from JDBC)
+
+These resources are automatically closed after the try block completes.
+
+## 162. How can you create custom exceptions in Java?
+## Creating Custom Exceptions in Java
+
+You can create custom exceptions by **extending the `Exception` or `RuntimeException` class**.
+
+### Checked Custom Exception:
+```java
+class MyException extends Exception {
+    MyException(String message) {
+        super(message);
+    }
+}
+```
+
+### Unchecked Custom Exception:
+```java
+class MyRuntimeException extends RuntimeException {
+    MyRuntimeException(String message) {
+        super(message);
+    }
+}
+```
+
+### Usage:
+```java
+throw new MyException("This is a custom checked exception");
+```
+
+## 163. Describe the process of throwing an exception in Java.
+## Throwing an Exception in Java
+
+To throw an exception, use the **`throw`** keyword followed by an exception object.
+
+### Syntax:
+```java
+throw new ExceptionType("Error message");
+```
+
+### Example:
+```java
+if (age < 18) {
+    throw new IllegalArgumentException("Age must be 18 or above");
+}
+```
+
+## 164. Explain the concept of checked and unchecked exceptions in the context of method overriding in Java.
+## Checked and Unchecked Exceptions in Method Overriding (Java)
+
+### Checked Exceptions:
+- If a **parent class method** throws a checked exception, the **child class method** can:
+  - Throw the **same** exception.
+  - Throw a **subclass** of that exception.
+  - Or **not throw** any exception.
+- Child method **cannot throw a broader checked exception**.
+
+### Unchecked Exceptions:
+- There are **no restrictions** on throwing unchecked exceptions.
+- Child class can throw any **RuntimeException**.
+
+### Example:
+```java
+class Parent {
+    void show() throws IOException { }
+}
+
+class Child extends Parent {
+    void show() throws FileNotFoundException { } // OK (subclass of IOException)
+}
+```
+
+## 165. What would happen if an unchecked exception is not handled properly in Java?
+## If Unchecked Exception Is Not Handled in Java
+
+- The program will **compile successfully**.
+- At **runtime**, the exception will occur and **terminate the program** abnormally.
+- The **JVM prints the stack trace**, showing where the error happened.
+
+### Example:
+```java
+public class Test {
+    public static void main(String[] args) {
+        int x = 10 / 0; // Unchecked exception (ArithmeticException)
+    }
+}
+```
+
+### Output:
+```java
+Exception in thread "main" java.lang.ArithmeticException: / by zero
+	at Test.main(Test.java:3)
+```
+
+## 166. What is Exception Propagation, and how does it work in Java?
+## Exception Propagation in Java
+
+Exception Propagation means **passing an exception up the call stack** until it is handled.
+
+### How it works:
+- If a method throws an exception and doesn't handle it,  
+  the exception moves to the **caller method**.
+- This continues until it's either caught or reaches the JVM.
+
+### Example:
+```java
+void method1() {
+    int x = 10 / 0; // ArithmeticException
+}
+
+void method2() {
+    method1(); // exception propagates here
+}
+
+public static void main(String[] args) {
+    try {
+        method2(); // handled here
+    } catch (ArithmeticException e) {
+        System.out.println("Handled in main");
+    }
+}
+```
+
+## 167. What is multithreading in Java?  
+**Multithreading **is a feature in Java that allows multiple threads to run concurrently, enabling efficient CPU usage and faster task execution.
+
+## 168. How is multithreading different from multiprocessing?  
+Multithreading uses multiple threads within a single process, sharing the same memory space. Multiprocessing uses multiple processes, each with its own memory space. Multithreading is lightweight and faster, while multiprocessing provides better fault isolation.
+
+## 169. What are the benefits of multithreading?  
+- Better CPU utilization by running tasks in parallel.  
+- Faster program execution.  
+- Efficient resource sharing among threads.  
+- Improved application responsiveness.  
+- Useful for real-time and interactive applications.
+
+## 170. How do you create a thread in Java?  
+You can create a thread in Java in two ways:  
+1. By extending the `Thread` class and overriding the `run()` method.  
+2. By implementing the `Runnable` interface and passing it to a `Thread` object.
+
+## 171. What is the difference between `Thread` and `Runnable` interface?  
+`Thread` is a class; `Runnable` is an interface.  
+Extending `Thread` means you can’t extend any other class.  
+Using `Runnable` is more flexible and preferred for sharing the same task across multiple threads.
+
+## 172. What is the lifecycle of a thread in Java?  
+A thread in Java goes through these stages:  
+1. **New** – Thread is created.  
+2. **Runnable** – Thread is ready to run.  
+3. **Running** – Thread is executing.  
+4. **Blocked/Waiting** – Thread is waiting for a resource or signal.  
+5. **Terminated** – Thread has finished execution.
+
+## 173. What are different states of a thread?  
+- New: Thread is created but not started.  
+- Runnable: Thread is ready to run.  
+- Running: Thread is currently executing.  
+- Blocked: Thread is waiting to access a locked resource.  
+- Waiting: Thread is waiting indefinitely for another thread.  
+- Timed Waiting: Thread is waiting for a specific time.  
+- Terminated: Thread has completed or exited.
+
+## 174. What is the use of the `start()` and `run()` methods?  
+`start()` creates a new thread and calls the `run()` method in that thread.  
+`run()` contains the code that executes when the thread runs, but calling it directly doesn't create a new thread.
+
+## 175. Can we call `run()` method directly? What happens if we do?  
+Yes, we can call `run()` directly, but it won’t create a new thread.  
+It will execute like a normal method in the current thread.
+
+## 176. What is the difference between `sleep()` and `wait()` in Java?  
+`sleep()` pauses the current thread for a specific time and doesn’t release the lock.  
+`wait()` pauses the thread until it's notified and it releases the lock during the wait.
+
+## 177. What is thread priority and how is it set?  
+Thread priority decides the order in which threads are scheduled for execution.  
+It can be set using `setPriority(int)` method, with values from 1 (MIN) to 10 (MAX). Default is 5 (NORM).
+
+## 178. What is thread synchronization?  
+Thread synchronization is the process of controlling access to shared resources to prevent data inconsistency when multiple threads access them at the same time.
+
+## 179. What is the difference between synchronized method and synchronized block?  
+A synchronized method locks the whole method for a thread, while a synchronized block locks only a specific part of the code.  
+Synchronized blocks give more control and are more efficient.
+
+## 180. What is a daemon thread? How do you create one?
+A daemon thread runs in the background and supports user threads. It ends when all user threads finish.  
+You can create one using `setDaemon(true)` before calling `start()`.
+
+## 181. What is the difference between user thread and daemon thread?
+User threads perform main tasks and keep the program running.  
+Daemon threads run in the background and stop automatically when all user threads finish.
+
+## 182. What is thread deadlock and how to avoid it?  
+Thread deadlock happens when two or more threads wait forever for each other to release resources.  
+
+To avoid it:
+- Lock resources in the same order.  
+- Use timeout with locks.  
+- Avoid nested locks when possible.
+
+## 183. What is race condition and how to handle it?  
+A race condition happens when multiple threads access and modify shared data at the same time, leading to unexpected results.  
+
+To handle it:
+- Use synchronization.  
+- Use atomic variables or thread-safe classes.  
+- Avoid shared mutable data when possible.
+
+## 184. How does `join()` method work in threads?  
+The `join()` method makes the current thread wait until the specified thread completes its execution.  
+It ensures one thread finishes before another starts.
+
+## 185. Can a thread be restarted once it is stopped?  
+No, once a thread is stopped or completed, it cannot be restarted.  
+You need to create a new thread object to run the code again.
+
+## 186. What is the use of `yield()` method in threads?
+The `yield()` method pauses the current thread and gives a chance to other threads of the same or higher priority to execute.  
+It doesn’t guarantee that the current thread will stop running.
+
+## 187. What are `wait()`, `notify()`, and `notifyAll()` methods?  
+`wait()` makes a thread pause and release the lock until it is notified.  
+`notify()` wakes up one waiting thread.  
+`notifyAll()` wakes up all waiting threads on the same object.
+
+## 188. What is the use of `ThreadGroup` in Java? 
+`ThreadGroup` is used to group multiple threads into a single object so they can be managed together, like setting priority or interrupting all threads in the group.
+
+## 189. What is the Executor framework in Java?  
+The Executor framework provides a way to manage and control thread execution using a pool of threads, instead of creating new threads manually. It helps in better resource management.
+
+## 190. What are `Callable` and `Future` interfaces?  
+`Callable` is like `Runnable` but it can return a result and throw exceptions.  
+`Future` is used to retrieve the result of a `Callable` task and check its status.
+
+## 191. How is `synchronized` keyword different from `ReentrantLock`? 
+`synchronized` is a keyword that automatically handles locking and unlocking.  
+`ReentrantLock` is a class that gives more control, like trying to lock, timed lock, and manually unlocking.
+
+## 192. What is the difference between `sleep()` and `yield()`?  
+`sleep()` pauses the thread for a specific time and always gives up the CPU.  
+`yield()` only hints to the scheduler to pause the thread, but it may continue if no other thread is ready.
+
+## 193. How do you handle uncaught exceptions in threads?  
+Uncaught exceptions in threads can be handled using `Thread.setDefaultUncaughtExceptionHandler()` or by overriding `ThreadGroup.uncaughtException()` method.
+
+## 194. What is a thread pool and why is it used?  
+A thread pool is a collection of pre-created worker threads.  
+It is used to manage and reuse threads efficiently, reduce overhead of thread creation, and improve performance.
+
+## 195. What is the difference between `synchronized` block and `Lock` interface? 
+`synchronized` block is simpler and built-in, but has less flexibility.  
+`Lock` (from `java.util.concurrent.locks`) provides more control, like try-lock, timed lock, and interruptible lock.
