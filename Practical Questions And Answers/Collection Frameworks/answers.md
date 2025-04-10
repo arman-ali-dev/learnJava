@@ -528,3 +528,40 @@ class Main {
 ```
 
 ### 25. Search for an element in a sorted ArrayList using binary search.
+
+```java
+class Main {
+   public static int binarySearch(ArrayList<Integer> list, int target) {
+        int high = list.size() - 1, low = 0;
+
+        while (low <= high) {
+            int mid = (high + low) / 2;
+
+            if (list.get(mid) == target) {
+                return target;
+            } else if (target > list.get(mid)) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(10);
+        list.add(25);
+        list.add(45);
+        list.add(67);
+        list.add(78);
+        list.add(1000);
+
+        int target = 25;
+
+        int result = binarySearch(list, target);
+
+        System.out.println(result == -1 ? target + " Not Found!" : target + " Founded!");
+    }
+}
+```
