@@ -446,28 +446,17 @@ class Main {
 ### 22. Sort an ArrayList of strings alphabetically.
 
 ```java
-class Main {
+public class Main {
     public static void main(String[] args) {
-        ArrayList<String> list = new ArrayList<>();
-        list.add("java");
-        list.add("python");
-        list.add("c");
-        list.add("c++");
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Banana");
+        fruits.add("Apple");
+        fruits.add("Mango");
+        fruits.add("Grapes");
 
-        int pos = 0;
-        String temp;
+        Collections.sort(fruits); // Ascending order (A-Z)
 
-        for(int i = 0; i < list.size() ; i++) {
-            for(int j = 0; j < list.size() - 1; j++) {
-                if(list.get(j).length() > list.get(j + 1).length()) {
-                    temp = list.get(j);
-                    list.set(j, list.get(j + 1));
-                    list.set((j + 1), temp);
-                }
-            }
-        }
-
-        System.out.println(list);
+        System.out.println("Sorted List: " + fruits);
     }
 }
 ```
@@ -803,3 +792,82 @@ class Main {
     }
 }
 ```
+
+### 38. Convert an ArrayList of strings to uppercase using Stream.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+
+        list.add("Java");
+        list.add("C++");
+        list.add("Python");
+
+        List<String> collect = list.stream().map(e -> e.toUpperCase()).collect(Collectors.toList());
+
+
+        System.out.println(collect);
+    }
+}
+```
+
+### 39. Remove whitespaces from all strings in an ArrayList.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+
+        list.add(" Java " );
+        list.add("C++ ");
+        list.add("Python ");
+
+        List<String> collect = list.stream().map(e -> e.trim()).collect(Collectors.toList());
+
+        System.out.println(collect);
+    }
+}
+```
+
+### 40. Capitalize first letter of all strings in an ArrayList.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+
+        list.add("java");
+        list.add("c++ ");
+        list.add("python ");
+
+        List<String> collect = list.stream()
+                .map(e -> e.substring(0, 1).toUpperCase() + e.substring(1)).collect(Collectors.toList());
+
+        System.out.println(collect);
+    }
+}
+```
+
+### 41. Create an ArrayList of custom objects (e.g., Student class).
+```java
+class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+
+        studentsList.add(new Student("Armaan Ali", 17));
+        studentsList.add(new Student("Farmaan Ali", 18));
+
+        System.out.println(studentsList);
+    }
+}
+```
+
+### 42. Sort ArrayList of custom objects by name.
