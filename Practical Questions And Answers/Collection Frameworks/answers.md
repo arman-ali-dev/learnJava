@@ -2,7 +2,7 @@
 
 # 🔹 ArrayList
 
-1. Create an ArrayList of integers and add five numbers to it.
+### 1. Create an ArrayList of integers and add five numbers to it.
 
 ```java
 class Main {
