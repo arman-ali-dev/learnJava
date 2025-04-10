@@ -565,3 +565,241 @@ class Main {
     }
 }
 ```
+
+### 26. Find the index of a specific element in an ArrayList.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+
+        list.add("c");
+        list.add("c++");
+        list.add("java");
+        list.add("python");
+
+        System.out.println(list.indexOf("c++"));
+
+    }
+}
+```
+
+### 27. Find max and min elements from an ArrayList.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        list.add(14);
+        list.add(12);
+        list.add(55);
+        list.add(4);
+        list.add(99);
+        list.add(45);
+
+        int max = 0, min = Integer.MAX_VALUE;
+
+        for(int n : list) {
+            if(n > max) max = n;
+            if(n < min) min = n;
+        }
+
+        System.out.println("Max Number: " + max + "\n Min Number: " + min);
+    }
+}
+```
+
+### 28. Use Collections.frequency to count occurrences of an element.   
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        list.add(14);
+        list.add(12);
+        list.add(55);
+        list.add(12);
+        list.add(4);
+        list.add(99);
+        list.add(14);
+        list.add(12);
+
+        System.out.println(Collections.frequency(list, 12));
+    }
+}
+```
+
+### 29. Shuffle elements of an ArrayList randomly.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+
+        list.add("c");
+        list.add("c++");
+        list.add("java");
+        list.add("python");
+
+        System.out.println(list); // original order
+
+        Collections.shuffle(list);
+        System.out.println(list); // shuffled
+    }
+}
+```
+
+### 30. Reverse an ArrayList.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.add(40);
+        list.add(50);
+
+        int start = 0, end = list.size() - 1, temp;
+
+        for(int i = 0; i < list.size() / 2; i++) {
+            temp = list.get(start);
+
+            list.set(start, list.get(end));
+            list.set(end, temp);
+
+            start++;
+            end--;
+        }
+
+        System.out.println(list);
+    }
+}
+```
+
+### 31. Create a subList from an ArrayList.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Mango");
+        fruits.add("Grapes");
+        fruits.add("Orange");
+
+        List<String> subList = fruits.subList(1,3);
+
+        System.out.println(subList);
+    }
+}
+```
+
+### 32. Modify elements in an ArrayList using ListIterator.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Mango");
+        fruits.add("Grapes");
+        fruits.add("Orange");
+
+        ListIterator<String> iterator = fruits.listIterator();
+
+        while(iterator.hasNext()) {
+            String fruit = iterator.next();
+            iterator.set(fruit.toUpperCase());
+        }
+
+        System.out.println("Modified List: " + fruits);
+    }
+}
+```
+
+### 33. Replace all elements in an ArrayList using Collections.fill.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+
+        Collections.fill(fruits, "Fruit");
+
+        System.out.println(fruits);
+    }
+}
+```
+
+### 34. Remove elements that match a condition using removeIf().
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> fruits = new ArrayList<>();
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Mango");
+        fruits.add("Grapes");
+        fruits.add("Orange");
+
+        fruits.removeIf(f -> f.equals("Mango"));
+
+        System.out.println(fruits);
+    }
+}
+```
+
+### 35. Flatten a list of ArrayLists using flatMap (Stream API).
+```java
+class Main {
+    public static void main(String[] args) {
+        List<List<String>> nestedList = Arrays.asList(
+                Arrays.asList("Banana", "Mango"),
+                Arrays.asList("Orange", "Grapes"),
+                Arrays.asList("Pineapple"));
+
+        List<String> flatList = nestedList.stream().flatMap(list -> list.stream()).toList();
+
+        System.out.println(flatList);
+     }
+}
+```
+
+### 36. Use forEach() to print all elements.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.add(40);
+        list.add(50);
+
+        list.forEach(elem -> System.out.println(elem));
+     }
+}
+```
+
+### 37. Filter null values from an ArrayList using Stream.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        list.add(null);
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.add(null);
+        list.add(40);
+        list.add(50);
+
+        List<Integer> collect = list.stream().filter(e -> e == null).collect(Collectors.toList());
+
+        System.out.println(collect);
+    }
+}
+```
