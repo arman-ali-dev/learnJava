@@ -871,3 +871,307 @@ class Main {
 ```
 
 ### 42. Sort ArrayList of custom objects by name.
+```java
+class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+
+        studentsList.add(new Student("Armaan Ali", 17));
+        studentsList.add(new Student("Ali", 17));
+        studentsList.add(new Student("Farmaan Ali", 18));
+        studentsList.add(new Student("MD. Jagir", 17));
+
+        studentsList.sort(Comparator.comparing(s -> s.getName()));
+        
+        studentsList.forEach(e -> System.out.println(e.getName()));
+    }
+}
+```
+
+### 43. Sort ArrayList of custom objects by multiple fields (e.g., age, name).
+```java
+class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+
+        studentsList.add(new Student("Armaan Ali", 17));
+        studentsList.add(new Student("Ali", 16));
+        studentsList.add(new Student("Farmaan Ali", 18));
+        studentsList.add(new Student("MD. Jagir", 15));
+
+        studentsList.sort(Comparator
+                .comparing(Student::getAge)
+                .thenComparing(Student::getName)
+        );
+
+        studentsList.forEach(e -> System.out.println(e.getName()));
+    }
+}
+```
+
+### 44. Group custom objects based on a field using Map.
+```java
+class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+
+        studentsList.add(new Student("Armaan Ali", 17));
+        studentsList.add(new Student("Ali", 16));
+        studentsList.add(new Student("Farmaan Ali", 18));
+        studentsList.add(new Student("MD. Jagir", 15));
+
+        Map<Integer, List<Student>> groupByAge = studentsList.stream()
+                                                .collect(Collectors.groupingBy(Student::getAge));
+
+        groupByAge.forEach((age, students) -> {
+            System.out.print(age + "  -> ");
+            students.forEach(s -> System.out.print(s.getName()));
+            System.out.println();
+        });
+    }
+}
+```
+
+### 45. Remove objects from ArrayList based on a field value.
+```java
+class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+
+        studentsList.add(new Student("Armaan Ali", 17));
+        studentsList.add(new Student("Ali", 16));
+        studentsList.add(new Student("Farmaan Ali", 16));
+        studentsList.add(new Student("MD. Jagir", 15));
+
+        studentsList.removeIf(s -> s.getAge() == 16);
+
+        studentsList.forEach(s -> System.out.println(s.getName()));
+    }
+}class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        ArrayList<Student> studentsList = new ArrayList<>();
+
+        studentsList.add(new Student("Armaan Ali", 17));
+        studentsList.add(new Student("Ali", 16));
+        studentsList.add(new Student("Farmaan Ali", 16));
+        studentsList.add(new Student("MD. Jagir", 15));
+
+        studentsList.removeIf(s -> s.getAge() == 16);
+
+        studentsList.forEach(s -> System.out.println(s.getName()));
+    }
+}
+```
+
+### 46. Count frequency of each word from an ArrayList of strings.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("One");
+        list.add("Two");
+        list.add("One");
+        list.add("Three");
+
+        list.forEach(e -> System.out.println(e + " -> " + Collections.frequency(list, e)));
+    }
+}
+```
+
+### 47. Convert ArrayList to comma-separated string.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("One");
+        list.add("Two");
+        list.add("One");
+        list.add("Three");
+
+        String result = list.stream().collect(Collectors.joining(", "));
+
+        System.out.println(result);
+    }
+}
+```
+
+### 48. Partition an ArrayList into sublists of size N.
+```java
+class Main {
+    public static void main(String[] args) {
+        List<Integer> originalList = Arrays.asList(1,2,3,4,5,6,7);
+        int N = 3;
+
+        List<List<Integer>> partitions = new ArrayList<>();
+
+        for(int i = 0; i < originalList.size(); i += N) {
+          partitions.add(
+                  originalList.subList(
+                          i, Math.min(i + N, originalList.size())
+                  )
+          );
+        }
+
+        System.out.println(partitions);
+    }
+}
+```
+
+### 49. Check if an ArrayList has any null or empty string.
+```java
+class Main {
+    public static void main(String[] args) {
+        List<String> list = Arrays.asList("Hello", "", "How", "Are", "You");
+
+        if(list.contains(null) || list.contains("")){
+            System.out.println("Yes Null OR Empty String Is Exists In List!");
+        }
+    }
+}
+```
+
+### 50. Convert ArrayList of strings to ArrayList of integers.
+```java
+class Main {
+    public static void main(String[] args) {
+        ArrayList<String> strList  = new ArrayList<>();
+        strList.add("10");
+        strList.add("20");
+        strList.add("30");
+
+        List<Integer> integerList = strList.stream().map(Integer::parseInt).collect(Collectors.toList());
+
+        System.out.println(integerList);
+    }
+}
+```
