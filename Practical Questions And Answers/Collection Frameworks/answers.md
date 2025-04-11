@@ -1175,3 +1175,599 @@ class Main {
     }
 }
 ```
+
+# 🔹 LinkedList
+
+### 1. Create a LinkedList of strings and add four names.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        System.out.println(names);
+    }
+}
+```
+
+### 2. Add an element at the first and last position in a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("filiya");
+        names.add("chintu");
+
+        names.addFirst("liliya");
+        names.addLast("candy");
+
+        System.out.println(names);
+    }
+}
+```
+
+### 3. Iterate through a LinkedList using for-each loop.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("filiya");
+        names.add("chintu");
+
+        names.addFirst("liliya");
+        names.addLast("candy");
+
+
+        names.forEach(System.out::println);
+    }
+}
+```
+
+### 4. Iterate through a LinkedList using Iterator.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("filiya");
+        names.add("chintu");
+
+        names.addFirst("liliya");
+        names.addLast("candy");
+
+        Iterator<String> iterator = names.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+```
+
+### 5. Iterate through a LinkedList using ListIterator.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("filiya");
+        names.add("chintu");
+
+        names.addFirst("liliya");
+        names.addLast("candy");
+
+        ListIterator<String> iterator = names.listIterator();
+
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+}
+```
+
+### 6. Access the first and last element of a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        System.out.println("First Element: " + names.getFirst());
+        System.out.println("Last Element: " + names.getLast());
+    }
+}
+```
+
+### 7. Remove the first and last element of a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        names.removeFirst();
+        names.removeLast();
+
+        System.out.println(names);
+    }
+}
+```
+
+### 8. Get the element at a specific index.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        System.out.println(names.get(3));
+    }
+}
+```
+
+### 9. Replace an element at a specific index.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        names.set(2, "pintu");
+
+        System.out.println(names);
+    }
+}
+```
+
+### 10. Check if a LinkedList contains a specific element.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+
+        System.out.println(names.contains("chintu"));
+    }
+}
+```
+
+### 11. Find the index of a given element.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        System.out.println(names.indexOf("chintu"));
+    }
+}
+```
+
+### 12. Remove an element by value.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        names.remove("chintu");
+        System.out.println(names);
+    }
+}
+```
+
+### 13. Remove an element by index.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        names.remove(2);
+        System.out.println(names);
+    }
+}
+```
+
+### 14. Clear all elements from a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        names.clear();
+        System.out.println(names);
+    }
+}
+```
+
+### 15. Check if a LinkedList is empty.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        System.out.println(names.isEmpty());
+    }
+}
+```
+
+### 16. Find the size of a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        System.out.println(names.size());
+    }
+}
+```
+
+### 17. Convert a LinkedList to an array.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        String[] nameArr = names.toArray(new String[0]);
+
+        for (String s : nameArr) {
+            System.out.println(s);
+        }
+    }
+}
+```
+
+### 18. Convert an array to a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4};
+
+        LinkedList<Integer> linkedList = new LinkedList<>();
+
+        for (int n : arr) {
+            linkedList.add(n);
+        }
+
+        System.out.println(linkedList);
+    }
+}
+```
+
+### 19. Sort a LinkedList of strings alphabetically.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        Collections.sort(names);
+
+        System.out.println(names);
+    }
+}
+```
+
+### 20. Reverse a LinkedList manually.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        int start = 0, end = names.size() - 1;
+        String temp;
+
+        for(int i = 0; i < names.size() / 2; i++) {
+            temp = names.get(start);
+            names.set(start, names.get(end));
+            names.set(end, temp);
+
+            start++;
+            end--;
+        }
+
+        System.out.println(names);
+    }
+}
+```
+
+### 21. Reverse a LinkedList using Collections.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        Collections.reverse(names);
+
+        System.out.println(names);
+    }
+}
+```
+
+### 22. Shuffle a LinkedList randomly.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> names = new LinkedList<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        Collections.shuffle(names);
+
+        System.out.println(names);
+    }
+}
+```
+
+### 23. Merge two LinkedLists.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList1 = new LinkedList<>();
+        linkedList1.add(1);
+        linkedList1.add(2);
+        linkedList1.add(3);
+
+        LinkedList<Integer> linkedList2 = new LinkedList<>();
+        linkedList2.add(4);
+        linkedList2.add(5);
+        linkedList2.add(6);
+
+        linkedList1.addAll(linkedList2);
+
+        System.out.println(linkedList1);
+    }
+}
+```
+
+### 24. Clone a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList1 = new LinkedList<>();
+        linkedList1.add(1);
+        linkedList1.add(2);
+        linkedList1.add(3);
+
+        LinkedList<Integer> cloned = (LinkedList<Integer>) linkedList1.clone();
+    }
+}
+```
+
+### 25. Compare two LinkedLists for equality.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList1 = new LinkedList<>();
+        linkedList1.add(1);
+        linkedList1.add(2);
+        linkedList1.add(3);
+
+        LinkedList<Integer> linkedList2 = new LinkedList<>();
+        linkedList2.add(1);
+        linkedList2.add(3);
+        linkedList2.add(2);
+
+        System.out.println(linkedList1.equals(linkedList2));
+    }
+}
+```
+
+### 26. Check if one LinkedList contains all elements of another.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList1 = new LinkedList<>();
+        linkedList1.add(1);
+        linkedList1.add(2);
+        linkedList1.add(3);
+        linkedList1.add(4);
+
+        LinkedList<Integer> linkedList2 = new LinkedList<>();
+        linkedList2.add(1);
+        linkedList2.add(3);
+        linkedList2.add(2);
+
+        System.out.println(linkedList1.containsAll(linkedList2));
+    }
+}
+```
+
+### 27. Retain common elements between two LinkedLists.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList1 = new LinkedList<>();
+        linkedList1.add(1);
+        linkedList1.add(2);
+        linkedList1.add(3);
+        linkedList1.add(4);
+
+        LinkedList<Integer> linkedList2 = new LinkedList<>();
+        linkedList2.add(1);
+        linkedList2.add(3);
+        linkedList2.add(2);
+
+        linkedList1.retainAll(linkedList2);
+
+        System.out.println(linkedList1);
+    }
+}
+```
+
+### 28. Remove all elements from one LinkedList that exist in another.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList1 = new LinkedList<>();
+        linkedList1.add(1);
+        linkedList1.add(2);
+        linkedList1.add(3);
+        linkedList1.add(4);
+
+        LinkedList<Integer> linkedList2 = new LinkedList<>();
+        linkedList2.add(1);
+        linkedList2.add(3);
+        linkedList2.add(2);
+
+        linkedList1.removeAll(linkedList2);
+
+        System.out.println(linkedList1);
+    }
+}
+```
+
+### 29. Convert a LinkedList to a Set.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> linkedList1 = new LinkedList<>();
+        linkedList1.add(1);
+        linkedList1.add(2);
+        linkedList1.add(3);
+        linkedList1.add(4);
+        linkedList1.add(3);
+
+        Set<Integer> set = new HashSet<>(linkedList1);
+
+        System.out.println(set);
+    }
+}
+```
+
+### 30. Add null values and observe behavior.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(null);
+        list.add(null);
+        list.add(null);
+
+        System.out.println(list);
+    }
+}
+```
+
+### 31. Create a LinkedList of integers and remove even numbers.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        list.removeIf(n -> n % 2 == 0);
+        System.out.println(list);
+    }
+}
+```
+
+### 32. Add elements at a specific index.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        list.set(1, 20);
+        System.out.println(list);
+    }
+}
+```
+
+### 33. Create a synchronized LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
+
+        List<Integer> synchronizedList = Collections.synchronizedList(list);
+
+    }
+}
+```
