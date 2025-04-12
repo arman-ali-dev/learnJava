@@ -2873,3 +2873,13 @@ It is used to manage and reuse threads efficiently, reduce overhead of thread cr
 ## 195. What is the difference between `synchronized` block and `Lock` interface? 
 `synchronized` block is simpler and built-in, but has less flexibility.  
 `Lock` (from `java.util.concurrent.locks`) provides more control, like try-lock, timed lock, and interruptible lock.
+
+## 196. What is Legacy Code and Legacy Class?
+
+## Legacy Code:
+**Legacy code** refers to code that is still in use but was written using older practices or technologies that are no longer considered the best approach. It can be difficult to maintain or extend and often lacks proper documentation.
+
+## Legacy Class:
+A **legacy class** is an outdated class that was part of an earlier version of a programming language or framework, now replaced by more efficient or modern alternatives. They are still functional but are not recommended for new development.
+
+
