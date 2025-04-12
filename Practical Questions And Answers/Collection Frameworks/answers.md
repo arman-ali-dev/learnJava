@@ -1771,3 +1771,393 @@ class Main {
     }
 }
 ```
+
+### 34. Create an unmodifiable LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        List<Integer> unmodifiableList  = Collections.unmodifiableList(list);
+
+       // list.add(4); give an unsupportedOperationException
+
+        System.out.println(unmodifiableList);
+    }
+}
+```
+
+### 35. Traverse a LinkedList backward using descendingIterator.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+
+        Iterator<Integer> reverseIterator = list.descendingIterator();
+
+        while (reverseIterator.hasNext()) {
+            System.out.println(reverseIterator.next());
+        }
+    }
+}
+```
+
+### 36. Use LinkedList as a Queue (FIFO behavior).
+```java
+class Main {
+    public static void main(String[] args) {
+        Deque<String> list = new LinkedList<>();
+        list.add("First");
+        list.add("Second");
+        list.add("Third");
+
+        list.remove(); // remove first element
+
+        System.out.println(list);
+    }
+}
+```
+
+### 37. Use LinkedList as a Stack (LIFO behavior).
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> stack = new LinkedList<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        
+        stack.remove() ; // LIFO (Last In First Out) Behavior
+
+        System.out.println(stack);
+    }
+}
+```
+
+### 38. Demonstrate peek(), poll(), and offer() methods.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+
+        // offer() - adds elements to the end of the LinkedList
+        list.offer(1);
+        list.offer(2);
+        list.offer(3);
+
+        // peek() - return head element of LinkedList
+        System.out.println(list.peek());
+
+        // poll() - removes and returns the head of the LinkedList
+        System.out.println(list.poll());
+        System.out.println(list);
+    }
+}
+```
+
+### 39. Use LinkedList to store custom objects.
+```java
+class Student {
+    private int age;
+    private String name;
+
+    public Student(int age, String name) {
+        this.age = age;
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Student> students = new LinkedList<>();
+
+        students.add(new Student(17, "Armaan Ali"));
+        students.add(new Student(18, "Farman Khan"));
+    }
+}
+```
+
+### 40. Sort LinkedList of custom objects using Comparator.
+```java
+class Student {
+    private int age;
+    private String name;
+
+    public Student(int age, String name) {
+        this.age = age;
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Student> students = new LinkedList<>();
+
+        students.add(new Student(17, "Armaan Ali"));
+        students.add(new Student(18, "Farman Khan"));
+        students.add(new Student(18, "Ali"));
+
+        Collections.sort(students, Comparator.comparing(Student::getName));
+
+        students.forEach(s -> System.out.println(s.getName()));
+    }
+}
+```
+
+### 41. Iterate and remove elements using removeIf().
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+
+        list.add("c");
+        list.add("c++");
+        list.add("java");
+        list.add("javaScript");
+        list.add("python");
+
+        list.removeIf(elem -> elem.equals("python"));
+
+        System.out.println(list);
+    }
+}
+```
+
+### 42. Create a sublist from a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+
+        list.add("c");
+        list.add("c++");
+        list.add("java");
+        list.add("javaScript");
+        list.add("python");
+
+        List<String> subList = list.subList(1, 4);
+
+        System.out.println(subList);
+    }
+}
+```
+
+### 43. Use listIterator to modify elements.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+
+        list.add("c");
+        list.add("c++");
+        list.add("java");
+        list.add("javaScript");
+        list.add("python");
+
+        ListIterator iterator  = list.listIterator();
+
+        while (iterator.hasNext()) {
+            iterator.set(iterator.next().toString().toUpperCase());
+        }
+
+        System.out.println(list); // Modified List
+    }
+}
+```
+
+### 44. Count frequency of elements using Collections.frequency().
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+
+        list.add("c");
+        list.add("c++");
+        list.add("java");
+        list.add("c");
+        list.add("python");
+
+        System.out.println(Collections.frequency(list,"c"));
+    }
+}
+```
+
+### 45. Find max and min in a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list = new LinkedList<>();
+
+        list.add(12);
+        list.add(34);
+        list.add(2);
+        list.add(45);
+        list.add(95);
+        list.add(92);
+
+        int max = 0, min = Integer.MAX_VALUE;
+
+        for (Integer num : list) {
+            if(num > max) max = num;
+            if (num < min) min = num;
+        }
+
+        System.out.println("Max Number: " + max);
+        System.out.println("Min Number: " + min);
+    }
+}
+```
+
+### 46. Add elements from another collection.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<Integer> list1 = new LinkedList<>();
+
+        list1.add(1);
+        list1.add(2);
+        list1.add(3);
+
+        LinkedList<Integer> list2 = new LinkedList<>();
+
+        list2.add(4);
+        list2.add(5);
+        list2.add(6);
+
+        list1.addAll(list2);
+
+        System.out.println(list1);
+    }
+}
+```
+
+### 47. Convert LinkedList to comma-separated string.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("C");
+        list.add("Java");
+        list.add("JavaScript");
+
+        String result = list.stream().collect(Collectors.joining(", "));
+
+        System.out.println(result);
+    }
+}
+```
+
+
+### 48. Capitalize first letter of each string in a LinkedList.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("hello");
+        list.add("world");
+        list.add("how");
+        list.add("are");
+        list.add("you");
+
+        ListIterator<String> iterator = list.listIterator();
+
+        while(iterator.hasNext()) {
+            String current = iterator.next();
+            String capitalizeStr = current.substring(0, 1).toUpperCase() +
+                    current.substring(1);
+
+            iterator.set(capitalizeStr);
+        }
+
+        System.out.println(list);
+    }
+}
+```
+
+### 49. Filter out null or empty strings.
+```java
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("hello");
+        list.add("world");
+        list.add("");
+        list.add("how");
+        list.add("are");
+        list.add(null);
+        list.add("you");
+
+        List<String> collect = list.stream().filter(s -> s != null && !s.isBlank() ).collect(Collectors.toList());
+
+        System.out.println(collect);
+    }
+}
+```
+
+### 50. Count vowels in each string of a LinkedList.
+```java
+import java.util.LinkedList;
+
+class Main {
+    public static void main(String[] args) {
+        LinkedList<String> list = new LinkedList<>();
+        list.add("hello");
+        list.add("world");
+        list.add("how");
+        list.add("are");
+        list.add("yoU");
+
+        int vowelCount = 0;
+
+        for (String s : list) {
+            for (int i = 0; i < s.length(); i++) {
+                char ch = s.charAt(i);
+                if (ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' ||
+                    ch == 'A' || ch == 'E' || ch == 'I' || ch == 'O' || ch == 'U') {
+                    vowelCount++;
+                }
+            }
+        }
+
+        System.out.println("Total Vowels In Each String Of List: " + vowelCount);
+    }
+}
+```
