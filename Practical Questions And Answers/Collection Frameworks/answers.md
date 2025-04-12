@@ -2161,3 +2161,417 @@ class Main {
     }
 }
 ```
+
+# 🔹 Vector
+
+### 1. Create a Vector of integers and add five elements to it.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<Integer> vector = new Vector<>();
+
+        vector.add(1);
+        vector.add(2);
+        vector.add(3);
+        vector.add(4);
+        vector.add(5);
+
+        System.out.println(vector);
+    }
+}
+```
+
+### 2. Create a Vector of Strings and add 3 names.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        System.out.println(names);
+    }
+}
+```
+
+### 3. Insert an element at a specific index in a Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        names.set(1, "Arman Ali");
+
+        System.out.println(names);
+    }
+}
+```
+
+### 4. Retrieve an element from a Vector using index.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        System.out.println(names.get(1));
+    }
+}
+```
+
+### 5. Get the size of a Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        System.out.println(names.size());
+    }
+}
+```
+
+### 6. Remove an element from a Vector by index.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        names.remove(1);
+        
+        System.out.println(names);
+    }
+}
+```
+
+### 7. Remove an element by value from a Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        names.remove("Armaan");
+
+        System.out.println(names);
+    }
+}
+```
+
+### 8. Replace an element at a given index in a Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        names.set(1, "Arman Ali");
+
+        System.out.println(names);
+    }
+}
+```
+
+### 9. Check if a Vector contains a specific value.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        System.out.println(names.contains("Ali"));
+    }
+}
+```
+
+### 10. Clear all elements from a Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        names.clear();
+        
+        System.out.println(names);
+    }
+}
+```
+
+
+### 11. Iterate over a Vector using a for-each loop.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        names.forEach(System.out::println);
+    }
+}
+```
+
+### 12. Iterate over a Vector using traditional for loop.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        for (int i = 0; i < names.size(); i++) {
+            System.out.println("Element at index " + i + ": " + names.get(i));
+        }
+    }
+}
+```
+
+### 13. Iterate using Iterator.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        Iterator<String> iterator = names.iterator();
+
+        while (iterator.hasNext()){
+            System.out.println(iterator.next());
+        }
+    }
+}
+```
+
+### 14. Iterate using ListIterator (forward and backward).
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("Ali");
+        names.add("Armaan");
+        names.add("Maan");
+
+        ListIterator<String> iterator = names.listIterator();
+
+        System.out.println("Forward Iteration:");
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+
+        System.out.println("\nBackward Iteration:");
+        while (iterator.hasPrevious()){
+            System.out.println(iterator.previous());
+        }
+    }
+}
+```
+
+### 15. Find the index of a specific element.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        System.out.println(names.indexOf("chintu"));
+    }
+}
+```
+
+### 16. Check if a Vector is empty.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        System.out.println(names.isEmpty());
+
+        names.clear();
+        System.out.println(names.isEmpty());
+    }
+}
+```
+
+### 17. Get the first and last element of the Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        System.out.println(names.getFirst());
+        System.out.println(names.getLast());
+    }
+}
+```
+
+### 18. Convert a Vector to an Array.
+```java
+class Main {
+    public static void main(String[] args) {
+        Vector<String> names = new Vector<>();
+
+        names.add("liliya");
+        names.add("filiya");
+        names.add("chintu");
+        names.add("candy");
+
+        String[] arr = names.toArray(new String[0]);
+
+        for (String s : arr) {
+            System.out.println(s);
+        }
+    }
+}
+```
+
+### 19. Convert an Array to a Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+        String[] nameArray = {"liliya", "filiya", "chintu", "candy"};
+
+        Vector<String> nameVector = new Vector<>(Arrays.asList(nameArray));
+
+        System.out.println(nameVector);
+    }
+}
+```
+
+### 20. Clone a Vector to another Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<String> vector = new Vector<>();
+       vector.add("Hello");
+       vector.add("World");
+
+       Vector<String> cloned = (Vector<String>) vector.clone();
+
+        System.out.println(cloned);
+    }
+}
+```
+
+### 21. Sort a Vector of Strings alphabetically.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<String> vector = new Vector<>();
+       vector.add("x");
+       vector.add("a");
+       vector.add("h");
+       vector.add("k");
+       vector.add("o");
+
+        Collections.sort(vector);
+
+       System.out.println(vector);
+    }
+}
+```
+
+### 22. Reverse a Vector of Integers.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<Integer> vector = new Vector<>(Arrays.asList(1,2,3,4,5));
+
+       System.out.println(vector.reversed());
+    }
+}
+```
+
+### 23. Shuffle a Vector of Strings randomly.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<String> vector = new Vector<>(Arrays.asList("Hello", "World", "How", "Are", "You"));
+
+       Collections.shuffle(vector);
+        System.out.println(vector);
+    }
+}
+```
+
+### 24. Copy elements from one Vector to another.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<String> vector1 = new Vector<>(Arrays.asList("Hello", "World", "How", "Are", "You"));
+
+       Vector<String > vector2 = new Vector<>(vector1);
+
+       System.out.println(vector2);
+    }
+}
+```
+
+### 25. Find the maximum and minimum from a Vector of Integers.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<Integer> vector = new Vector<>(Arrays.asList( 45, 86, 77, 2, 65, 10 ));
+
+       int max = 0, min = Integer.MAX_VALUE;
+
+        for (Integer num : vector) {
+            if(num > max) max = num;
+            if(num < min) min = num;
+        }
+
+        System.out.println("Max Number: " + max);
+        System.out.println("Min Number: " + min);
+    }
+}
+```
