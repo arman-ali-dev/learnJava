@@ -2575,3 +2575,281 @@ class Main {
     }
 }
 ```
+
+### 26. Create a synchronized version of a Vector.
+```java
+// Here, Vector is already synchronized internally, so it's thread-safe for most simple use cases.
+
+public class Main {
+    public static void main(String[] args) {
+        Vector<String> vector = new Vector<>();
+        vector.add("Apple");
+        vector.add("Banana");
+
+        System.out.println(vector);
+    }
+}
+```
+
+### 27. Convert a Vector to ArrayList.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<Integer> vector = new Vector<>(Arrays.asList( 45, 86, 77, 2, 65, 10 ));
+
+       ArrayList<Integer> list = new ArrayList<>(vector);
+
+        System.out.println(list);
+    }
+}
+```
+
+### 28. Use Collections.frequency() with Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<Integer> vector = new Vector<>(Arrays.asList( 45, 86, 77, 2, 65, 77, 10 ));
+
+        System.out.println(Collections.frequency(vector,77));
+    }
+}
+```
+
+### 29. Count occurrences of a word in a Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<String> vector = new Vector<>(Arrays.asList( "Hello", "World", "Hello", "Java"  ));
+
+        for (String s : vector) {
+            System.out.println(s + " -> " + Collections.frequency(vector, s));
+        }
+    }
+}
+```
+
+### 30. Filter elements starting with a specific letter from Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<String> vector = new Vector<>(Arrays.asList( "Hello", "World", "How", "Are", "You"));
+
+        List<String> filteredVector = vector.stream().filter(s -> s.startsWith("H")).collect(Collectors.toList());
+
+        System.out.println(filteredVector);
+    }
+}
+```
+
+### 31. Remove all even numbers from a Vector.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<Integer> vector = new Vector<>(Arrays.asList(1,2,3,4,5,6));
+       vector.removeIf(elem -> elem % 2 == 0);
+
+        System.out.println(vector);
+    }
+}
+```
+
+### 32. Remove duplicates using Set.
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<Integer> vector = new Vector<>(Arrays.asList(1,2,3,1,5,2));
+
+       Set<Integer> set = new HashSet<>(vector);
+
+       Vector<Integer> newVector = new Vector<>(set);
+
+        System.out.println(newVector);
+    }
+}
+```
+
+### 33. Convert Vector to Stream and filter values.    
+```java
+class Main {
+    public static void main(String[] args) {
+       Vector<Integer> vector = new Vector<>(Arrays.asList(1,2,3,1,5,2));
+
+        Stream<Integer> integerStream = vector.stream().filter(e -> e % 2 == 0);
+    }
+}
+```
+
+### 34. Use Vector to store custom objects.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Vector<Person> personVector = new Vector<>();
+        personVector.add(new Person("Armaan Ali", 18));
+        personVector.add(new Person("Ali", 17));
+    }
+}
+```
+
+### 35. Sort a Vector of custom objects using Comparator.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Vector<Person> personVector = new Vector<>();
+        personVector.add(new Person("Armaan Ali", 18));
+        personVector.add(new Person("Ali", 17));
+
+        personVector.sort(Comparator.comparing(Person::getName));
+
+        for (Person person : personVector) {
+            System.out.println(person.getName());
+        }
+    }
+}
+```
+
+### 36. Explain how Vector is synchronized.
+
+#### What is Synchronization?
+**Synchronization** in Java means that only one thread can access a method or block of code at a time. This helps prevent:
+
+- Data corruption
+- Race conditions
+- Inconsistent results in multithreaded environments
+
+#### How is `Vector` Synchronized?
+
+The `Vector` class in Java is **synchronized by default**. This means:
+- All major methods like `add()`, `remove()`, `get()`, `set()` etc. are synchronized.
+- Internally, `Vector` uses the `synchronized` keyword to ensure thread-safe access.
+
+### 37. Difference between Vector and ArrayList.
+
+## 1. Synchronization
+- **`Vector`**: It is **synchronized** by default, meaning it is thread-safe. Multiple threads can safely access a `Vector` without causing data inconsistencies.
+- **`ArrayList`**: It is **not synchronized** by default. This makes it **faster** in single-threaded environments, but you need to manually synchronize it if required.
+
+## 2. Growth Policy
+- **`Vector`**: It **doubles its size** when it runs out of space. For example, if a `Vector` with 10 elements reaches its capacity, it increases the capacity to 20 elements.
+- **`ArrayList`**: It **grows by 50%** of the current size. For example, if an `ArrayList` with 10 elements exceeds its capacity, it increases the capacity by 5 elements (i.e., 15 total).
+
+## 3. Performance
+- **`Vector`**: Due to synchronization and doubling of size, `Vector` is generally **slower** compared to `ArrayList`, especially in single-threaded applications.
+- **`ArrayList`**: It is **faster** as it is not synchronized and grows by 50%, making it more efficient in most use cases.
+
+## 4. Methods
+- **`Vector`**: It includes some legacy methods such as `elementAt()`, `addElement()`, and `removeElement()`, which are not present in `ArrayList`.
+- **`ArrayList`**: It uses modern collection methods, and doesn't include legacy methods that are specific to `Vector`.
+
+## 5. Memory Overhead
+- **`Vector`**: The synchronization mechanism introduces additional **memory overhead**.
+- **`ArrayList`**: Since it's not synchronized, there is less **memory overhead** compared to `Vector`.
+
+## 6. Default Size
+- **`Vector`**: It has a **default capacity** of 10 elements, but it may grow more significantly when the capacity exceeds the current size.
+- **`ArrayList`**: It has a **default capacity** of 10 elements, and it increases its capacity by 50% when needed.
+
+## 7. Legacy Status
+- **`Vector`**: It is a **legacy class** in Java. It was part of the original version of Java, but it's been largely replaced by other collection classes like `ArrayList`.
+- **`ArrayList`**: It is a **modern class** introduced in the Java Collections Framework and is the preferred choice for list operations in most cases.
+
+---
+
+## When to Use Which?
+
+- Use **`Vector`** when:
+  - You need thread-safety with **built-in synchronization**.
+  - You are working with legacy code that depends on `Vector`.
+
+- Use **`ArrayList`** when:
+  - You don’t need synchronization, and you want better **performance**.
+  - You are working with modern code and Java Collections Framework.
+
+## 38. Why Vector is slower than ArrayList.
+
+1. **Synchronization**:  
+   - `Vector` is synchronized by default, introducing overhead for thread safety.  
+   - `ArrayList` is not synchronized, making it faster in single-threaded environments.
+
+2. **Growth Policy**:  
+   - `Vector` doubles its size when capacity is exceeded, causing more frequent resizing.  
+   - `ArrayList` increases its size by 50%, resulting in fewer resizes.
+
+3. **Legacy Class**:  
+   - `Vector` is older and less optimized for modern usage.  
+   - `ArrayList` is newer and more efficient for general use.
+
+4. **Thread Safety vs Performance**:  
+   - `Vector` sacrifices performance for thread safety.  
+   - `ArrayList` is faster without built-in thread safety.
+
+## 39. When should Vector be used in modern Java?
+# When Should `Vector` be Used in Modern Java?
+
+`Vector` should be used in modern Java when:
+
+1. **Thread Safety is Required**:  
+   - If you need a thread-safe list where multiple threads will be accessing and modifying the list concurrently, and you prefer built-in synchronization.
+
+2. **Legacy System Support**:  
+   - When maintaining or interacting with legacy code that already uses `Vector` and changing it might introduce bugs or be costly.
+
+3. **No Better Alternative**:  
+   - When using modern alternatives like `ArrayList` or `CopyOnWriteArrayList` is not suitable for the specific requirements of your project.
+
+However, in most cases, `ArrayList` or other concurrency-safe collections like `CopyOnWriteArrayList` are recommended for performance reasons.
+
+## 40. What is capacity and capacity increment in Vector?
+
+## 1. **Capacity**:
+- The **capacity** of a `Vector` refers to the number of elements it can hold before needing to resize.
+- When a `Vector` is created, it is initialized with a default capacity of 10 elements. However, you can specify an initial capacity when creating a `Vector`.
+
+### Example:
+```java
+Vector<Integer> vector = new Vector<>(20);  // Initial capacity is 20
+```
+
+## 2. Capacity Increment:
+ - The capacity increment defines how much the Vector’s capacity increases when it needs to grow.
+ - If a Vector’s size exceeds its current capacity, the capacity will increase by a fixed increment (which is specified when the Vector is created).
+
+### Example:
+```java
+Vector<Integer> vector = new Vector<>(10, 5);  // Initial capacity 10, increment 5
+```
