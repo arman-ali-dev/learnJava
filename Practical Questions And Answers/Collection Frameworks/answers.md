@@ -2853,3 +2853,177 @@ Vector<Integer> vector = new Vector<>(20);  // Initial capacity is 20
 ```java
 Vector<Integer> vector = new Vector<>(10, 5);  // Initial capacity 10, increment 5
 ```
+
+# 🔹 Stack
+
+## 1. Create a Stack of integers and push five elements into it.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        System.out.println(stack);
+    }
+}
+```
+
+## 2. Pop an element from the Stack.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        stack.pop();
+        
+        System.out.println(stack);
+    }
+}
+```
+
+## 3. Peek the top element of the Stack.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        System.out.println(stack.peek());
+    }
+}
+```
+
+## 4. Check if the Stack is empty.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        System.out.println(stack.isEmpty());
+    }
+}
+```
+
+## 5. Find the size of the Stack.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        System.out.println(stack.size());
+    }
+}
+```
+
+## 6. Search an element in the Stack.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        System.out.println(stack.search(10));
+    }
+}
+```
+
+## 7. Use a loop to pop all elements from a Stack.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        while (!stack.isEmpty()) {
+            stack.pop();
+        }
+
+        System.out.println(stack);
+    }
+}
+```
+
+## 8. Convert Stack to List.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        List<Integer> list = new ArrayList<>(stack);
+
+        System.out.println(list);
+    }
+}
+```
+
+## 9. Clear all elements from the Stack.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        stack.clear();
+
+        System.out.println(stack);
+    }
+}
+```
+
+## 10. Clone a Stack.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        Stack<Integer> cloned  = (Stack<Integer>) stack.clone();
+
+        System.out.println(cloned);
+    }
+}
+```
