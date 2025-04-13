@@ -3027,3 +3027,136 @@ class Main {
     }
 }
 ```
+
+## 11. Iterate through a Stack using a for-each loop.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        for (Integer n : stack) {
+            System.out.println(n);
+        }
+    }
+}
+```
+
+## 12. Iterate through a Stack using an Iterator.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        Iterator<Integer> iterator = stack.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+```
+
+## 13. Reverse print Stack without modifying it.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        ListIterator<Integer> iterator = stack.listIterator(stack.size());
+
+        while (iterator.hasPrevious()) {
+            System.out.println(iterator.previous());
+        }
+    }
+}
+```
+
+## 14.Print elements from bottom to top of Stack.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        ListIterator<Integer> iterator = stack.listIterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+```
+
+## 15. Convert Stack to Array.
+```java
+class Main {
+    public static void main(String[] args) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+        stack.push(4);
+        stack.push(5);
+
+        Integer[] arr = stack.toArray(new Integer[0]);
+    }
+}
+```
+
+## 16. Check for balanced parentheses using Stack.
+```java
+class Main {
+    public static boolean isBalanced(String str) {
+        Stack<Character> stack = new Stack<>();
+
+        for(Character ch : str.toCharArray()) {
+            if(ch == '(' || ch == '{' || ch == '[') {
+                stack.push(ch);
+            }
+
+            else if(ch == ')' || ch == '}' || ch == ']') {
+                if(stack.isEmpty()) return false;
+
+                Character top = stack.pop();
+
+                if((ch == ')' && top != '(') ||
+                   (ch == '}' && top != '{') ||
+                   (ch == ']' && top != '[')) {
+                    return  false;
+                }
+            }
+        }
+
+        return  stack.isEmpty();
+    }
+
+    public static void main(String[] args) {
+        String str = "({[]})";
+
+        if (isBalanced(str)) {
+            System.out.println("Balanced!");
+        } else {
+            System.out.println("Not Balanced!");
+        }
+    }
+}
+```
