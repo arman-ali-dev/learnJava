@@ -1,4 +1,4 @@
-# Java Collections Framework - 300 Coding Questions (Beginner Friendly)
+# Java Collections Framework 
 
 # 🔹 ArrayList
 
@@ -3157,6 +3157,347 @@ class Main {
         } else {
             System.out.println("Not Balanced!");
         }
+    }
+}
+```
+
+# 🔹 HashSet
+
+## 1. Create a HashSet of Strings and add five elements.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Five");
+
+        System.out.println(set);
+    }
+}
+```
+
+## 2. Add duplicate elements to a HashSet and observe behavior.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Three"); // HashSet remove automatically duplicate element
+        set.add("Five");
+
+        System.out.println(set);
+    }
+}
+```
+
+## 3. Remove an element from the HashSet.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Five");
+
+        set.remove("One");
+        System.out.println(set);
+    }
+}
+```
+
+## 4. Check if an element exists in the HashSet.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Five");
+
+        System.out.println(set.contains("Two"));
+    }
+}
+```
+
+### 5. Get the size of the HashSet.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Five");
+
+        System.out.println(set.size());
+    }
+}
+```
+
+## 6. Clear all elements from the HashSet.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Five");
+
+        set.clear();
+
+        System.out.println(set);
+    }
+}
+```
+
+## 7. Iterate over a HashSet using for-each loop.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Five");
+
+        set.forEach(System.out::println);
+    }
+}
+```
+
+## 8. Iterate over a HashSet using Iterator.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Five");
+
+        Iterator<String> iterator = set.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+```
+
+## 9. Convert HashSet to Array.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Five");
+
+        String[] arr = set.toArray(new String[0]);
+    }
+}
+```
+
+## 10. Convert HashSet to List.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set  = new HashSet<>();
+
+        set.add("One");
+        set.add("Two");
+        set.add("Three");
+        set.add("Four");
+        set.add("Five");
+
+        List<String> list = new ArrayList<>(set);
+
+        System.out.println(list);
+    }
+}
+```
+
+## 11. Perform Union of two HashSets.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<Integer> set1 = new HashSet<>(Arrays.asList(1,2,3));
+        HashSet<Integer> set2 = new HashSet<>(Arrays.asList(3,4,5));
+
+        HashSet<Integer> unionSet =  new HashSet<>(set1);
+        unionSet.addAll(set2);
+
+        System.out.println(unionSet);
+    }
+}
+```
+
+## 12. Perform Intersection of two HashSets.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<Integer> set1 = new HashSet<>(Arrays.asList(1,2,3));
+        HashSet<Integer> set2 = new HashSet<>(Arrays.asList(3,4,5));
+
+        HashSet<Integer> intersection =  new HashSet<>(set1);
+        intersection.retainAll(set2); // // keep only common elements
+
+        System.out.println(intersection);
+    }
+}
+```
+
+## 13. Perform Difference between two HashSets.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<Integer> set1 = new HashSet<>(Arrays.asList(1,2,3));
+        HashSet<Integer> set2 = new HashSet<>(Arrays.asList(3,4,5));
+
+        HashSet<Integer> diffrence =  new HashSet<>(set1);
+        diffrence.removeAll(set2);
+
+        System.out.println(diffrence);
+    }
+}
+```
+
+## 14. Check if one HashSet is a subset of another.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<Integer> set1 = new HashSet<>(Arrays.asList(1,2,3,4));
+        HashSet<Integer> set2 = new HashSet<>(Arrays.asList(1,2));
+
+        boolean isSubset = set1.containsAll(set2);
+
+        System.out.println(isSubset);
+    }
+}
+```
+
+## 15. Compare two HashSets and print common elements.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<Integer> set1 = new HashSet<>(Arrays.asList(1,2,3,4));
+        HashSet<Integer> set2 = new HashSet<>(Arrays.asList(1,2,5,6));
+
+        HashSet<Integer> common = new HashSet<>(set1);
+        common.retainAll(set2);
+
+        System.out.println(common);
+    }
+}
+```
+
+## 16. Understand why HashSet does not allow duplicates.
+> **HashSet** is a type of **Set**, and by definition, **Set does not allow duplicate elements**.
+
+---
+
+## ⚙️ Internal Working of HashSet
+
+- HashSet is internally backed by a **HashMap**.
+- When you add an element to a HashSet:
+  1. Java calculates the **hashCode** of the element.
+  2. It checks whether the element **already exists** in the set (via the key of HashMap).
+  3. If it does, it **ignores** the new one.
+  4. If not, it **adds** the element.
+ 
+## 17. Observe ordering in HashSet.
+  > ❌ **No**, `HashSet` does **not guarantee any specific order** of elements.
+
+It stores elements **based on their hashcode**, so the iteration order can appear random and may change.
+
+## 18. Use null values in HashSet.
+```java
+class Main {
+    public static void main(String[] args) {
+        HashSet<String> set = new HashSet<>();
+
+        set.add("Hello");
+        set.add(null);
+        set.add("World!");
+
+        System.out.println(set);
+    }
+}
+```
+
+## 19. Compare performance of HashSet vs TreeSet.
+### 🧠 Overview
+
+| Feature              | `HashSet`                | `TreeSet`                   |
+|----------------------|--------------------------|-----------------------------|
+| Order Maintained?    | ❌ No                    | ✅ Sorted (natural order)   |
+| Duplicate Allowed?   | ❌ No                    | ❌ No                        |
+| Backed By            | HashMap                  | TreeMap (Red-Black Tree)    |
+| Insertion Time       | ⚡ **O(1)** (avg case)   | 🐢 **O(log n)**              |
+| Lookup Time          | ⚡ O(1) (avg case)       | 🐢 O(log n)                  |
+| Deletion Time        | ⚡ O(1) (avg case)       | 🐢 O(log n)                  |
+| Null Allowed?        | ✅ Yes (only one)        | ⚠️ No (throws NullPointerException) |
+
+
+## 20. Compare performance of HashSet vs LinkedHashSet.
+### 🧠 Overview
+
+| Feature              | `HashSet`                | `LinkedHashSet`             |
+|----------------------|--------------------------|-----------------------------|
+| Order Maintained?    | ❌ No                    | ✅ Insertion Order          |
+| Duplicate Allowed?   | ❌ No                    | ❌ No                        |
+| Backed By            | HashMap                  | HashMap (with Linked List)  |
+| Insertion Time       | ⚡ **O(1)** (avg case)   | ⚡ **O(1)** (avg case)       |
+| Lookup Time          | ⚡ O(1) (avg case)       | ⚡ O(1) (avg case)           |
+| Deletion Time        | ⚡ O(1) (avg case)       | ⚡ O(1) (avg case)           |
+| Null Allowed?        | ✅ Yes (only one)        | ✅ Yes (only one)           |
+| Extra Memory         | ❌ Minimal               | ✅ Slightly more (due to Linked List) |
+
+## 21. Add custom objects to HashSet.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HashSet<Person> personHashSet = new HashSet<>();
+
+        personHashSet.add(new Person("Arman Ali", 18));
+        personHashSet.add(new Person("Farman Ali", 20));
+
     }
 }
 ```
