@@ -4079,3 +4079,571 @@ Internally, a `HashSet` works by using a `HashMap`. When an element is added to 
 2. **Indexing**: The hash code is then used to find the appropriate index in the internal array (bucket array) where the element should be placed.
 3. **Collision Handling**: If two elements have the same hash code (a collision), the elements are stored in the same bucket using a linked list or tree structure (in the case of many collisions).
 4. **Equality Check**: Before adding the element, `HashSet` checks if the element already exists using the `equals()` method to ensure no duplicates are inserted.
+
+# 🔹 LinkedHashSet
+
+## 1. Create a LinkedHashSet and add five elements.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>();
+
+        lhs.add(1);
+        lhs.add(2);
+        lhs.add(3);
+        lhs.add(4);
+        lhs.add(5);
+
+        System.out.println(lhs);
+    }
+}
+```
+
+## 2. Add duplicate elements and observe behavior.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>();
+
+        lhs.add(1);
+        lhs.add(2);
+        lhs.add(3);
+        lhs.add(4);
+        lhs.add(2);
+        lhs.add(5);
+
+        System.out.println(lhs);
+    }
+}
+```
+
+## 3. Remove an element from the LinkedHashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>();
+
+        lhs.add(1);
+        lhs.add(2);
+        lhs.add(3);
+        lhs.add(4);
+        lhs.add(5);
+
+        lhs.remove(3);
+        System.out.println(lhs);
+    }
+}
+```
+
+## 4. Check if an element exists in the LinkedHashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>();
+
+        lhs.add(1);
+        lhs.add(2);
+        lhs.add(3);
+        lhs.add(4);
+        lhs.add(5);
+
+        System.out.println(lhs.contains(50));
+    }
+}
+```
+
+## 5. Get the size of the LinkedHashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>();
+
+        lhs.add(1);
+        lhs.add(2);
+        lhs.add(3);
+        lhs.add(4);
+        lhs.add(5);
+
+        System.out.println(lhs.size());
+    }
+}
+```
+
+## 6. Clear all elements from the LinkedHashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>();
+
+        lhs.add(1);
+        lhs.add(2);
+        lhs.add(3);
+        lhs.add(4);
+        lhs.add(5);
+
+        lhs.clear();
+        
+        System.out.println(lhs);
+    }
+}
+```
+
+## 7. Iterate using for-each loop.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>();
+
+        lhs.add(1);
+        lhs.add(2);
+        lhs.add(3);
+        lhs.add(4);
+        lhs.add(5);
+
+        lhs.forEach(System.out::println);
+    }
+}
+```
+
+## 8. Iterate using Iterator.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>();
+
+        lhs.add(1);
+        lhs.add(2);
+        lhs.add(3);
+        lhs.add(4);
+        lhs.add(5);
+
+        Iterator<Integer> iterator = lhs.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+```
+
+## 9. Convert LinkedHashSet to Array.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs = new LinkedHashSet<>();
+
+        lhs.add(1);
+        lhs.add(2);
+        lhs.add(3);
+        lhs.add(4);
+        lhs.add(5);
+
+        int[] arr = lhs.stream().mapToInt(Integer::intValue).toArray();
+
+        for (int n : arr) {
+            System.out.println(n);
+        }
+    }
+}
+```
+
+## 10. Convert LinkedHashSet to List.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<String> lhs = new LinkedHashSet<>();
+
+        lhs.add("Hello");
+        lhs.add("World");
+
+        ArrayList<String> list = new ArrayList<>(lhs);
+
+        System.out.println(list);
+    }
+}
+```
+
+## 11. Compare output of HashSet and LinkedHashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        HashSet<Integer> hashSet = new HashSet<>();
+
+        hashSet.add(10);
+        hashSet.add(1);
+        hashSet.add(2);
+        hashSet.add(1);
+        hashSet.add(3);
+        hashSet.add(5);
+
+        System.out.println(hashSet);
+
+        LinkedHashSet<Integer> linkedHashSet =  new LinkedHashSet<>();
+
+        linkedHashSet.add(10);
+        linkedHashSet.add(1);
+        linkedHashSet.add(2);
+        linkedHashSet.add(1);
+        linkedHashSet.add(3);
+        linkedHashSet.add(5);
+
+        System.out.println(linkedHashSet);
+    }
+}
+```
+
+## 12. Maintain insertion order using LinkedHashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<String> lhs = new LinkedHashSet<>();
+
+        lhs.add("One");
+        lhs.add("Two");
+        lhs.add("Three");
+        lhs.add("Four");
+        lhs.add("Five");
+
+        lhs.forEach(System.out::println);
+    }
+}
+```
+
+## 13. Verify if insertion order is preserved after removal.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<String> lhs = new LinkedHashSet<>();
+
+        lhs.add("One");
+        lhs.add("Two");
+        lhs.add("Three");
+        lhs.add("Four");
+        lhs.add("Five");
+
+        lhs.remove("Three");
+
+        lhs.forEach(System.out::println);
+    }
+}
+```
+
+## 14. Re-insert a removed element and check its position.    
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<String> lhs = new LinkedHashSet<>();
+
+        lhs.add("One");
+        lhs.add("Two");
+        lhs.add("Three");
+        lhs.add("Four");
+        lhs.add("Five");
+
+        lhs.remove("Three");
+
+        lhs.add("Three");
+
+        lhs.forEach(System.out::println);
+    }
+}
+```
+
+## 15. Add null values and observe position.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<String> lhs = new LinkedHashSet<>();
+
+        lhs.add("One");
+        lhs.add("Two");
+        lhs.add(null);
+        lhs.add("Three");
+        lhs.add("Four");
+        lhs.add("Five");
+        lhs.add(null);
+
+        lhs.forEach(System.out::println);
+    }
+}
+```
+
+## 16. Perform union of two LinkedHashSets.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs1 = new LinkedHashSet<>(Arrays.asList(1,2,3,4));
+        LinkedHashSet<Integer> lhs2 = new LinkedHashSet<>(Arrays.asList(3,4,5,6));
+
+        LinkedHashSet<Integer> union = new LinkedHashSet<>(lhs1);
+        union.addAll(lhs2);
+
+        System.out.println(union);
+    }
+}
+```
+
+## 17. Perform intersection of two LinkedHashSets.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs1 = new LinkedHashSet<>(Arrays.asList(1,2,3,4));
+        LinkedHashSet<Integer> lhs2 = new LinkedHashSet<>(Arrays.asList(3,4,5,6,1));
+
+        LinkedHashSet<Integer> intersection = new LinkedHashSet<>(lhs1);
+        intersection.retainAll(lhs2);
+
+        System.out.println(intersection);
+    }
+}
+```
+
+## 18. Perform difference of two LinkedHashSets.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs1 = new LinkedHashSet<>(Arrays.asList(1,2,3,4));
+        LinkedHashSet<Integer> lhs2 = new LinkedHashSet<>(Arrays.asList(3,4,5,6,1));
+
+        LinkedHashSet<Integer> union = new LinkedHashSet<>(lhs1);
+        union.addAll(lhs2);
+
+        LinkedHashSet<Integer> intersection = new LinkedHashSet<>(lhs1);
+        intersection.retainAll(lhs2);
+
+        union.removeAll(intersection);
+
+        System.out.println(union);
+    }
+}
+```
+
+## 19. Check if one LinkedHashSet is subset of another.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs1 = new LinkedHashSet<>(Arrays.asList(1,2,3,4));
+        LinkedHashSet<Integer> subset = new LinkedHashSet<>(Arrays.asList(1, 5, 2));
+
+        if(lhs1.containsAll(subset)) {
+            System.out.println("Yes!");
+        } else {    
+            System.out.println("No!");
+        }
+    }
+}
+```
+
+## 20. Compare two LinkedHashSets and print common elements.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> lhs1 = new LinkedHashSet<>(Arrays.asList(1, 2, 3, 4));
+        LinkedHashSet<Integer> lhs2 = new LinkedHashSet<>(Arrays.asList(3, 4, 5, 6));
+
+        lhs1.retainAll(lhs2);
+        
+        System.out.println(lhs1);
+    }
+}
+```
+
+## 21. Add custom class objects (like Book, Student).
+```java
+class Student {
+    private int rollNo;
+    private String name;
+
+    public Student(int rollNo, String name) {
+        this.rollNo = rollNo;
+        this.name = name;
+    }
+
+    public int getRollNo() {
+        return rollNo;
+    }
+
+    public void setRollNo(int rollNo) {
+        this.rollNo = rollNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Student> students = new LinkedHashSet<>();
+
+        students.add(new Student(14, "Arman ali"));
+        students.add(new Student(21, "Farman Khan"));
+
+        students.forEach(s -> System.out.println(s.getName()));
+    }
+}
+```
+
+## 22. Implement equals() and hashCode() for ordering.
+```java
+class Student {
+    private int rollNo;
+    private String name;
+
+    public Student(int rollNo, String name) {
+        this.rollNo = rollNo;
+        this.name = name;
+    }
+
+    public int getRollNo() {
+        return rollNo;
+    }
+
+    public void setRollNo(int rollNo) {
+        this.rollNo = rollNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.rollNo, this.name);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == this) return true;
+        if(obj == null || obj.getClass() != this.getClass()) return false;
+        Student other = (Student) obj;
+
+        return  this.rollNo == other.rollNo && Objects.equals(this.name, other.name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Student> students = new LinkedHashSet<>();
+
+        students.add(new Student(14, "Arman ali"));
+        students.add(new Student(21, "Farman Khan"));
+
+        students.forEach(s -> System.out.println(s.getName()));
+    }
+}
+```
+
+## 23. Remove duplicate custom objects using LinkedHashSet.
+```java
+import java.util.LinkedHashSet;
+import java.util.Objects;
+
+class Student {
+    private int rollNo;
+    private String name;
+
+    public Student(int rollNo, String name) {
+        this.rollNo = rollNo;
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return rollNo == student.rollNo && Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(rollNo, name);
+    }
+
+    public int getRollNo() {
+        return rollNo;
+    }
+
+    public void setRollNo(int rollNo) {
+        this.rollNo = rollNo;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Student> students = new LinkedHashSet<>();
+
+        students.add(new Student(14, "Arman ali"));
+        students.add(new Student(15, "Farman khan"));
+        students.add(new Student(14, "Arman ali"));
+
+        students.forEach(e -> System.out.println(e.getName()));
+    }
+}
+```
+
+## 24. Store user records in LinkedHashSet (id, name, email).
+```java
+class User {
+    private int id;
+    private String name;
+    private int age;
+
+    public User(int id, String name, int age) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<User> users = new LinkedHashSet<>();
+
+        users.add(new User(1, "Arman", 17));
+        users.add(new User(2, "Farman", 18));
+
+        users.forEach(u -> System.out.println(u.getName()));
+    }
+}
+```
