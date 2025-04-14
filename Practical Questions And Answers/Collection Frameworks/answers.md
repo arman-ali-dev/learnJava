@@ -3953,3 +3953,129 @@ public class Main {
     }
 }
 ```
+
+## 41. Remove duplicate emails from contact list.
+```java
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<String> contactList = new ArrayList<>();
+
+        contactList.add("armaanali.dev@gmail.com");
+        contactList.add("farman@gmail.com");
+        contactList.add("armaanali.dev@gmail.com");
+        contactList.add("jhon@gmail.com");
+
+        HashSet<String> set = new HashSet<>(contactList);
+
+        contactList = new ArrayList<>(set);
+
+        System.out.println(contactList);
+    }
+}
+```
+
+## 42. Detect duplicate login attempts by user IDs.
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[] loginAttempts = {101, 102, 103, 101, 104, 102};
+
+        HashSet<Integer> seen = new HashSet<>();
+
+        for (int id : loginAttempts) {
+            if (seen.contains(id)){
+                System.out.println("Duplicate login attempt by user ID: " + id);
+            } else {
+                seen.add(id);
+            }
+        }
+    }
+}
+```
+
+## 43. Store unique hashtags from a tweet list.
+```java
+public class Main {
+    public static void main(String[] args) {
+        HashSet<String> tweetList = new HashSet<>();
+
+        tweetList.add("#coding");
+        tweetList.add("#java");
+        tweetList.add("#javaScript");
+        tweetList.add("#java");
+
+        System.out.println(tweetList);
+    }
+}
+```
+
+## 44. Store unique file names in a directory.
+```java
+public class Main {
+    public static void main(String[] args) {
+        HashSet<String> directory = new HashSet<>();
+        
+        directory.add("Main.java");
+        directory.add("HelloWorld.java");
+        directory.add("Main.java");
+
+        System.out.println(directory);
+    }
+}
+```
+
+## 45. Track unique page views in a web app.
+```java
+import java.util.HashSet;
+
+public class Main {
+    public static void main(String[] args) {
+        int[] pageViews = {101, 102, 101, 103, 104, 102, 105};
+
+        HashSet<Integer> uniqueVisitors = new HashSet<>();
+
+        for (int userId : pageViews) {
+            uniqueVisitors.add(userId);
+        }
+
+        System.out.println("Unique Page Views: " + uniqueVisitors.size());
+        System.out.println("User IDs: " + uniqueVisitors);
+    }
+}
+```
+
+## 46. Manually implement a simplified HashSet using ArrayList.
+```java
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>();
+
+        if (!list.contains(3)) list.add(3);
+        if(!list.contains(5)) list.add(5);
+        if (!list.contains(3)) list.add(3);
+
+        System.out.println(list);
+    }
+}
+```
+
+## 47. Explain internal working of HashSet.
+A `HashSet` in Java is a collection that does not allow duplicate elements and does not guarantee any specific order of the elements. Internally, a `HashSet` is backed by a `HashMap`. The `HashSet` uses the hashing mechanism to store its elements.
+
+### Definition
+
+- **HashSet** is a part of the Java Collections Framework.
+- It implements the `Set` interface and is backed by a `HashMap`.
+- It does not allow duplicate elements.
+- It provides constant-time performance for basic operations like add, remove, and contains.
+
+### Internal Structure
+
+Internally, a `HashSet` works by using a `HashMap`. When an element is added to the set, it is inserted into the map as a key, and the value associated with each key is a constant (commonly `PRESENT`). The keys in the `HashMap` represent the unique elements in the `HashSet`.
+
+#### Steps:
+
+1. **Hashing**: When an element is added to the `HashSet`, the `hashCode()` method of the element is called to get its hash code.
+2. **Indexing**: The hash code is then used to find the appropriate index in the internal array (bucket array) where the element should be placed.
+3. **Collision Handling**: If two elements have the same hash code (a collision), the elements are stored in the same bucket using a linked list or tree structure (in the case of many collisions).
+4. **Equality Check**: Before adding the element, `HashSet` checks if the element already exists using the `equals()` method to ensure no duplicates are inserted.
