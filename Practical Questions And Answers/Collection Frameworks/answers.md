@@ -4647,3 +4647,281 @@ public class Main {
     }
 }
 ```
+
+
+## 25. Remove duplicate characters from string (keep order).
+```java
+public class Main {
+    public static void main(String[] args) {
+        String str = "hello world";
+        LinkedHashSet<Character> set = new LinkedHashSet<>();
+
+        for (char ch : str.toCharArray()) {
+            set.add(ch);
+        }
+
+        str = set.stream().map(s -> s.toString()).collect(Collectors.joining(""));
+
+        System.out.println(str);
+    }
+}
+```
+
+## 26. Find first non-repeating character using LinkedHashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        String str = "hello world";
+        LinkedHashSet<Character> set = new LinkedHashSet<>();
+
+        for (char ch : str.toCharArray()) {
+            set.add(ch);
+        }
+
+        for (char ch : set) {
+            if(str.indexOf(ch) == str.lastIndexOf(ch)) {
+                System.out.println("First Non-Repeating Character: " + ch);
+                break;
+            }
+        }
+    }
+}
+```
+
+## 27. Store elements from a list while preserving uniqueness and order.
+```java
+public class Main {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(2);
+
+        LinkedHashSet<Integer> linkedHashSet = new LinkedHashSet<>(list);
+
+        System.out.println(linkedHashSet);
+    }
+}
+```
+
+## 28. Filter unique words from a paragraph while keeping order.
+```java
+public class Main {
+    public static void main(String[] args) {
+        String paragraph = "java is great and java is powerful";
+        LinkedHashSet<String> set = new LinkedHashSet<>(Arrays.asList(paragraph.split(" ")));
+
+        paragraph = set.stream().collect(Collectors.joining(" "));
+
+        System.out.println(paragraph);
+    }
+}
+```
+
+## 29. Count frequency of elements using LinkedHashSet + Map.
+```java
+public class Main {
+    public static void main(String[] args) {
+        String paragraph = "java is great and java is powerful";
+        LinkedHashSet<String> set = new LinkedHashSet<>(Arrays.asList(paragraph.split(" ")));
+
+        Map<String, Integer> frequencyMap = new HashMap<>();
+
+        for (String word : set) {
+            int count = 0;
+            for(String tmpWord : paragraph.split(" ")) {
+                if(word.equals(tmpWord)) {
+                    count++;
+                }
+            }
+
+            frequencyMap.put(word, count);
+        }
+
+        frequencyMap.forEach((key, value) ->   System.out.println(key + ": " + value));
+    }
+}
+```
+
+## 30. Add multiple nulls and analyze.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<String> set = new LinkedHashSet<>();
+
+        set.add("hello");
+        set.add(null);
+        set.add(null);
+        set.add("world");
+        set.add(null);
+
+        System.out.println(set);
+    }
+}
+```
+
+## 31. Add elements with similar hashCode.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return name.equals(person.name);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Person> set = new LinkedHashSet<>();
+
+        set.add(new Person("jhon", 20));
+        set.add(new Person("arman", 18));
+        set.add(new Person("jhon", 20));
+
+        for (Person person : set) {
+            System.out.println(person.getName());
+        }
+    }
+}
+```
+
+## 32. Add elements with different types (observe compile-time errors).
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> set = new LinkedHashSet<>();
+
+        set.add(1);
+        set.add("Hello");
+    }
+}
+```
+
+## 33. Add large number of elements to test order preservation.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> set = new LinkedHashSet<>();
+
+        for ( int i = 1; i <= 100000; i++) {
+            set.add(i);
+        }
+
+        for (Integer num : set) {
+            System.out.println(num);
+        }
+    }
+}
+```
+
+## 34. Use LinkedHashSet with initial capacity and load factor.
+```java
+import java.util.LinkedHashSet;
+
+public class Main {
+    public static void main(String[] args) {
+        // LinkedHashSet with initial capacity = 10 and load factor = 0.75
+        LinkedHashSet<Integer> set = new LinkedHashSet<>(10, 0.75f);
+
+        // Adding elements to the LinkedHashSet
+        set.add(1);
+        set.add(2);
+        set.add(3);
+        set.add(4);
+
+        System.out.println(set);
+    }
+}
+
+// 10: Initial capacity (set ki size pehle 10 elements ko accommodate kar sakega).
+// 0.75f: Load factor (jab set ka size 75% ho jaayega, tab internal capacity ko double kar diya jayega).
+```
+
+## 35. Convert LinkedHashSet to TreeSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        LinkedHashSet<Integer> linkedHashSet = new LinkedHashSet<>(Arrays.asList(1,2,3,4,5));
+
+        TreeSet<Integer> treeSet = new TreeSet<>(linkedHashSet);
+
+        System.out.println(treeSet);
+    }
+}
+```
+
+## 36. Convert ArrayList to LinkedHashSet to remove duplicates.
+```java
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,4,5,3,1));
+
+        LinkedHashSet<Integer> set = new LinkedHashSet<>(list);
+
+        set.forEach(System.out::println);
+    }
+}
+```
+
+## 37. Compare HashSet vs LinkedHashSet insertion order.
+- **HashSet**:
+  - Does not preserve insertion order.
+  - Elements are stored based on their hash code.
+
+- **LinkedHashSet**:
+  - Preserves the insertion order.
+  - Elements are stored in a linked list along with their hash code.
+
+## 38. Measure performance: LinkedHashSet vs TreeSet.
+- **LinkedHashSet**:
+  - **Time Complexity**:
+    - Insertion: **O(1)** (amortized)
+    - Search: **O(1)**
+    - Removal: **O(1)**
+  - Preserves insertion order.
+  - Uses a hash table to store elements.
+
+- **TreeSet**:
+  - **Time Complexity**:
+    - Insertion: **O(log n)**
+    - Search: **O(log n)**
+    - Removal: **O(log n)**
+  - Does **not** preserve insertion order.
+  - Implements a **Red-Black Tree** to store elements, which ensures elements are sorted.
+
+## 39. Understand internal structure of LinkedHashSet.
+# Internal Structure of LinkedHashSet
+
+- `LinkedHashSet` is a **hash table** + **doubly linked list** implementation of the `Set` interface.
+- It **preserves insertion order**, unlike `HashSet`.
+
+## 🔧 Inheritance Hierarchy:
+```java
+LinkedHashSet<E>
+  ↳ extends HashSet<E>
+      ↳ implements Set<E>
+```
