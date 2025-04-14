@@ -3501,3 +3501,455 @@ public class Main {
     }
 }
 ```
+
+## 22. Override equals() and hashCode() for custom objects.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null || obj.getClass() != this.getClass()) return  false;
+        Person other = (Person) obj;
+        return  this.age == other.age && Objects.equals(this.name, other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name, this.age);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HashSet<Person> personHashSet = new HashSet<>();
+
+        personHashSet.add(new Person("Arman Ali", 18));
+        personHashSet.add(new Person("Arman Ali", 18));
+
+        System.out.println(personHashSet);
+    }
+}
+```
+
+## 23. Prevent duplicate custom objects using hashCode().
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj) return true;
+        if(obj == null || obj.getClass() != this.getClass()) return  false;
+        Person other = (Person) obj;
+        return  this.age == other.age && Objects.equals(this.name, other.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(this.name, this.age);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HashSet<Person> personHashSet = new HashSet<>();
+
+        personHashSet.add(new Person("Arman Ali", 18));
+        personHashSet.add(new Person("Arman Ali", 18));
+
+        System.out.println(personHashSet);
+    }
+}
+```
+
+## 24. Store student records in a HashSet (with id, name).
+```java
+class Student {
+    private int id;
+    private String name;
+
+    public Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HashSet<Student> students  = new HashSet<>();
+
+        students.add(new Student(1, "Armaan"));
+        students.add(new Student(2, "Farman"));
+
+        students.forEach(System.out::println);
+    }
+}
+```
+
+## 25. Detect duplicates in custom class using HashSet.
+```java
+import java.util.HashSet;
+import java.util.Objects;
+
+class Student {
+    int id;
+    String name;
+
+    public Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if(this == o) return true;
+        if(o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return id == student.id && Objects.equals(name, student.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name);
+    }
+
+    @Override
+    public String toString() {
+        return "Student{id=" + id + ", name='" + name + "'}";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        HashSet<Student> students = new HashSet<>();
+
+        students.add(new Student(1, "Maan"));
+        students.add(new Student(1, "Maan"));
+
+        System.out.println("Size: " + students.size());
+        System.out.println(students);
+    }
+}
+```
+
+## 26. Find duplicate elements in an array using HashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[] arr = {1, 2, 3, 2, 4, 5, 1, 6};
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int num : arr) {
+            if(!set.contains(num)) {
+                set.add(num);
+            }else {
+                System.out.println("duplicate number is: " + num);
+            }
+        }
+    }
+}
+```
+
+## 27. Remove duplicates from a list using HashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 2, 4, 5, 1, 6));
+
+        HashSet<Integer> set =  new HashSet<>(list);
+
+        ArrayList<Integer> newList = new ArrayList<>(set);
+
+        System.out.println(newList);
+    }
+}
+```
+
+## 28. Check if two strings have common characters.
+```java
+public class Main {
+    public static void main(String[] args) {
+        String str1 = "hello";
+        String str2 = "world";
+
+        HashSet<Character> set = new HashSet<>();
+
+        for(char ch : str1.toCharArray()) {
+            set.add(ch);
+        }
+
+        for(char ch : str2.toCharArray()) {
+            if(set.contains(ch)) {
+                System.out.println("Common character found: " + ch);
+            }
+        }
+    }
+}
+```
+
+## 29. Count unique words in a sentence using HashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        String sentence = "hello world hello java";
+
+        String[] strArray = sentence.split(" ");
+
+        HashSet<String> set  = new HashSet<>(Arrays.asList(strArray));
+
+        System.out.println("unique words count of sentence: " + set.size());
+    }
+}
+```
+
+## 30. Find the first repeated character in a string.
+```java
+public class Main {
+    public static void main(String[] args) {
+        String str = "hello world";
+
+        Set<Character> set = new HashSet<>();
+
+        for(char ch : str.toCharArray()) {
+            set.add(ch);
+        }
+
+        for (char ch : set) {
+            if(str.indexOf(ch) != str.lastIndexOf(ch)) {
+                System.out.println("first repeated character: " + ch);
+                break;
+            }
+        }
+
+    }
+}
+```
+
+## 31. Add null multiple times and observe behavior.
+```java
+public class Main {
+    public static void main(String[] args) {
+        HashSet<String> set = new HashSet<>();
+
+        set.add("Hello");
+        set.add(null);
+        set.add(null);
+        set.add(null);
+        set.add("World");
+        set.add(null);
+
+        System.out.println(set);
+    }
+}
+```
+
+## 32. Add elements of mixed case (upper/lower) and analyze.
+```java
+public class Main {
+    public static void main(String[] args) {
+        HashSet<String> set = new HashSet<>();
+
+        set.add("Apple");
+        set.add("apple");
+        set.add("APPLE");
+
+        System.out.println(set);
+    }
+}
+```
+
+## 33. Add same object reference multiple times.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        HashSet<Person> set = new HashSet<>();
+
+        Person p1 = new Person("Arman Ali", 18);
+
+        set.add(p1);
+        set.add(p1);
+        set.add(p1);
+
+        System.out.println(set);
+    }
+}
+```
+
+## 34. Add very large number of elements and test performance.
+```java
+public class Main {
+    public static void main(String[] args) {
+        HashSet<Integer> set = new HashSet<>();
+        int limit = 1_000_000;
+
+        long startTime = System.currentTimeMillis();
+
+        for (int i = 0; i < limit; i++) {
+            set.add(i);
+        }
+
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("Time taken to add " + limit + " elements: " + (endTime - startTime) + " ms");
+    }
+}
+```
+
+## 35. Use HashSet with initial capacity and load factor.
+```java
+import java.util.HashSet;
+
+public class Main {
+    public static void main(String[] args) {
+        // Initial capacity = 1000, Load factor = 0.80
+        HashSet<Integer> set = new HashSet<>(1000, 0.80f);
+
+        for (int i = 0; i < 1000; i++) {
+            set.add(i);
+        }
+
+        System.out.println("Size: " + set.size());
+    }
+}
+
+// initialCapacity: Starting size of internal HashMap buckets.
+// loadFactor: Kitna full hone par resize hoga. Default is 0.75f.
+```
+
+## 36. Implement a method to return unique elements from a list.
+```java
+public class Main {
+
+    public static ArrayList<Integer> getUniqueElements(ArrayList<Integer> list) {
+        HashSet<Integer> set = new HashSet<>(list);
+
+        return new ArrayList<>(set);
+    }
+
+    public static void main(String[] args) {
+       ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1,2,3,2,4,1,5));
+
+       list =  getUniqueElements(list);
+
+        System.out.println(list);
+    }
+}
+```
+
+## 37. Store IP addresses that visited a website using HashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        HashSet<String> ipAddresses = new HashSet<>();
+
+        ipAddresses.add("192.168.1.1");
+        ipAddresses.add("10.0.0.2");
+        ipAddresses.add("192.168.1.1");  // duplicate
+        ipAddresses.add("172.16.0.5");
+
+        System.out.println(ipAddresses);
+    }
+}
+```
+
+## 38. Find distinct integers in a matrix using HashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 2, 6},
+                {7, 8, 3}
+        };
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                set.add(matrix[i][j]);
+            }
+        }
+
+        System.out.println("Distinct Integers in Matrix: " + set);
+    }
+}
+```
+
+## 39. Find unique elements between two arrays.
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[] arr1 = {1,2,3,4};
+        int[] arr2 = {3,4,5,6};
+
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int num : arr1) {
+            set.add(num);
+        }
+
+        for (int num : arr2) {
+            set.add(num);
+        }
+
+        System.out.println(set);
+    }
+}
+```
+
+## 40. Find unique elements between two arrays.
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[] arr1 = {1,2,3,4};
+        int[] arr2 = {3,4,5,6};
+
+        HashSet<Integer> set1 = new HashSet<>();
+        HashSet<Integer> set2 = new HashSet<>();
+
+        for (int num : arr1) set1.add(num);
+        for (int num : arr2) set2.add(num);
+
+        HashSet<Integer> union = new HashSet<>(set1);
+        union.addAll(set2);
+
+        HashSet<Integer> intersection = new HashSet<>(set1);
+        intersection.retainAll(set2);
+
+        union.removeAll(intersection);
+
+        System.out.println(union);
+    }
+}
+```
