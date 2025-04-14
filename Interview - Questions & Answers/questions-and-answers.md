@@ -2882,4 +2882,5 @@ It is used to manage and reuse threads efficiently, reduce overhead of thread cr
 ## Legacy Class:
 A **legacy class** is an outdated class that was part of an earlier version of a programming language or framework, now replaced by more efficient or modern alternatives. They are still functional but are not recommended for new development.
 
-
+## 197. What is Hash Collision?
+A hash collision happens when two different objects produce the same hash code. This can cause problems in hash-based data structures like `HashSet` or `HashMap`.
