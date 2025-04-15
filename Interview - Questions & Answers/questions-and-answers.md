@@ -2884,3 +2884,36 @@ A **legacy class** is an outdated class that was part of an earlier version of a
 
 ## 197. What is Hash Collision?
 A hash collision happens when two different objects produce the same hash code. This can cause problems in hash-based data structures like `HashSet` or `HashMap`.
+
+## 198. What is diffrence between `Comparable` and `Comparator`?
+
+**Comparable** and **Comparator** are both used to sort objects in Java, but they work differently.
+
+### Comparable:
+- It is in `java.lang` package.
+- It has a method `compareTo(Object o)`.
+- Used for **default or natural sorting**.
+- Logic is written **inside the class**.
+- Example:
+```java
+class Student implements Comparable<Student> {
+    int marks;
+    public int compareTo(Student s) {
+        return this.marks - s.marks;
+    }
+}
+```
+
+### Comparator:
+ - It is in java.util package.
+ - It has a method compare(Object o1, Object o2).
+ - Used for custom sorting.
+ - Logic is written outside the class.
+ - Example:
+```java
+class MarksComparator implements Comparator<Student> {
+    public int compare(Student s1, Student s2) {
+        return s1.marks - s2.marks;
+    }
+}
+```
