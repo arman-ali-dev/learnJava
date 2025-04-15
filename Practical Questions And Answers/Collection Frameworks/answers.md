@@ -4925,3 +4925,647 @@ LinkedHashSet<E>
   ↳ extends HashSet<E>
       ↳ implements Set<E>
 ```
+
+# 🔹 TreeSet
+
+## 1. Create a TreeSet and add elements.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+
+        System.out.println(set);
+    }
+}
+```
+
+## 2. Add duplicate elements and observe behavior.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+        set.add(3);
+
+        System.out.println(set);
+    }
+}
+```
+
+## 3. Remove an element from the TreeSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+        set.add(3);
+
+        set.remove(3);
+
+        System.out.println(set);
+    }
+}
+```
+
+## 4. Check if an element exists in the TreeSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+        set.add(3);
+
+        System.out.println(set.contains(3));
+    }
+}
+```
+
+## 5. Get the size of the TreeSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+        set.add(3);
+
+        System.out.println(set.size());
+    }
+}
+```
+
+## 6. Clear all elements from the TreeSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+        set.add(3);
+
+        set.clear();
+        System.out.println(set.size());
+    }
+}
+```
+
+## 7. Iterate using for-each loop.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+        set.add(3);
+
+        set.forEach(System.out::println);
+    }
+}
+```
+
+## 8. Iterate using Iterator.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+        set.add(3);
+
+        Iterator<Integer> iterator = set.iterator();
+
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+```
+
+## 9. Convert TreeSet to Array.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+        set.add(3);
+
+        Integer[] arr = set.toArray(new Integer[0]);
+
+        for (Integer num : arr) {
+            System.out.println(num);
+        }
+    }
+}
+```
+
+## 10. Convert TreeSet to List.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(2);
+        set.add(3);
+        set.add(1);
+        set.add(3);
+
+        ArrayList<Integer> list = new ArrayList<>(set);
+
+        System.out.println(list);
+    }
+}
+```
+
+## 11. Verify natural sorting of integers.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        set.add(100);
+        set.add(56);
+        set.add(20);
+        set.add(40);
+        set.add(101);
+
+        System.out.println(set);
+    }
+}
+```
+
+## 12. Add strings and verify alphabetical sorting.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<String> set = new TreeSet<>();
+
+        set.add("Armaan Ali");
+        set.add("Farman Ali");
+        set.add("Ali");
+        set.add("Maan");
+
+        set.forEach(System.out::println);
+    }
+}
+```
+
+## 13. Create TreeSet of custom objects (implement Comparable).
+```java
+class User {
+    private String email;
+    private String password;
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<User> users = new TreeSet<>((u1, u2) -> u1.getEmail().compareTo(u2.getEmail()));
+
+        users.add(new User("armaanali.dev@gmail.com", "arman"));
+        users.add(new User("farman@gmail.com", "farman"));
+        users.add(new User("armaanali.dev@gmail.com", "arman"));
+
+        users.forEach(System.out::println);
+    }
+}
+```
+
+## 14. Sort custom objects by name or age.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                '}';
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Person> personTreeSet = new TreeSet<>((p1, p2) -> Integer.compare(p1.getAge(), p2.getAge()) );
+
+        personTreeSet.add(new Person("Arman", 18));
+        personTreeSet.add(new Person("Farman", 20));
+        personTreeSet.add(new Person("Maan", 17));
+
+        personTreeSet.forEach(System.out::println);
+    }
+}
+```
+
+## 15. Reverse the TreeSet using descendingSet().
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                '}';
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Person> personTreeSet = new TreeSet<>((p1, p2) -> Integer.compare(p1.getAge(), p2.getAge()) );
+
+        personTreeSet.add(new Person("Arman", 18));
+        personTreeSet.add(new Person("Farman", 20));
+        personTreeSet.add(new Person("Maan", 17));
+
+        System.out.println( personTreeSet.descendingSet());
+    }
+}
+```
+
+### 16. Use first() and last() methods.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age='" + age + '\'' +
+                '}';
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Person> personTreeSet = new TreeSet<>((p1, p2) -> Integer.compare(p1.getAge(), p2.getAge()) );
+
+        personTreeSet.add(new Person("Arman", 18));
+        personTreeSet.add(new Person("Farman", 20));
+        personTreeSet.add(new Person("Maan", 17));
+
+        System.out.println( personTreeSet.first());
+        System.out.println( personTreeSet.last());
+    }
+}
+```
+
+## 17. Use higher() and lower() methods.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> numbers = new TreeSet<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+
+        System.out.println("Higher than 20: " + numbers.higher(20)); // 30
+        System.out.println("Lower than 20: " + numbers.lower(20)); // 10
+    }
+}
+```
+
+## 18. Use ceiling() and floor() methods.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> numbers = new TreeSet<>();
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+
+
+        System.out.println("Ceiling of 25: " + numbers.ceiling(25)); // ➜ 30
+        System.out.println("Ceiling of 30: " + numbers.ceiling(30)); // ➜ 30
+        System.out.println("Ceiling of 45: " + numbers.ceiling(45)); // ➜ null
+
+        System.out.println("Floor of 25: " + numbers.floor(25));     // ➜ 20
+        System.out.println("Floor of 20: " + numbers.floor(20));     // ➜ 20
+        System.out.println("Floor of 5: " + numbers.floor(5));       // ➜ null
+    }
+}
+```
+## 19. Use headSet() to get values less than a given element.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> numbers = new TreeSet<>();
+
+        numbers.add(0);
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+
+        System.out.println(numbers.headSet(30));
+    }
+}
+```
+
+## 20. Use tailSet() to get values greater than or equal to an element.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> numbers = new TreeSet<>();
+
+        numbers.add(0);
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+
+        System.out.println(numbers.tailSet(20));
+    }
+}
+```
+
+## 21. Perform union of two TreeSets.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set1 = new TreeSet<>(Arrays.asList(1,2,3,4));
+        TreeSet<Integer> set2 = new TreeSet<>(Arrays.asList(3,4,5,6));
+
+        TreeSet<Integer> union = new TreeSet<>(set1);
+        union.addAll(set2);
+
+        System.out.println(union);
+    }
+}
+```
+
+## 22. Perform intersection of two TreeSets.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set1 = new TreeSet<>(Arrays.asList(1,2,3,4));
+        TreeSet<Integer> set2 = new TreeSet<>(Arrays.asList(3,4,5,6));
+
+        TreeSet<Integer> intersection = new TreeSet<>(set1);
+        intersection.retainAll(set2);
+
+        System.out.println(intersection);
+    }
+}
+```
+
+## 23. Perform difference of two TreeSets.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set1 = new TreeSet<>(Arrays.asList(1,2,3,4));
+        TreeSet<Integer> set2 = new TreeSet<>(Arrays.asList(3,4,5,6));
+
+        TreeSet<Integer> union = new TreeSet<>(set1);
+        union.addAll(set2);
+
+        TreeSet<Integer> intersection = new TreeSet<>(set1);
+        intersection.retainAll(set2);
+
+        union.removeAll(intersection);
+
+        System.out.println(union);
+    }
+}
+```
+
+## 24. Check if one TreeSet is subset of another.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set1 = new TreeSet<>(Arrays.asList(1,2,3,4));
+        TreeSet<Integer> set2 = new TreeSet<>(Arrays.asList(3,4));
+
+        System.out.println(set1.containsAll(set2) ? "Yes set2 is subset of set1" : "No set2 is not subset of set1");
+    }
+}
+```
+
+## 25. Compare two TreeSets and print common elements.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set1 = new TreeSet<>(Arrays.asList(10, 20, 30, 40));
+        TreeSet<Integer> set2 = new TreeSet<>(Arrays.asList(20, 30, 50, 60));
+
+        for (Integer num : set2) {
+            if(set1.contains(num)) {
+                System.out.println("Common Element: " + num);
+            }
+        }
+    }
+}
+```
+
+## 26. Convert TreeSet to ArrayList.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>(Arrays.asList(10, 20, 30, 40));
+        ArrayList<Integer> list = new ArrayList<>(set);
+    }
+}
+```
+
+## 27. Convert TreeSet to LinkedList.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>(Arrays.asList(10, 20, 30, 40));
+        LinkedList<Integer> list = new LinkedList<>(set);
+    }
+}
+```
+
+## 28. Convert ArrayList to TreeSet to remove duplicates.
+```java
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> list = new ArrayList<>(Arrays.asList(10, 20, 30, 50, 60, 40, 20, 30, 100));
+        TreeSet<Integer> set = new TreeSet<>(list);
+
+        set.forEach(System.out::println);
+    }
+}
+```
+
+## 29. Convert TreeSet to HashSet.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> treeSet = new TreeSet<>(Arrays.asList(10, 20, 30, 50, 60, 40, 20, 30, 100));
+        HashSet<Integer> hashSet = new LinkedHashSet<>(treeSet);
+
+        hashSet.forEach(System.out::println);
+    }
+}
+```
+
+## 30. Convert TreeSet to String.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<String> treeSet = new TreeSet<>(Arrays.asList("Hello", "How", "Are", "You"));
+        String str = treeSet.stream().collect(Collectors.joining(" "));
+
+        System.out.println(str);
+    }
+}
+```
+
+## 31. Add null values and observe behavior.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<String> treeSet = new TreeSet<>(Arrays.asList("Hello", "How", "Are",null, "You"));
+
+        System.out.println(treeSet);
+        // If you try to add null to a TreeSet (which uses natural ordering or comparator), it will throw a NullPointerException at runtime because null cannot             be compared to other elements.
+    }
+}
+```
+
+## 32. Add mixed data types (observe compile-time error).
+A TreeSet is a generic collection that requires all elements to be of the same type. Adding mixed data types will result in a compile-time error, as elements must be mutually comparable.
+
+## 33. Add custom objects without Comparable (runtime error).
+If you add custom objects to a TreeSet without implementing Comparable or without providing a Comparator, Java will throw a ClassCastException at runtime, because TreeSet won’t know how to compare the objects.
+
+## 34. Insert duplicate custom objects and observe behavior.
+TreeSet does not allow duplicate elements. For custom objects, it uses the result of compareTo() (or provided Comparator) to decide uniqueness — not .equals() or .hashCode().
+
+## 35. Add large number of elements and check sorting performance.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> set = new TreeSet<>();
+
+        for(int i = 9999999; i >= 1; i--) {
+            set.add(i);
+        }
+
+        set.forEach(System.out::println);
+    }
+}
+```
+
+## 36. Store sorted user IDs.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<String> userIds = new TreeSet<>();
+
+        userIds.add("arman1");
+        userIds.add("arman3");
+        userIds.add("arman4");
+        userIds.add("arman2");
+        userIds.add("arman5");
+
+        System.out.println(userIds);
+    }
+}
+```
+
+## 37. Filter and sort product prices.
+```java
+public class Main {
+    public static void main(String[] args) {
+      TreeSet<Integer> prices = new TreeSet<>(Arrays.asList(299, 1200, 499, 750, 999, 150));
+
+      Set<Integer> filteredPrices = prices.stream().filter(p -> p > 500).collect(Collectors.toSet());
+
+      System.out.println(filteredPrices);
+    }
+}
+```
