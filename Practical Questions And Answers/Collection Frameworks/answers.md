@@ -5569,3 +5569,718 @@ public class Main {
     }
 }
 ```
+
+## 38. Use custom Comparator to sort in reverse order.
+```java
+class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+class NameComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student o1, Student o2) {
+        return o2.getName().compareTo(o1.getName());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Student> students = new ArrayList<>();
+
+        students.add(new Student("Arman", 18));
+        students.add(new Student("Farman", 19));
+        students.add(new Student("Ali", 17));
+
+        Collections.sort(students, new NameComparator());
+
+        students.forEach(System.out::println);
+    }
+}
+```
+
+## 38. Create TreeSet of objects sorted by multiple fields.
+```java
+class Student {
+    private String name;
+    private int age;
+
+    public Student(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+class StudentComparator implements Comparator<Student> {
+    @Override
+    public int compare(Student o1, Student o2) {
+        int nameCompare = o1.getName().compareTo(o2.getName());
+
+        if (nameCompare != 0) {
+            return nameCompare;
+        } else {
+            return Integer.compare(o1.getAge(), o2.getAge());
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Student> students = new TreeSet<>(new StudentComparator());
+
+        students.add(new Student("Arman", 18));
+        students.add(new Student("Farman", 19));
+        students.add(new Student("Ali", 17));
+        students.add(new Student("Arman", 17));
+
+
+        for (Student student : students) {
+            System.out.println(student);
+        }
+    }
+}
+```
+
+## 39. Use TreeSet to implement auto-suggestions.
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<String> words = new TreeSet<>();
+
+        words.add("apple");
+        words.add("app");
+        words.add("application");
+        words.add("bat");
+        words.add("banana");
+        words.add("ball");
+
+       String prefix = "app";
+
+        for (String word : words.tailSet(prefix)) {
+            if (word.startsWith(prefix)) {
+                System.out.println(word);
+            } else {
+                break;
+            }
+        }
+    }
+}
+```
+
+## 40. Range queries using subSet().
+```java
+public class Main {
+    public static void main(String[] args) {
+        TreeSet<Integer> numbers = new TreeSet<>();
+
+        numbers.add(10);
+        numbers.add(20);
+        numbers.add(30);
+        numbers.add(40);
+        numbers.add(50);
+
+        System.out.println(numbers.subSet(20, 40));
+    }
+}
+```
+
+## 41. Compare TreeSet vs HashSet (performance + sorting).
+- **Performance**:
+  - **TreeSet**: Slower than **HashSet** for basic operations (add, remove, contains) due to its underlying **Red-Black tree** structure (O(log n) time complexity).
+  - **HashSet**: Faster for basic operations with an average time complexity of O(1) due to its underlying **hash table** structure.
+
+- **Sorting**:
+  - **TreeSet**: Elements are **sorted** in natural order (or according to a specified comparator).
+  - **HashSet**: Does not guarantee any sorting of elements.
+
+
+## 42. Understand internal structure of TreeSet (Red-Black Tree).
+
+### 1. Red-Black Tree Basics
+
+A **Red-Black Tree** is a self-balancing binary search tree (BST). It satisfies the following properties:
+
+#### Binary Search Tree (BST) Property:
+- For any given node `N`, all the values in the left subtree of `N` are smaller, and all the values in the right subtree of `N` are larger.
+
+#### Red-Black Properties:
+- **Root is Black:** The root of the tree is always black.
+- **Red Nodes Can't Have Red Children:** No two red nodes can be adjacent (a red node cannot have a red child).
+- **Every Path from Root to Null Has the Same Number of Black Nodes:** The number of black nodes from the root to any leaf (or null) node must be the same.
+- **Red-Black Properties Ensure Balanced Height:** These properties ensure that the height of the tree remains balanced, resulting in logarithmic time complexity for insertion, deletion, and search operations.
+
+### 2. TreeSet Structure in Java
+
+A `TreeSet` in Java is backed by a **Red-Black Tree**, which ensures the following:
+
+- **Sorted Elements:** `TreeSet` stores its elements in natural order (or according to a provided comparator). The Red-Black Tree maintains this order.
+- **No Duplicates:** `TreeSet` does not allow duplicate elements. If an element is already present, it is not added again.
+- **Navigable:** `TreeSet` implements the `NavigableSet` interface, which provides methods like `lower()`, `higher()`, `floor()`, and `ceiling()` to navigate through the set efficiently.
+
+
+# 🔹 PriorityQueue
+
+## 1. Create a PriorityQueue of integers.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.add(20);
+        pq.add(10);
+        pq.add(30);
+        pq.add(15);
+
+        System.out.println(pq);
+    }
+}
+```
+
+## 2. Add elements to the queue using offer().
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(30);
+        pq.offer(15);
+
+        System.out.println(pq);
+    }
+}
+```
+
+## 3. Retrieve and remove the head using poll().
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(30);
+        pq.offer(15);
+
+        pq.poll();
+
+        System.out.println(pq);
+    }
+}
+```
+
+## 4. Retrieve but do not remove the head using peek().
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(30);
+        pq.offer(15);
+
+        System.out.println(pq.peek());
+    }
+}
+```
+
+## 5. Check if queue contains an element.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(30);
+        pq.offer(15);
+
+        System.out.println(pq.contains(10));
+    }
+}
+```
+
+## 6. Get the size of the queue.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(30);
+        pq.offer(15);
+
+        System.out.println(pq.size());
+    }
+}
+```
+
+## 7. Iterate through the PriorityQueue.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(30);
+        pq.offer(15);
+
+        Iterator<Integer> iterator = pq.iterator();
+
+        while(iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
+    }
+}
+```
+
+## 8. Clear all elements from the queue.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(30);
+        pq.offer(15);
+
+        pq.clear();
+
+        System.out.println(pq);
+    }
+}
+```
+
+## 9. Add duplicate elements and observe behavior.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(30);
+        pq.offer(15);
+        pq.offer(10);
+
+        System.out.println(pq);
+    }
+}
+```
+
+## 10. Add negative numbers and check order.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(-30);
+        pq.offer(15);
+        pq.offer(10);
+
+        System.out.println(pq);
+    }
+}
+```
+
+## 11. Insert integers and observe natural sorting.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(20);
+        pq.offer(10);
+        pq.offer(-30);
+        pq.offer(15);
+        pq.offer(10);
+
+        System.out.println(pq);
+    }
+}
+```
+
+## 12. Add strings and check lexicographical order.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<String> pq = new PriorityQueue<>();
+
+        pq.offer("Hello");
+        pq.offer("How");
+        pq.offer("Are");
+        pq.offer("You");
+
+        pq.forEach(System.out::println);
+    }
+}
+```
+
+## 13. Use forEach to print elements (not necessarily sorted).
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<String> pq = new PriorityQueue<>();
+
+        pq.offer("Hello");
+        pq.offer("How");
+        pq.offer("Are");
+        pq.offer("You");
+
+        pq.forEach(System.out::println);
+    }
+}
+```
+
+## 14. Poll all elements and print in sorted order.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<String> pq = new PriorityQueue<>();
+
+        pq.add("banana");
+        pq.add("apple");
+        pq.add("cherry");
+
+        while (!pq.isEmpty()) {
+            System.out.println(pq.poll());
+        }
+    }
+}
+```
+
+## 15. Compare PriorityQueue with TreeSet ordering.
+
+### PriorityQueue
+- Maintains elements in **heap order** (min-heap by default).
+- Only the **smallest element is guaranteed at the front**.
+- Internal order is **not fully sorted**.
+- `poll()` or `peek()` gives the smallest element.
+- Allows **duplicates**.
+
+### TreeSet
+- Maintains elements in **sorted order** (ascending by default).
+- All elements are stored in **fully sorted form**.
+- Uses **Red-Black Tree** internally.
+- No need to `poll()` to get sorted data.
+- **Does not allow duplicates**.
+
+## 16. Create max heap using Comparator.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<String> pq = new PriorityQueue<>(Comparator.reverseOrder());
+
+        pq.add("banana");
+        pq.add("apple");
+        pq.add("cherry");
+
+        for (String s : pq) {
+            System.out.println(s);
+        }
+    }
+}
+```
+
+## 17. Create PQ that sorts strings in reverse order.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<String> pq = new PriorityQueue<>(Comparator.reverseOrder());
+
+        pq.add("banana");
+        pq.add("apple");
+        pq.add("date");
+        pq.add("cherry");
+
+        for (String s : pq) {
+            System.out.println(s);
+        }
+    }
+}
+```
+
+## 18. Store custom objects with custom Comparator.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+class PersonComparator implements Comparator<Person> {
+    @Override
+    public int compare(Person o1, Person o2) {
+        return o1.getAge() - o2.getAge();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Person> pq = new PriorityQueue<>(new PersonComparator());
+
+        pq.offer(new Person("Armaan Ali", 18));
+        pq.offer(new Person("Farman Ali", 20));
+        pq.offer(new Person("Ali", 17));
+
+        for (Person person : pq) {
+            System.out.println(person);
+        }
+    }
+}
+```
+
+## 19. Sort people by age in descending order.
+```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                '}';
+    }
+}
+
+class PersonComparator implements Comparator<Person> {
+    @Override
+    public int compare(Person o1, Person o2) {
+        return o2.getAge() - o1.getAge();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Person> pq = new PriorityQueue<>(new PersonComparator());
+
+        pq.offer(new Person("Armaan Ali", 18));
+        pq.offer(new Person("Farman Ali", 20));
+        pq.offer(new Person("Ali", 17));
+
+        for (Person person : pq) {
+            System.out.println(person);
+        }
+    }
+}
+```
+
+## 20. Use remove() to delete specific element.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(10);
+        pq.offer(20);
+        pq.offer(30);
+        pq.offer(40);
+        pq.offer(50);
+
+        pq.remove(30);
+
+        System.out.println(pq);
+    }
+}
+```
+
+## 21. Use contains() to check membership.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(10);
+        pq.offer(20);
+        pq.offer(30);
+        pq.offer(40);
+        pq.offer(50);
+
+        System.out.println(pq.contains(30));
+    }
+}
+```
+
+## 22. Use isEmpty() before polling.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(10);
+        pq.offer(20);
+        pq.offer(30);
+        pq.offer(40);
+        pq.offer(50);
+
+        System.out.println(pq.isEmpty());
+
+        while (!pq.isEmpty()) {
+            pq.poll();
+        }
+
+        System.out.println(pq.isEmpty());
+    }
+}
+```
+
+## 23. Convert PriorityQueue to Array.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(10);
+        pq.offer(20);
+        pq.offer(30);
+        pq.offer(40);
+        pq.offer(50);
+
+        Integer[] arr = pq.toArray(new Integer[0]);
+
+        for (Integer num : arr) {
+            System.out.println(num);
+        }
+    }
+}
+```
+
+## 24. Convert List to PriorityQueue.
+```java
+public class Main {
+    public static void main(String[] args) {
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+
+        pq.offer(10);
+        pq.offer(20);
+        pq.offer(30);
+        pq.offer(40);
+        pq.offer(50);
+
+        ArrayList<Integer> list = new ArrayList<>(pq);
+
+        System.out.println(list);
+    }
+}
+```
+
+## 25. Find k largest elements using max heap.
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {4, 1, 7, 3, 8, 5};
+        int k = 4;
+
+        PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (int num : nums) {
+            maxHeap.offer(num);
+        }
+
+        for(int i = 0; i < k; i++) {
+            System.out.println(maxHeap.poll());
+        }
+    }
+}
+```
+
+## 26. Find k smallest elements using min heap.
+```java
+public class Main {
+    public static void main(String[] args) {
+        int[] nums = {4, 1, 7, 3, 8, 5};
+        int k = 4;
+
+        PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+
+        for (int num : nums) {
+            minHeap.offer(num);
+        }
+
+        for(int i = 0; i < k; i++) {
+            System.out.println(minHeap.poll());
+        }
+    }
+}
+```
