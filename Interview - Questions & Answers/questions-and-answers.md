@@ -2917,3 +2917,92 @@ class MarksComparator implements Comparator<Student> {
     }
 }
 ```
+
+## 199. What is the default size of collection classes like ArrayList and Vector in Java?
+Both `ArrayList` and `Vector` have a default size of **10**. ArrayList grows by 50%, while Vector doubles its size when full.
+
+## 200. Explain the dynamic size increment in ArrayList and provide details about how it works.
+ArrayList grows by **50%** of its current size when full, using `Arrays.copyOf()` to create a new larger array and copy elements.
+
+## 201. What is the significance of the Load Factor in Java Collections, and can you provide an example?
+The **load factor** determines when a HashMap will resize. It is the ratio between the number of elements and capacity. Default is `0.75`, meaning HashMap will resize when it is 75% full.
+
+#### Example:
+- **Capacity** = 16  
+- **Load factor** = 0.75  
+- HashMap will resize after adding **12 elements** (16 × 0.75).
+
+## 202. Explain the concepts of Hashing and Rehashing in the context of collections.
+#### **Hashing:**
+- **Hashing** is a process used to map data (like keys) to an index (or bucket) in an array (hash table).
+- Hashing uses a function (called a **hash function**) to calculate the index where a key-value pair should be stored.
+- In Java collections like **HashMap**, the key's hash code is computed and used to decide the index in the array.
+
+#### **Example of Hashing:**
+  - Key: `"apple"`
+  - Hash function calculates a hash value and maps `"apple"` to a specific index (bucket) in the array.
+  
+#### **Rehashing:**
+- **Rehashing** happens when the current array (or hash table) is full or nearly full.
+- When the **load factor** is exceeded (like 75% in HashMap), the collection resizes by creating a new, larger array and rehashes all the elements to new indices based on their hash values.
+- This is done to reduce the chances of **collisions** (when multiple elements get mapped to the same index).
+
+#### **Example of Rehashing:**
+- Initially, a HashMap with capacity 16 is created, and once 12 elements are added (75% of 16), it resizes to double the size (32) and rehashes all the existing elements to the new array.
+
+## 203. What is the load factor of Vector, and what is the default size of a Vector in Java?
+#### **Default Size:**
+- The default size of a `Vector` in Java is **10**. When a `Vector` is created without specifying an initial size, it starts with a size of 10.
+
+#### **Load Factor:**
+- The default **load factor** of a `Vector` is **2**. This means that when the `Vector` exceeds its capacity, it will **double its size** to accommodate more elements.
+
+#### Example:
+- Initial capacity = 10  
+- Load factor = 2  
+- After adding 10 elements, the `Vector` will resize to a capacity of 20.
+
+## 204. Differentiate between Hashtable and HashMap in Java.
+
+1. **Synchronized:**
+   - **Hashtable** is synchronized and thread-safe.
+   - **HashMap** is not synchronized and not thread-safe.
+
+2. **Null Keys/Values:**
+   - **Hashtable** does not allow **null** keys or values.
+   - **HashMap** allows **one null key** and **multiple null values**.
+
+3. **Performance:**
+   - **Hashtable** is slower due to synchronization overhead.
+   - **HashMap** is faster since it does not have synchronization.
+
+4. **Inheritance:**
+   - **Hashtable** is inherited from the **Dictionary** class (legacy).
+   - **HashMap** is part of the **AbstractMap** class.
+  
+## 205. Compare and contrast Vector and ArrayList in Java.
+
+1. **Synchronization:**
+   - **Vector** is synchronized and thread-safe.
+   - **ArrayList** is not synchronized and not thread-safe.
+
+2. **Growth Factor:**
+   - **Vector** grows by **doubling its size** when it reaches capacity.
+   - **ArrayList** grows by **50% of its current size** when it reaches capacity.
+
+3. **Performance:**
+   - **Vector** is slower due to synchronization.
+   - **ArrayList** is faster as it doesn’t have synchronization overhead.
+
+4. **Null Elements:**
+   - Both **Vector** and **ArrayList** allow **null** elements.
+
+5. **Legacy:**
+   - **Vector** is a legacy class, part of the **Vector** class in Java since **JDK 1.0**.
+   - **ArrayList** is part of the **Collections Framework**, introduced in **JDK 1.2**.
+  
+## 205. Can the hash codes of two objects be the same or different in Java?
+Yes, the hash codes of two objects can be **the same** (a hash collision) or **different** depending on the hash function and object properties.
+
+## 206. What is Hashcode Collision, and how is it handled in Java?
+A **hashcode collision** occurs when two objects have the same hashcode. In Java, it’s handled by using **linked lists** or **trees** (in case of `HashMap`), where objects with the same hashcode are stored in the same bucket but differentiated by **equals()**.
