@@ -3006,3 +3006,1568 @@ Yes, the hash codes of two objects can be **the same** (a hash collision) or **d
 
 ## 206. What is Hashcode Collision, and how is it handled in Java?
 A **hashcode collision** occurs when two objects have the same hashcode. In Java, it’s handled by using **linked lists** or **trees** (in case of `HashMap`), where objects with the same hashcode are stored in the same bucket but differentiated by **equals()**.
+
+## 207. Explain the internal working of a HashMap in Java.
+## Overview
+
+`HashMap` in Java is a part of the `java.util` package and is used to store key-value pairs. It allows **one null key** and **multiple null values**, and it **does not maintain any order**.
+
+---
+
+## How it Works Internally
+
+#### 1. **Hashing**
+- When you insert a key-value pair in a HashMap, the key’s `hashCode()` method is called.
+- This hash code is then converted into a **bucket index** using an internal function.
+  
+#### 2. **Buckets**
+- Internally, HashMap has an array of **Node<K, V>** (also called buckets).
+- Each bucket is like a **LinkedList** (or a **tree**, in some cases).
+
+#### 3. **Storing Elements**
+- If the bucket index is empty, the key-value pair is stored directly.
+- If the bucket already has a value:
+  - HashMap checks if the new key is **equal** to an existing key using `.equals()`.
+  - If it is equal, the value is **updated**.
+  - Otherwise, the new key-value pair is added to the bucket (chaining).
+
+#### 4. **Handling Collisions**
+- When two keys have the same bucket index, it's called a **collision**.
+- Java handles this using:
+  - **Chaining** with a LinkedList (Java 7 and below).
+  - If more than 8 entries in a single bucket (Java 8+), LinkedList is replaced with a **Balanced Tree (Red-Black Tree)**.
+
+#### 5. **Load Factor and Rehashing**
+- HashMap has a **default load factor of 0.75**.
+- When the map reaches 75% of its capacity, it **resizes** (doubles in size) and rehashes all the keys.
+
+---
+
+### Example Flow
+
+```java
+Map<String, String> map = new HashMap<>();
+map.put("apple", "red");
+```
+
+- `"apple".hashCode()` is calculated.
+- That hash is converted to an index.
+- Value `"red"` is stored at that index in the bucket.
+  
+---
+
+### Summary
+
+- Uses array + LinkedList/tree for storage.
+- Uses `hashCode()` and `equals()` for keys.
+- Handles collisions with chaining or trees.
+- Resizes automatically when load factor is exceeded.
+
+---
+
+### Java 8 Enhancements
+
+- Bucket structure changes to Red-Black Tree when bucket size > 8.
+- Improves performance in cases of heavy collisions.
+
+## 208. Compare the usage of "for each" loops and Iterators in Java.
+# For-each vs Iterator in Java
+
+## For-each Loop
+- Simple and readable.
+- Used for **reading only**.
+- Cannot remove/modify elements.
+- Works on arrays and collections.
+
+```java
+for (String item : list) {
+    System.out.println(item);
+}
+```
+
+## Iterator
+- Allows **removal** during iteration.
+- More control (e.g., `hasNext()`, `remove()`).
+- Slightly more code.
+
+```java
+Iterator<String> it = list.iterator();
+while (it.hasNext()) {
+    if (it.next().equals("x")) it.remove();
+}
+```
+
+## Summary
+
+| Feature        | For-each | Iterator |
+|----------------|----------|----------|
+| Simple         | ✅        | ❌        |
+| Can remove     | ❌        | ✅        |
+| Arrays support | ✅        | ❌        |
+| Modify list    | ❌        | ✅        |
+
+## 209. Differentiate between Iterator and ListIterator in Java.
+# Iterator vs ListIterator in Java
+
+## Iterator
+- Used with **all collections**.
+- **Forward** direction only.
+- Can **remove()** elements.
+- No index access.
+
+```java
+Iterator<String> it = list.iterator();
+while (it.hasNext()) {
+    it.next();
+}
+```
+
+## ListIterator
+- Used with **List only**.
+- **Forward & backward** both.
+- Can **add(), remove(), set()**.
+- Has index info (`nextIndex()`, `previousIndex()`).
+
+```java
+ListIterator<String> it = list.listIterator();
+while (it.hasNext()) {
+    it.next();
+}
+while (it.hasPrevious()) {
+    it.previous();
+}
+```
+
+## Summary
+
+| Feature             | Iterator | ListIterator |
+|---------------------|----------|--------------|
+| Direction           | Forward  | Both         |
+| Applicable on       | All      | List only    |
+| Add/Set support     | ❌        | ✅            |
+| Index info          | ❌        | ✅            |
+
+## 210. Explain the concepts of Comparable and Comparator in Java.
+# Comparable vs Comparator in Java
+
+## Comparable (java.lang.Comparable)
+- Used to define **natural sorting**.
+- Class implements it and overrides `compareTo()`.
+- Can sort by **one field only**.
+
+```java
+class Student implements Comparable<Student> {
+    int marks;
+    public int compareTo(Student s) {
+        return this.marks - s.marks;
+    }
+}
+```
+
+## Comparator (java.util.Comparator)
+- Used for **custom sorting**.
+- Create separate class or use lambda.
+- Can sort by **multiple fields**.
+
+```java
+class SortByName implements Comparator<Student> {
+    public int compare(Student a, Student b) {
+        return a.name.compareTo(b.name);
+    }
+}
+```
+
+## Using Lambda with Comparator
+```java
+list.sort((a, b) -> a.name.compareTo(b.name));
+```
+
+## Summary
+
+| Feature         | Comparable | Comparator         |
+|-----------------|------------|--------------------|
+| Package         | java.lang  | java.util          |
+| Method          | compareTo()| compare()          |
+| Sorting Type    | Natural    | Custom             |
+| Multiple Fields | ❌          | ✅                  |
+| Used by         | TreeSet, Collections.sort() | Collections.sort(), custom logic |
+
+## 211. Provide Java code to sort employee objects using employee ID.
+```java
+import java.util.ArrayList;
+import java.util.Collections;
+
+class Employee implements Comparable<Employee> {
+    private int id;
+    private String name;
+
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    @Override
+    public int compareTo(Employee o) {
+        return this.id - o.id;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        employees.add(new Employee(34, "Armaan"));
+        employees.add(new Employee(25, "Farman"));
+        employees.add(new Employee(30, "Jagir"));
+
+        Collections.sort(employees);
+
+        employees.forEach(System.out::println);
+    }
+}
+```
+
+## 212. Provide Java code to sort employee objects using both employee ID and employee name.
+```java
+class Employee {
+    private int id;
+    private String name;
+
+    public Employee(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
+
+class EmployeeComparator implements Comparator<Employee> {
+    @Override
+    public int compare(Employee o1, Employee o2) {
+        int idComparasion = Integer.compare(o1.getId(), o2.getId());
+        if(idComparasion != 0) return  idComparasion;
+
+
+        return o1.getName().compareTo(o2.getName());
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Employee> employees = new ArrayList<>();
+
+        employees.add(new Employee(30, "Armaan"));
+        employees.add(new Employee(25, "Farman"));
+        employees.add(new Employee(30, "Jagir"));
+
+        employees.sort(new EmployeeComparator());
+
+        employees.forEach(System.out::println);
+    }
+}
+```
+
+## 213. Why is the Iterable interface located in the java.lang package in Java?
+### Explanation
+- `Iterable` interface is in the `java.lang` package because it is a **core part of the Java Collection Framework**.
+- It provides the **foundation for enhanced for-loops** (`for-each` loop).
+- Being in `java.lang`, it is available **globally** without needing additional imports, making it easier to use with any collection.
+
+```java
+List<String> list = new ArrayList<>();
+for (String item : list) {
+    System.out.println(item);
+}
+```
+
+### Summary
+- Located in `java.lang` for **ease of use**.
+- Ensures all collections are **iterable** using `for-each` loop.
+
+## 214. Discuss the uses of the Arrays and Collections classes in Java.
+The `Arrays` class provides utility methods like `sort()`, `binarySearch()`, and `copyOf()`. It's used for fixed-size arrays and primitive types, offering faster performance and lower memory usage.
+
+```java
+Arrays.sort(arr);
+```
+
+The `Collections` class offers methods like `sort()`, `reverse()`, and `shuffle()` for working with dynamic collections such as `ArrayList`. It supports objects and more complex operations.
+
+```java
+Collections.sort(list);
+```
+
+## 215. Explain why the Map interface is not part of the Collection interface hierarchy in Java.
+The `Map` interface is not part of the `Collection` hierarchy because it represents a **different kind of data structure**. While `Collection` deals with single elements (like lists, sets), `Map` is designed to store **key-value pairs**, where each key is unique.
+
+- `Collection` is used for storing **individual objects**.
+- `Map` stores **key-value pairs** and does not extend `Collection`, since a `Map` contains no direct elements (only keys and values).
+
+```java
+Map<Integer, String> map = new HashMap<>();
+map.put(1, "One");
+map.put(2, "Two");
+```
+
+## 216. Can collections in Java contain null values, and what about concurrent collections?
+Yes, regular collections in Java like `ArrayList`, `HashSet`, and `HashMap` can contain `null` values. However, some collections have limitations:
+- **Lists**: Can contain `null` values.
+- **Sets**: Can contain one `null` value (except `TreeSet`, which doesn't allow `null`).
+- **Maps**: Can have `null` as both key and value, except `Hashtable` and `ConcurrentHashMap`.
+
+For concurrent collections like `ConcurrentHashMap`:
+- It does **not allow `null` keys or values** to avoid ambiguity and ensure thread safety.
+  
+```java
+Map<Integer, String> map = new HashMap<>();
+map.put(1, null);  // Allowed
+
+ConcurrentMap<Integer, String> concurrentMap = new ConcurrentHashMap<>();
+concurrentMap.put(1, null);  // Throws NullPointerException
+```
+
+## 217. Which collection types in Java can have null values?
+In Java, the following collection types can contain `null` values:
+
+- **Lists**: Can contain multiple `null` values (e.g., `ArrayList`, `LinkedList`).
+- **Sets**: Can contain one `null` value (e.g., `HashSet`, `LinkedHashSet`). `TreeSet` does not allow `null`.
+- **Maps**: Can have `null` as values (e.g., `HashMap`, `LinkedHashMap`), but only `HashMap` allows `null` keys. `TreeMap` does not allow `null` keys.
+- **Queues**: Can contain `null` (e.g., `LinkedList`, `PriorityQueue`), but some queue implementations like `BlockingQueue` do not allow `null`.
+
+```java
+List<String> list = new ArrayList<>();
+list.add(null);  // Allowed
+```
+
+## 218. Name some synchronized and non-synchronized collection classes in Java.
+# Synchronized and Non-Synchronized Collection Classes in Java
+
+## Synchronized Collection Classes:
+- `Vector`
+- `Hashtable`
+- `Stack`
+- `ConcurrentHashMap` (thread-safe, but not fully synchronized)
+
+## Non-Synchronized Collection Classes:
+- `ArrayList`
+- `HashMap`
+- `HashSet`
+- `LinkedList`
+- `TreeMap`
+- `TreeSet`
+
+To make non-synchronized collections thread-safe:
+- `Collections.synchronizedList()`
+- `Collections.synchronizedMap()`
+- `Collections.synchronizedSet()`
+- Or use concurrent collections like `CopyOnWriteArrayList`
+
+## 219. What is Generics in Java?
+Generics in Java allow you to write code that works with different data types while providing **type safety** at compile time.
+
+It helps avoid `ClassCastException` and eliminates the need for casting.
+
+For example, instead of using `Object`, you specify a type like `String` or `Integer`.
+
+```java
+List<String> list = new ArrayList<>();
+```
+
+Benefits:
+- Compile-time type checking
+- Code reusability
+- Eliminates explicit type casting
+
+## 220. Why were Generics introduced in Java?
+Generics were introduced in Java to provide **type safety** and **eliminate the need for explicit type casting**.
+
+Before generics, collections used `Object` type, which led to runtime errors.
+
+With generics:
+- Type errors are caught at compile-time.
+- Code becomes more readable and reusable.
+- No need for manual casting.
+
+```java
+List<String> list = new ArrayList<>();
+String name = list.get(0); // No casting needed
+```
+
+## 221. Why is the Comparable interface implemented in classes when the hashCode method is present to compare objects?
+The `Comparable` interface is used to **define the natural ordering** of objects, like sorting in ascending or descending order.
+
+The `hashCode()` method is used in **hash-based collections** (like `HashMap`, `HashSet`) to efficiently locate objects, not for sorting.
+
+So:
+- `Comparable` → used for **ordering/sorting**.
+- `hashCode()` → used for **hashing/lookup**.
+
+Both serve different purposes and are **not interchangeable**.
+
+## 222. What implementations are required for an object to be used as a key in a TreeMap in Java?
+To use an object as a key in a `TreeMap`, it must:
+
+- Implement the `Comparable` interface  
+**or**
+- Be used with a `Comparator` provided during `TreeMap` creation
+
+This is because `TreeMap` stores keys in **sorted order**.
+
+Also, the key class should have a consistent `equals()` and `compareTo()` logic to avoid unexpected behavior.
+
+## 223. Explain different ways to iterate through a map in Java.
+Different ways to iterate through a `Map` in Java:
+
+1. **Using entrySet() with for-each loop**  
+Access both key and value:
+```java
+for (Map.Entry<K, V> entry : map.entrySet()) {
+    K key = entry.getKey();
+    V value = entry.getValue();
+}
+```
+
+2. **Using keySet()**  
+Access only keys, then get values:
+```java
+for (K key : map.keySet()) {
+    V value = map.get(key);
+}
+```
+
+3. **Using values()**  
+To iterate only over values:
+```java
+for (V value : map.values()) {
+    // use value
+}
+```
+
+4. **Using Iterator**  
+For more control or removal during iteration:
+```java
+Iterator<Map.Entry<K, V>> it = map.entrySet().iterator();
+while (it.hasNext()) {
+    Map.Entry<K, V> entry = it.next();
+}
+```
+
+5. **Using forEach() (Java 8+)**
+```java
+map.forEach((key, value) -> {
+    // use key and value
+});
+```
+
+## 224. What does the "Iterator.next()" method return in Java?
+The `Iterator.next()` method returns the **next element** in the iteration.
+
+It moves the cursor forward and gives the current element.
+
+If no elements are left, it throws `NoSuchElementException`.
+
+```java
+Iterator<String> it = list.iterator();
+String value = it.next(); // returns next element
+```
+
+## 225. How can you make any collection immutable in Java, ensuring that it cannot be modified (no add/remove/update actions allowed)?
+To make a collection immutable in Java (no add/remove/update allowed), use:
+
+### 1. `Collections.unmodifiableXXX()` methods:
+```java
+List<String> list = Collections.unmodifiableList(new ArrayList<>());
+Set<String> set = Collections.unmodifiableSet(new HashSet<>());
+Map<String, String> map = Collections.unmodifiableMap(new HashMap<>());
+```
+
+### 2. Java 9+ factory methods:
+```java
+List<String> list = List.of("a", "b");
+Set<String> set = Set.of("x", "y");
+Map<String, String> map = Map.of("key1", "val1", "key2", "val2");
+```
+
+These return **truly immutable** collections.
+
+## 226. What is the use of a question mark (?) in collections and generics in Java?
+The question mark `?` is a **wildcard** in Java Generics. It represents an **unknown type**.
+
+### Uses:
+- To write **flexible and reusable** code.
+- Useful in methods that work with different types of collections.
+
+### Types:
+- `<?>` → Unbounded wildcard (any type)
+- `<? extends T>` → Upper bounded (T or its subclass)
+- `<? super T>` → Lower bounded (T or its superclass)
+
+Example:
+```java
+List<?> list;               // accepts any type
+List<? extends Number> n;   // accepts Integer, Double, etc.
+List<? super Integer> i;    // accepts Integer, Number, Object
+```
+
+## 227. With which collection types do we use Comparable or Comparator in Java?
+We use `Comparable` or `Comparator` with **sorted collection types** in Java:
+
+### Collections that use them:
+- `TreeSet` → for sorting elements
+- `TreeMap` → for sorting keys
+- `PriorityQueue` → for ordering elements
+- `Collections.sort(List)` → for sorting lists
+
+### Purpose:
+- `Comparable` → natural ordering (implements `compareTo`)
+- `Comparator` → custom ordering (passed to constructor or sort method)
+
+## 228. What is the difference between Hashtable and ConcurrentMap in Java?
+### Difference between `Hashtable` and `ConcurrentMap`:
+
+- **Thread Safety**:
+  - `Hashtable`: Synchronized, locks entire table.
+  - `ConcurrentMap`: Thread-safe, uses finer-grained locking.
+
+- **Performance**:
+  - `Hashtable`: Slower due to full locking.
+  - `ConcurrentMap`: Faster in multithreaded scenarios.
+
+- **Null Keys/Values**:
+  - `Hashtable`: No null key or value allowed.
+  - `ConcurrentMap`: No null key or value allowed (same as `Hashtable`).
+
+- **Modern Usage**:
+  - `ConcurrentMap` (like `ConcurrentHashMap`) is preferred in concurrent apps.
+
+## 229. Explain the hierarchy of the Collection interface, from Iterable to various interfaces and classes in Java.
+### Hierarchy of the `Collection` Interface in Java:
+
+1. **`Iterable`**  
+   - The root interface for all collections, provides the `iterator()` method to iterate over elements.
+   
+2. **`Collection`**  
+   - Extends `Iterable`. It represents a group of objects and provides basic collection operations like `add()`, `remove()`, `size()`, etc.
+
+3. **`List`**  
+   - Extends `Collection`, ordered collection with index-based access (e.g., `ArrayList`, `LinkedList`).
+
+4. **`Set`**  
+   - Extends `Collection`, unordered collection without duplicates (e.g., `HashSet`, `TreeSet`).
+
+5. **`Queue`**  
+   - Extends `Collection`, for handling elements in a FIFO (First In, First Out) order (e.g., `LinkedList`, `PriorityQueue`).
+
+6. **`Map`**  
+   - Not a direct descendant of `Collection`, but part of the Java Collections Framework. Stores key-value pairs (e.g., `HashMap`, `TreeMap`).
+
+### Key Classes Implementing the Interfaces:
+- **`ArrayList`** implements `List`
+- **`HashSet`** implements `Set`
+- **`PriorityQueue`** implements `Queue`
+- **`HashMap`** implements `Map`
+
+## 230. When should you implement the hashCode() and equals() methods in your class in Java?
+You should implement `hashCode()` and `equals()` methods in your class when the class is used as a key in hash-based collections like `HashMap`, `HashSet`, or `Hashtable`.
+
+### Why implement them:
+1. **Consistency**: These methods ensure that the objects behave correctly in hash-based collections.
+2. **Equality**: `equals()` defines object equality based on business logic.
+3. **Hashing**: `hashCode()` ensures efficient lookup and retrieval in hash-based collections.
+
+### General Rule:
+- If `equals()` is overridden, `hashCode()` must also be overridden.
+- Objects that are considered equal by `equals()` must have the same `hashCode()`.
+
+Example:
+```java
+@Override
+public boolean equals(Object obj) {
+    // custom equality logic
+}
+
+@Override
+public int hashCode() {
+    // custom hash code logic
+}
+```
+
+## 231. How can you allow duplicate values in hashCode in Java?
+In Java, **duplicate values** can exist in a collection like `HashSet` or `HashMap` even if the objects have the same `hashCode()`. This is because `hashCode()` only determines the bucket in which objects are stored, but the **`equals()`** method determines whether two objects are considered the same.
+
+To allow duplicate values in collections:
+
+- **Override `hashCode()` and `equals()`** carefully to allow objects with the same `hashCode()` but different `equals()` to be treated as duplicates in your collection logic.
+
+However, **duplicate keys** are not allowed in `HashMap`. But **duplicate values** can exist in a map, since values don’t need to be unique, only keys.
+
+```java
+Map<String, String> map = new HashMap<>();
+map.put("key1", "value1");
+map.put("key2", "value1"); // Duplicate value, allowed
+```
+
+### Key Takeaway:
+- You can have duplicate **values** in a `HashMap`, but not duplicate **keys**.
+- `hashCode()` should be consistent, but `equals()` may allow duplicates based on business logic.
+
+## 232. How does ConcurrentHashMap work in a multithreaded environment in Java?
+`ConcurrentHashMap` is a thread-safe implementation of `Map` in Java, designed to handle concurrency in a multithreaded environment efficiently.
+
+### Key Features:
+1. **Segmented Locking**: 
+   - Divides the map into segments (buckets) and locks only the segment that needs to be modified. This allows multiple threads to access different segments concurrently.
+   
+2. **Fine-Grained Locking**:
+   - Uses **locks at the bucket level**, so threads can perform operations (like `put`, `get`) on different entries simultaneously without interfering with each other.
+
+3. **Atomic Operations**: 
+   - Methods like `putIfAbsent()`, `remove()`, and `replace()` are atomic, ensuring thread-safety without requiring additional synchronization.
+
+4. **No Global Lock**:
+   - Unlike `Hashtable` or `synchronizedMap()`, `ConcurrentHashMap` does not lock the entire map for every operation, resulting in better performance in highly concurrent environments.
+
+5. **Non-Blocking Reads**:
+   - `get()` operations do not require locking and can be performed without blocking other threads.
+
+### Example:
+```java
+ConcurrentHashMap<String, Integer> map = new ConcurrentHashMap<>();
+map.put("key1", 10);
+map.putIfAbsent("key2", 20);
+```
+
+### Conclusion:
+`ConcurrentHashMap` is ideal for multithreaded applications where frequent read and write operations are needed without a significant performance penalty.
+
+## 233. What is a Multivalue Map in Java?
+A **Multivalue Map** in Java is a map where each key can be associated with **multiple values**.
+
+### Common Implementations:
+- **`MultiValueMap`** is typically used in libraries like **Spring**, where it extends `Map<K, List<V>>`.
+- It allows a **single key to map to multiple values**, which is useful when dealing with scenarios like HTTP headers or form parameters.
+
+### Key Characteristics:
+1. **Multiple values per key**: Each key is associated with a collection (like `List`, `Set`, etc.) of values.
+2. **Common Operations**: You can add multiple values for the same key and retrieve them as a collection.
+
+### Example:
+```java
+MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+map.add("key1", "value1");
+map.add("key1", "value2");
+
+System.out.println(map.get("key1"));  // Output: [value1, value2]
+```
+
+### Use Case:
+- Common in scenarios like handling multiple query parameters or headers in HTTP requests.
+
+## 234. How do you sort an array with and without using the Arrays or Collections classes in Java?
+### Sorting an Array in Java:
+
+1. **Using `Arrays.sort()`**:
+   - Sorts the array in ascending order (natural order for primitive types or `Comparable` objects).
+   ```java
+   int[] arr = {3, 1, 4, 1, 5};
+   Arrays.sort(arr);  // Sorts the array
+   ```
+
+2. **Without `Arrays.sort()` or `Collections.sort()`**:
+   - **Using Bubble Sort (manual sorting)**:
+   ```java
+   int[] arr = {3, 1, 4, 1, 5};
+   for (int i = 0; i < arr.length - 1; i++) {
+       for (int j = 0; j < arr.length - i - 1; j++) {
+           if (arr[j] > arr[j + 1]) {
+               int temp = arr[j];
+               arr[j] = arr[j + 1];
+               arr[j + 1] = temp;
+           }
+       }
+   }
+   ```
+
+   - **Using Selection Sort (manual sorting)**:
+   ```java
+   int[] arr = {3, 1, 4, 1, 5};
+   for (int i = 0; i < arr.length - 1; i++) {
+       int minIndex = i;
+       for (int j = i + 1; j < arr.length; j++) {
+           if (arr[j] < arr[minIndex]) {
+               minIndex = j;
+           }
+       }
+       int temp = arr[minIndex];
+       arr[minIndex] = arr[i];
+       arr[i] = temp;
+   }
+   ```
+
+These are two common manual sorting algorithms you can use without relying on built-in classes.
+
+## 235. What is a Priority Queue in Java?
+A **Priority Queue** in Java is a data structure that stores elements in a way that allows efficient retrieval of the **highest or lowest priority element**.
+
+### Key Features:
+1. **Ordering**: 
+   - Elements are ordered based on their priority (default is **natural ordering**, but you can define custom priority using `Comparator`).
+   
+2. **No Indexing**: 
+   - Unlike arrays or lists, the elements in a priority queue are not accessible by index.
+
+3. **Heap-Based Implementation**:
+   - By default, Java's `PriorityQueue` is backed by a **min-heap** (smallest element has the highest priority). You can use a `Comparator` to create a max-heap.
+
+### Example:
+```java
+PriorityQueue<Integer> pq = new PriorityQueue<>();
+pq.add(10);
+pq.add(5);
+pq.add(15);
+
+System.out.println(pq.poll());  // Output: 5 (the smallest element)
+```
+
+### Use Cases:
+- **Task Scheduling**: Prioritize tasks based on urgency.
+- **Dijkstra’s Algorithm**: For finding the shortest path in graphs.
+
+### Key Methods:
+- `add(E e)`: Inserts an element.
+- `poll()`: Removes and returns the highest priority element.
+- `peek()`: Returns the highest priority element without removing it.
+
+## 236. What is a Blocking Priority Queue in Java?
+A **Blocking Priority Queue** in Java is a thread-safe variation of the `PriorityQueue` that supports blocking operations when the queue is empty or full.
+
+### Key Features:
+1. **Thread-Safety**:
+   - It ensures that elements can be safely added and removed by multiple threads concurrently.
+
+2. **Blocking Operations**:
+   - **Blocking** means that if the queue is empty, threads trying to **remove** an element will wait until an element becomes available.
+   - Similarly, if the queue is full, threads trying to **add** elements will wait until space is available.
+
+3. **Used in Producer-Consumer Model**:
+   - Commonly used in multi-threaded applications like **task scheduling** where threads wait for tasks to become available.
+
+### Implemented in:
+- `BlockingQueue` interface (extends `Queue`), and one of the most commonly used implementations is `PriorityBlockingQueue`.
+
+### Example:
+```java
+BlockingQueue<Integer> queue = new PriorityBlockingQueue<>();
+queue.put(10);   // Will block if the queue is full
+int element = queue.take();  // Will block if the queue is empty
+```
+
+### Key Methods:
+- `put(E e)`: Adds an element, blocking if the queue is full.
+- `take()`: Removes and returns an element, blocking if the queue is empty.
+- `offer(E e)`: Attempts to add an element, without blocking.
+
+## 237. Is it possible to create an object of an interface in Java?
+No, it is not possible to create an object of an **interface** in Java directly because an interface cannot have concrete implementations. It only defines method signatures without providing the actual behavior.
+
+### Why?
+- An **interface** is meant to be implemented by a class, and a class can then provide the concrete implementation for the methods defined in the interface.
+
+### Solution:
+- To create an object, a class must **implement the interface** and provide implementations for its methods.
+
+### Example:
+```java
+interface Animal {
+    void sound();
+}
+
+class Dog implements Animal {
+    public void sound() {
+        System.out.println("Bark");
+    }
+}
+
+// Creating an object of the class implementing the interface
+Animal dog = new Dog();
+dog.sound();  // Output: Bark
+```
+
+### Alternative (Anonymous Classes):
+You can use **anonymous classes** to create an object of an interface implementation in a single statement:
+```java
+Animal cat = new Animal() {
+    public void sound() {
+        System.out.println("Meow");
+    }
+};
+cat.sound();  // Output: Meow
+```
+
+## 238. What is a Functional Interface in Java?
+A **Functional Interface** in Java is an interface that has **exactly one abstract method**. These interfaces can have multiple **default** or **static** methods, but only one abstract method.
+
+### Key Features:
+1. **Single Abstract Method**: 
+   - It must contain only one abstract method.
+   
+2. **Used with Lambda Expressions**: 
+   - Functional interfaces are primarily used with **lambda expressions** and method references, enabling a functional programming style.
+
+3. **`@FunctionalInterface` Annotation** (Optional):
+   - This annotation is used to indicate that the interface is intended to be a functional interface. The compiler will give an error if it has more than one abstract method.
+   
+### Example:
+```java
+@FunctionalInterface
+interface Greet {
+    void sayHello();
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Greet greet = () -> System.out.println("Hello, World!");
+        greet.sayHello();  // Output: Hello, World!
+    }
+}
+```
+
+### Common Functional Interfaces in Java:
+- `Runnable`
+- `Callable`
+- `Comparator`
+- `Function`
+- `Predicate`
+- `Consumer`
+
+## 239. Can you declare variables in an interface in Java?
+Yes, you can declare variables in an interface in Java, but with some restrictions:
+
+### Key Points:
+1. **Implicitly `public`, `static`, and `final`**:
+   - All variables declared in an interface are **implicitly** `public`, `static`, and `final`. This means the variables are **constant** and can’t be changed.
+
+2. **Initialization Required**:
+   - Since the variables are `final`, they must be **initialized** when declared, and you cannot assign a new value to them after initialization.
+
+### Example:
+```java
+interface MyInterface {
+    int CONSTANT_VALUE = 100;  // Implicitly public, static, final
+}
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println(MyInterface.CONSTANT_VALUE);  // Output: 100
+    }
+}
+```
+
+### Conclusion:
+- While you can declare variables in an interface, they are constants and cannot be modified.
+
+## 240. List and differentiate between different types of cursors in Java.
+In Java, cursors are used to iterate over data structures like collections. The different types of cursors in Java are:
+
+### 1. **Iterator**:
+   - **Purpose**: Used to iterate over the elements of a collection.
+   - **Modification**: Supports removal of elements during iteration (`remove()` method).
+   - **Example**: 
+   ```java
+   Iterator<String> iterator = list.iterator();
+   while (iterator.hasNext()) {
+       System.out.println(iterator.next());
+   }
+   ```
+
+### 2. **ListIterator**:
+   - **Purpose**: A specialized version of `Iterator` for **lists** (like `ArrayList` or `LinkedList`).
+   - **Modification**: Allows **both forward and backward iteration** and modification of elements (using `add()`, `set()` methods).
+   - **Example**:
+   ```java
+   ListIterator<String> listIterator = list.listIterator();
+   while (listIterator.hasNext()) {
+       System.out.println(listIterator.next());
+   }
+   ```
+
+### 3. **Enumeration**:
+   - **Purpose**: Legacy interface for iterating over collections (replaced by `Iterator`).
+   - **Modification**: **No modification** of elements is allowed. Only **reading** is supported.
+   - **Example**:
+   ```java
+   Enumeration<String> enumeration = vector.elements();
+   while (enumeration.hasMoreElements()) {
+       System.out.println(enumeration.nextElement());
+   }
+   ```
+
+### Key Differences:
+| Feature            | Iterator        | ListIterator     | Enumeration   |
+|--------------------|-----------------|------------------|---------------|
+| **Collection Type** | Any collection  | List (e.g., ArrayList) | Legacy Collections (e.g., Vector) |
+| **Forward/Backward** | Forward only    | Forward & Backward | Forward only |
+| **Modification**    | Remove only     | Add, Remove, Set | No modification |
+| **Legacy**          | No              | No               | Yes           |
+
+### Conclusion:
+- `Iterator` and `ListIterator` are more commonly used in modern Java, while `Enumeration` is considered outdated.
+
+## 241. What is Enumeration in Java?
+**Enumeration** in Java is an interface that was part of the original version of Java. It is used to iterate over the elements in **legacy collections** such as `Vector`, `Stack`, and `Properties`.
+
+### Key Features:
+1. **Legacy Interface**:
+   - It was replaced by `Iterator` in the **Java Collections Framework** but is still used in older classes.
+
+2. **No Modifications**:
+   - You cannot modify the collection during iteration (no `remove()` method).
+
+3. **Simple Iteration**:
+   - It only supports forward iteration, without the ability to traverse in reverse or modify the collection.
+
+### Key Methods:
+- `boolean hasMoreElements()`: Returns `true` if there are more elements to iterate over.
+- `E nextElement()`: Returns the next element in the iteration.
+
+### Example:
+```java
+Enumeration<String> enumeration = vector.elements();
+while (enumeration.hasMoreElements()) {
+    System.out.println(enumeration.nextElement());
+}
+```
+
+### Difference from `Iterator`:
+- **Enumeration** is more limited compared to `Iterator` (no modification allowed, only forward iteration).
+- **Iterator** is more modern and flexible.
+
+## 242. What is an Iterator in Java?
+An **Iterator** in Java is an interface that provides a way to iterate over a collection of objects (such as a `List`, `Set`, or `Map`). It allows you to access each element of the collection sequentially without exposing the underlying structure.
+
+### Key Features:
+1. **Forward Iteration**:
+   - Can only move **forward** through the collection, one element at a time.
+
+2. **Modification**:
+   - Allows **removal** of elements from the collection during iteration using the `remove()` method.
+
+3. **Universal**:
+   - Can be used on any collection that implements the `Iterable` interface.
+
+### Key Methods:
+- `boolean hasNext()`: Returns `true` if there are more elements to iterate.
+- `E next()`: Returns the next element in the iteration.
+- `void remove()`: Removes the last element returned by `next()` (optional).
+
+### Example:
+```java
+Iterator<String> iterator = list.iterator();
+while (iterator.hasNext()) {
+    System.out.println(iterator.next());
+}
+```
+
+### Difference from `Enumeration`:
+- `Iterator` has additional methods like `remove()` and is more powerful than `Enumeration`, which only supports reading elements.
+
+## 243. What is a ListIterator in Java?
+A **ListIterator** in Java is an interface that extends the `Iterator` interface. It is specifically used to iterate over **list collections** (like `ArrayList` and `LinkedList`), allowing both **forward and backward** traversal.
+
+### Key Features:
+1. **Bidirectional Iteration**:
+   - Allows iteration both **forward** and **backward** through the list.
+
+2. **Modification**:
+   - Supports adding, removing, and modifying elements during iteration (`add()`, `remove()`, `set()` methods).
+
+3. **Indexed Iteration**:
+   - Provides methods to get the index of the current element using `nextIndex()` and `previousIndex()`.
+
+### Key Methods:
+- `boolean hasNext()`: Returns `true` if there are more elements in the list (forward iteration).
+- `E next()`: Returns the next element in the list.
+- `boolean hasPrevious()`: Returns `true` if there are previous elements (backward iteration).
+- `E previous()`: Returns the previous element.
+- `void add(E e)`: Adds an element to the list.
+- `void set(E e)`: Modifies the last element returned by `next()` or `previous()`.
+
+### Example:
+```java
+ListIterator<String> listIterator = list.listIterator();
+while (listIterator.hasNext()) {
+    System.out.println(listIterator.next());
+}
+while (listIterator.hasPrevious()) {
+    System.out.println(listIterator.previous());
+}
+```
+
+### Difference from `Iterator`:
+- `ListIterator` is more powerful than `Iterator` as it allows both forward and backward traversal and element modification.
+
+## 244. Explain the differences between Enumeration and Iterator in Java.
+**Enumeration** and **Iterator** are both used to iterate over collections, but they have key differences:
+
+- **Enumeration** is part of legacy collections (like `Vector` and `Stack`) and only supports forward iteration. It has no `remove()` method, meaning you cannot modify the collection while iterating.
+
+- **Iterator** is part of modern collections (like `ArrayList`, `HashSet`) and allows forward iteration with the ability to remove elements using the `remove()` method.
+
+### Key Differences:
+- **Enumeration** is older and limited to forward iteration, while **Iterator** provides more flexibility with element removal and supports modern collections.
+
+## 245. Explain the differences between Enumeration and ListIterator in Java.
+**Enumeration** and **ListIterator** are both interfaces used to iterate over collections, but they have significant differences:
+
+- **Enumeration** is an older interface used in legacy collections (e.g., `Vector`, `Stack`). It only supports **forward iteration** and does not allow modifications during iteration.
+
+- **ListIterator** is a more advanced interface used for **list collections** (e.g., `ArrayList`, `LinkedList`). It supports **bidirectional iteration** (both forward and backward) and allows modifications of the collection (adding, removing, or setting elements).
+
+### Key Differences:
+- **Forward/Backward Iteration**: `Enumeration` supports only forward iteration, while `ListIterator` supports both forward and backward.
+- **Modification**: `ListIterator` allows modifying the list (using `add()`, `remove()`, and `set()`), while `Enumeration` does not support modifications.
+- **Collection Types**: `Enumeration` is used in legacy collections; `ListIterator` is used in lists (e.g., `ArrayList`, `LinkedList`).
+
+### Conclusion:
+`ListIterator` is more powerful and flexible than `Enumeration`, making it suitable for modern collections and scenarios where both forward and backward iteration is needed.
+
+## 246. Explain the differences between ListIterator and Iterator in Java.
+**ListIterator** and **Iterator** are both interfaces for iterating over collections, but they have key differences:
+
+- **Iterator** is used for **general collections** like `Set`, `List`, and `Queue`, and supports **forward iteration only**.
+- **ListIterator** is a more specialized version of `Iterator` used for **lists** (e.g., `ArrayList`, `LinkedList`) and allows **both forward and backward iteration**.
+
+### Key Differences:
+- **Forward/Backward Iteration**: `Iterator` supports only forward iteration, while `ListIterator` supports both forward and backward.
+- **Modification**: `ListIterator` allows adding, removing, and updating elements during iteration, whereas `Iterator` only supports element removal.
+- **Collection Type**: `Iterator` works with any collection, while `ListIterator` works specifically with lists.
+- **Additional Methods**: `ListIterator` provides methods like `previous()`, `nextIndex()`, and `previousIndex()` for more control over iteration.
+
+### Conclusion:
+`ListIterator` is more powerful than `Iterator` because it allows both directions of iteration and modification, making it ideal for working with lists.
+
+## 247. Describe scenarios in which you would use Enumeration, Iterator, or ListIterator in Java.
+### **Enumeration**:
+- Used when working with **legacy collections** like `Vector`, `Stack`, or `Properties`.
+- Ideal when you only need **forward iteration** and don't need to modify the collection during iteration.
+- Example: Iterating through a `Vector` or `Stack` (older APIs).
+
+### **Iterator**:
+- Used for **modern collections** (e.g., `ArrayList`, `HashSet`, `HashMap`).
+- Ideal when you need **forward iteration** and may want to **remove** elements during iteration.
+- Example: Iterating through a `HashSet` and removing elements if necessary.
+
+### **ListIterator**:
+- Used specifically with **lists** like `ArrayList`, `LinkedList`, or `Vector`.
+- Ideal when you need **bidirectional iteration** (both forward and backward).
+- Useful if you need to **add**, **remove**, or **modify** elements during iteration.
+- Example: Iterating through a `LinkedList` and needing to traverse in both directions or modify the list during iteration.
+
+### Conclusion:
+- Use `Enumeration` for legacy collections and simple forward iteration.
+- Use `Iterator` for modern collections and forward iteration with removal capability.
+- Use `ListIterator` when working with lists and requiring bidirectional iteration or modification during iteration.
+
+## 248. List a few methods commonly used with Enumeration, Iterator, and ListIterator in Java.
+### **Methods in Enumeration**:
+- `boolean hasMoreElements()`: Checks if there are more elements.
+- `E nextElement()`: Returns the next element.
+
+### **Methods in Iterator**:
+- `boolean hasNext()`: Checks if there are more elements.
+- `E next()`: Returns the next element.
+- `void remove()`: Removes the last element returned by `next()`.
+
+### **Methods in ListIterator**:
+- `boolean hasNext()`: Checks if there are more elements (forward iteration).
+- `E next()`: Returns the next element (forward iteration).
+- `boolean hasPrevious()`: Checks if there are previous elements (backward iteration).
+- `E previous()`: Returns the previous element (backward iteration).
+- `void add(E e)`: Adds an element during iteration.
+- `void set(E e)`: Modifies the last element returned.
+- `int nextIndex()`: Returns the index of the next element.
+- `int previousIndex()`: Returns the index of the previous element.
+
+### Conclusion:
+- `Enumeration` provides basic iteration, while `Iterator` and `ListIterator` offer more control, with `ListIterator` allowing bidirectional iteration and modification of lists.
+
+## 249. Discuss the differences between the "for each" loop and ListIterator/Iterator/Enumeration in Java.
+### **"for each" loop**:
+- Introduced in Java 5, the **"for each" loop** simplifies iteration over collections and arrays.
+- Can only iterate **forward** and does not provide the ability to modify the collection.
+- Suitable for **read-only operations** when you don’t need to remove or modify elements.
+
+### **Iterator**:
+- Provides more flexibility than the "for each" loop, allowing iteration and **removal** of elements during iteration using `remove()`.
+- Works with any collection and supports **forward iteration**.
+- Example: Removing an element while iterating through a `HashSet`.
+
+### **ListIterator**:
+- A more advanced version of `Iterator`, **ListIterator** allows **bidirectional iteration** (both forward and backward).
+- Supports **adding**, **removing**, and **modifying** elements during iteration.
+- Useful when working with **lists** like `ArrayList` or `LinkedList`.
+
+### **Enumeration**:
+- The oldest interface for iteration, used in legacy collections like `Vector` and `Stack`.
+- Only supports **forward iteration** and lacks the ability to modify the collection during iteration.
+- Not commonly used in modern Java.
+
+### Key Differences:
+- **"for each" loop** is the simplest for read-only operations but doesn't allow removal or modification.
+- **Iterator** and **ListIterator** provide more control (e.g., removal, modification), with **ListIterator** allowing bidirectional iteration.
+- **Enumeration** is outdated and not recommended for new code.
+
+### Conclusion:
+Use the **"for each" loop** for simple, read-only iterations. Use **Iterator** or **ListIterator** for more control, especially when modifications are needed.
+
+## 250. Explain when to use a "for" loop and when to use Iterators in Java.
+### **Using a "for" loop**:
+- Use a **"for" loop** when you need to iterate over a collection or array by index.
+- Ideal for situations where the **index** is important or when you need to modify the index (e.g., skipping elements, breaking at a certain condition).
+- Works well with **arrays** or **lists** when the position of the element is needed.
+
+### **Using Iterators**:
+- Use **Iterator** when you want to iterate over a **collection** (like `ArrayList`, `HashSet`) and **don’t need the index**.
+- Ideal when you need to **remove** elements during iteration (via `remove()` method).
+- Iterator is preferred for **modern collections** and for situations where **modification** or **simplified iteration** (without worrying about indexes) is required.
+
+### Key Differences:
+- **"for" loop** is index-based and more suitable for **arrays** and cases where the element index is important.
+- **Iterator** is collection-based and more flexible, especially for **modifying** the collection during iteration.
+
+### Conclusion:
+Use a **"for" loop** when you need index-based iteration or when working with arrays. Use **Iterator** when working with collections and when modification (removal) during iteration is needed.
+
+## 251. Why does ArrayList implement interfaces like java.util.RandomAccess, java.lang.Cloneable, and java.io.Serializable in Java?
+### **java.util.RandomAccess**:
+- **ArrayList** implements `RandomAccess` to signal that it allows **efficient random access** to elements, meaning you can quickly access any element by its index. This is possible due to its underlying array structure.
+
+### **java.lang.Cloneable**:
+- **ArrayList** implements `Cloneable` to allow **cloning** of the list. This means you can create a **shallow copy** of an `ArrayList` using the `clone()` method.
+
+### **java.io.Serializable**:
+- **ArrayList** implements `Serializable` so that it can be **serialized** (converted into a byte stream) and **deserialized** (converted back from a byte stream). This is important for saving or transferring the list across different systems or sessions.
+
+### Conclusion:
+- **RandomAccess** improves access speed for large lists, **Cloneable** enables cloning, and **Serializable** ensures the list can be persisted or transmitted.
+
+## 252. Why has ArrayList extended the java.util.AbstractList class in Java?
+### **Reason for ArrayList extending java.util.AbstractList**:
+- **AbstractList** provides a **partial implementation** of the `List` interface, reducing the need to implement all methods from scratch.
+- It implements most of the `List` interface methods, leaving only a few (like `get(int index)` and `size()`) to be implemented by the subclass.
+- **ArrayList** extends **AbstractList** to inherit this partial implementation, allowing it to focus on implementing the remaining methods (like `get()` and `size()`), thus reducing boilerplate code.
+
+### Conclusion:
+- **AbstractList** provides the base implementation for list operations, allowing **ArrayList** to focus on specific behaviors and optimizations related to array-backed lists.
+
+## 253. Why has LinkedList extended the java.util.AbstractSequentialList class instead of java.util.AbstractList class in Java?
+### **Reason for LinkedList extending java.util.AbstractSequentialList**:
+- **AbstractSequentialList** provides a **partial implementation** of the `List` interface specifically optimized for **sequential access** collections like **LinkedLists**.
+- **LinkedList** is backed by a **doubly linked list**, where accessing elements is inherently sequential (i.e., you must traverse the list to reach an element), unlike `ArrayList`, which allows **random access** due to its array-based structure.
+- By extending **AbstractSequentialList**, **LinkedList** inherits methods that are more suited for **sequential iteration** (such as `get(int index)` and `remove(int index)`), and only needs to implement methods specific to linked-list operations.
+
+### Conclusion:
+- **AbstractSequentialList** is tailored for sequential access collections like `LinkedList`, making it more efficient and logical for `LinkedList` to extend it rather than `AbstractList`, which is better suited for random-access collections.
+
+
+## 254. Why has LinkedList not implemented the java.util.RandomAccess interface in Java?
+### **Why LinkedList does not implement java.util.RandomAccess**:
+- **RandomAccess** is implemented by collections like **ArrayList** where **random access** to elements is efficient due to its **array-based structure**.
+- **LinkedList**, on the other hand, is a **doubly linked list** where accessing an element by index requires **sequential traversal** from the head or tail, making random access inefficient.
+- Therefore, **LinkedList** does not implement `RandomAccess` because its underlying structure does not provide **constant time random access**, and it would be misleading to indicate otherwise.
+
+### Conclusion:
+- **LinkedList** is optimized for sequential access, and implementing `RandomAccess` would imply capabilities it doesn’t offer efficiently.
+
+## 255. What is a Marker Interface in Java, and can you provide examples related to ArrayList and LinkedList?
+### **What is a Marker Interface in Java?**
+- A **Marker Interface** in Java is an interface that does not contain any methods.
+- It is used to **mark** a class with a special property, behavior, or capability, and is typically used for **metadata purposes**.
+- The presence of the interface allows the class to be treated differently at runtime, often via reflection or other mechanisms.
+
+### **Examples in ArrayList and LinkedList**:
+- **Serializable**: Both **ArrayList** and **LinkedList** implement the `Serializable` marker interface, which indicates that these classes can be serialized (converted to a byte stream for storage or transfer).
+- **Cloneable**: Both classes also implement the `Cloneable` interface, marking them as capable of being cloned using the `clone()` method.
+
+### Conclusion:
+- Marker interfaces like **Serializable** and **Cloneable** provide special behavior without adding methods to the class.
+
+## 256. Why doesn't LinkedList support a constructor with a size parameter, like new LinkedList<>(size), in Java?
+### **Why LinkedList doesn't support a constructor with a size parameter**:
+- **LinkedList** is a **doubly linked list**, where elements are linked through pointers and not stored in contiguous memory like arrays.
+- It doesn’t require a **predefined size** because it can **grow dynamically** as elements are added. The **size of the list** adjusts automatically without needing an initial size allocation.
+- Unlike **ArrayList**, which requires an initial array size to be allocated, a **LinkedList** does not need this, as its nodes are added dynamically as needed.
+
+### Conclusion:
+- A constructor with a size parameter is unnecessary for **LinkedList** since it doesn’t rely on contiguous memory allocation and can grow dynamically.
+
+## 257. Why are Java Vector and Stack classes considered obsolete or deprecated?
+### **Why Java Vector and Stack are considered obsolete or deprecated**:
+- **Vector** and **Stack** are considered obsolete because they are **synchronized** by default, which introduces **performance overhead** in multithreaded environments.
+- The **synchronization** leads to slower performance when thread-safety is not necessary, especially in modern applications where **concurrent collections** like `ArrayList` and `LinkedList` provide better performance.
+- The **Stack** class represents a **LIFO (Last In, First Out)** collection but can be replaced by **Deque** (Double-Ended Queue) or **LinkedList** in most scenarios, which offer more flexibility and better performance.
+
+### Conclusion:
+- **Vector** and **Stack** are legacy classes with performance issues due to synchronization, and modern alternatives like **ArrayList** and **Deque** are recommended.
+
+## 258. Why does the indexing of arrays start at zero in Java?
+### **Why does indexing of arrays start at zero in Java?**
+- **Historical reasons**: Starting array indexing at **zero** originates from early programming languages like **C**. It simplifies memory addressing, where the index directly represents an **offset** from the start of the array.
+- In **C**, the array name points to the **first element** of the array, and the index is used to calculate the memory address of each element. The expression `array[i]` is essentially the address of `array + i`, so the first element is at **offset 0**.
+- **Java** follows this convention for consistency with other languages and for efficiency in memory access.
+
+### Conclusion:
+- **Zero-based indexing** is a widely adopted convention that simplifies memory calculations and is maintained for consistency and performance reasons in Java.
+
+## 259. What are the differences between the Collection and Collections classes in Java?
+### **Differences between Collection and Collections in Java**:
+
+- **Collection** is an interface, while **Collections** is a utility class.
+- **Collection** represents a group of objects (like List, Set, Queue), and **Collections** provides static methods for operations like sorting, searching, etc., on collections.
+- **Collection** is part of the collection hierarchy, whereas **Collections** is not.
+- **Collection** defines methods like `add()`, `remove()`, `contains()`, etc., while **Collections** contains utility methods like `sort()`, `reverse()`, `max()`, etc.
+
+### Conclusion:
+- **Collection** is the foundation of the collection framework, while **Collections** is a helper class to perform common tasks on collections.
+
+## 260. Explain the extra methods available in the LinkedList class that are not present in the ArrayList class and are used for creating Queue and Stack in Java.
+### **Extra Methods in LinkedList (not in ArrayList) for Queue and Stack**:
+
+- **Queue Methods**:
+  - **offer(E e)**: Adds an element to the end of the list (in the context of a queue).
+  - **poll()**: Retrieves and removes the head of the list, returning `null` if the list is empty.
+  - **peek()**: Retrieves, but does not remove, the head of the list, returning `null` if the list is empty.
+
+- **Stack Methods**:
+  - **push(E e)**: Pushes an element onto the stack (adds an element to the front).
+  - **pop()**: Removes and returns the first element of the list (removes the top element of the stack).
+  - **peek()**: Retrieves the first element of the list without removing it (top of the stack).
+
+### Conclusion:
+- **LinkedList** provides extra methods for **Queue** and **Stack** operations, making it suitable for these data structures, unlike **ArrayList**, which does not have these methods.
+
+## 261. How does a Vector dynamically increase in size in Java, and what is the formula behind it?
+### **How does a Vector dynamically increase in size in Java?**
+
+- A **Vector** in Java automatically grows when elements are added beyond its current capacity.
+- The default growth strategy is to **double its size** when the capacity is exceeded.
+
+### **Formula**:
+- **New Capacity = Old Capacity + (Old Capacity / 2)** (if default growth factor is 1.5).
+- Alternatively, **New Capacity = Old Capacity * 2** (for default 100% growth, typically when no explicit growth factor is set).
+
+### Conclusion:
+- **Vector** dynamically increases its size based on a growth factor, either doubling or increasing by a fixed percentage.
+
+## 262. Differentiate between the "peek" and "pop" methods of the Stack class in Java.
+### **Differences between "peek" and "pop" methods of the Stack class in Java**:
+
+- **peek()**:
+  - Retrieves the top element of the stack.
+  - Does **not** remove the element from the stack.
+  - Returns `null` if the stack is empty.
+  
+- **pop()**:
+  - Retrieves and **removes** the top element of the stack.
+  - Throws `EmptyStackException` if the stack is empty.
+
+### Conclusion:
+- Use **peek()** when you want to view the top element without modifying the stack, and **pop()** when you need to both retrieve and remove the top element.
+
+## 263. What is the default size of an ArrayList in Java?
+### **Default size of an ArrayList in Java**:
+
+- The default initial capacity of an **ArrayList** in Java is **10**.
+- When the number of elements exceeds the initial capacity, the **ArrayList** grows dynamically by **50%** of its current size.
+
+### Conclusion:
+- The default size of an **ArrayList** is **10**, but it automatically resizes as elements are added.
+
+## 264. What is the default size of a Vector in Java?
+### **Default size of a Vector in Java**:
+
+- The default initial capacity of a **Vector** in Java is **10**.
+- When the number of elements exceeds the current capacity, the **Vector** grows by **doubling** its size.
+
+### Conclusion:
+- The default size of a **Vector** is **10**, and it doubles in size when more space is needed.
+
+## 265. How can you dynamically increase the size of an ArrayList in Java, and what is the formula for it?
+### **How to Dynamically Increase the Size of an ArrayList in Java**:
+
+- **ArrayList** in Java automatically increases its size when elements are added beyond its current capacity.
+- By default, **ArrayList** grows by **50%** of its current size when it exceeds its capacity.
+
+### **Formula**:
+- **New Capacity = Old Capacity + (Old Capacity / 2)** (default growth factor of 1.5).
+- Alternatively, the growth factor can be set to **double the size** when needed.
+
+### Conclusion:
+- **ArrayList** grows automatically by a factor of 1.5 (default) when the capacity is exceeded.
+
+## 266. Explain the differences between ArrayList and LinkedList in Java.
+### **Differences between ArrayList and LinkedList in Java**:
+
+- **Implementation**:
+  - **ArrayList** uses a dynamic array for storage.
+  - **LinkedList** uses a doubly linked list for storage.
+
+- **Access time**:
+  - **ArrayList** allows faster access by index (O(1)).
+  - **LinkedList** has slower access by index (O(n)).
+
+- **Insertions/Deletions**:
+  - **ArrayList** is slower for insertions and deletions (O(n)) due to array resizing.
+  - **LinkedList** is faster for insertions and deletions (O(1)) at the beginning or end.
+
+- **Memory usage**:
+  - **ArrayList** requires contiguous memory.
+  - **LinkedList** uses more memory due to pointers for each element.
+
+- **Use case**:
+  - **ArrayList** is ideal for random access and when the size doesn't change frequently.
+  - **LinkedList** is ideal for frequent insertions and deletions.
+
+- **Thread-safety**:
+  - Both **ArrayList** and **LinkedList** are **not synchronized**.
+
+### Conclusion:
+- **ArrayList** is better for random access, while **LinkedList** is more efficient for insertions and deletions, especially at the ends.
+
+## 267. Describe the internal structure of an ArrayList in Java.
+### **Internal Structure of an ArrayList in Java**:
+
+- **ArrayList** internally uses a **dynamic array** to store its elements.
+- It maintains an **array** for holding the actual data and a **size variable** to keep track of the current number of elements in the list.
+- The **initial capacity** of the array is 10 by default, and it increases dynamically when more elements are added.
+  
+### **Growth Strategy**:
+- When the **capacity** of the internal array is exceeded, the **ArrayList** grows by **50%** of its current size.
+- The growth factor is typically **1.5x** (i.e., current size + current size / 2).
+
+### **Key Components**:
+- **elementData**: A private array of type `Object[]` that holds the elements.
+- **size**: An integer to track the number of elements currently in the list.
+
+### Conclusion:
+- **ArrayList** uses a dynamically resizing array to manage its elements, with automatic resizing when the number of elements exceeds its capacity.
+
+## 268. Describe the internal structure of a LinkedList in Java.
+### **Internal Structure of a LinkedList in Java**:
+
+- **LinkedList** in Java uses a **doubly linked list** structure to store elements.
+- Each element is represented by a **node** containing:
+  - **Data**: The value of the element.
+  - **Next**: A reference to the next node in the list.
+  - **Previous**: A reference to the previous node in the list.
+
+### **Key Components**:
+- **head**: A reference to the first node in the list.
+- **tail**: A reference to the last node in the list.
+- **size**: A variable to track the number of elements in the list.
+
+### **Node Structure**:
+- **Node Class**:
+  - Holds the data.
+  - Points to both the **next** and **previous** nodes.
+
+### Conclusion:
+- **LinkedList** uses a doubly linked list structure where each element is a node with references to the next and previous elements, allowing efficient insertions and deletions at both ends.
+
+## 269. What is the load factor in an ArrayList in Java?
+### **Load Factor in an ArrayList in Java**:
+
+- **Load Factor** refers to the threshold when the **ArrayList** needs to grow its internal array.
+- **ArrayList** itself does not directly use a load factor like `HashMap`, but the concept of **growth** is similar.
+- **ArrayList** grows by 50% when the internal array is full, which can be thought of as a "load factor" of 0.75 (since it increases capacity by 1.5 times).
+
+### Conclusion:
+- **ArrayList** increases its size dynamically when elements exceed its current capacity, which is similar to how the load factor works in other collections.
+
+## 270. Provide the formula used to calculate the new size of an ArrayList in Java.
+### **Formula to Calculate the New Size of an ArrayList in Java**:
+
+- **New Size Formula**:
+  - **New Capacity = Old Capacity + (Old Capacity / 2)**
+
+- By default, when an **ArrayList** exceeds its current capacity, the size increases by **50%** of the old capacity.
+
+### Example:
+- If the old capacity is **10**, the new capacity will be **10 + (10 / 2) = 15**.
+
+### Conclusion:
+- **ArrayList** grows by 1.5 times its current capacity when more elements are added.
+
+## 271. Why is an ArrayList considered slow for modifications in Java?
+### **Why is an ArrayList Considered Slow for Modifications in Java?**
+
+- **ArrayList** is slow for modifications (insertions and deletions) because:
+  1. **Resizing the Array**: When the **ArrayList** exceeds its capacity, it needs to resize the underlying array, which involves creating a new, larger array and copying the elements.
+  2. **Shifting Elements**: Inserting or deleting an element at a specific position requires shifting all subsequent elements, which takes **O(n)** time.
+
+### Conclusion:
+- **ArrayList** provides fast access but is slower for modifications like insertions and deletions due to resizing and shifting elements.
+
+## 272. Explain the mostly used methods of the List interface in Java.
+### **Mostly Used Methods of the List Interface in Java**:
+
+- **add(E e)**: Adds the specified element to the end of the list.
+- **add(int index, E element)**: Inserts the specified element at the specified position in the list.
+- **get(int index)**: Returns the element at the specified index.
+- **set(int index, E element)**: Replaces the element at the specified position with the specified element.
+- **remove(int index)**: Removes the element at the specified position in the list.
+- **remove(Object o)**: Removes the first occurrence of the specified element from the list.
+- **size()**: Returns the number of elements in the list.
+- **isEmpty()**: Returns `true` if the list is empty.
+- **contains(Object o)**: Returns `true` if the list contains the specified element.
+- **indexOf(Object o)**: Returns the index of the first occurrence of the specified element, or -1 if not found.
+- **clear()**: Removes all elements from the list.
+- **toArray()**: Converts the list into an array.
+
+### Conclusion:
+- These methods provide essential functionalities like adding, removing, accessing, and searching for elements in a List.
+
+## 273. Describe how to convert an array to an ArrayList in Java.
+### **Converting an Array to an ArrayList in Java**:
+
+You can convert an array to an `ArrayList` using the following methods:
+
+1. **Using Arrays.asList()**:
+   ```java
+   String[] array = {"Apple", "Banana", "Cherry"};
+   ArrayList<String> list = new ArrayList<>(Arrays.asList(array));
+   ```
+
+2. **Using a loop**:
+   ```java
+   String[] array = {"Apple", "Banana", "Cherry"};
+   ArrayList<String> list = new ArrayList<>();
+   for (String item : array) {
+       list.add(item);
+   }
+   ```
+
+### Conclusion:
+- **Arrays.asList()** is the most convenient method, while the loop approach gives more control for modifications.
+
+## 274. What are legacy classes in Java Collections?
+### **Legacy Classes in Java Collections**:
+
+- **Legacy classes** are part of the original Java Collections Framework, introduced before the collections framework was standardized in Java 1.2.
+- These classes were replaced by the more powerful **Collections Framework** but are still supported for backward compatibility.
+
+#### Key Legacy Classes:
+1. **Vector**: A growable array of objects, similar to an `ArrayList`, but synchronized.
+2. **Stack**: A subclass of `Vector` that implements a stack data structure (LIFO).
+3. **Hashtable**: A key-value store similar to `HashMap`, but synchronized.
+4. **Properties**: A subclass of `Hashtable` used for managing key-value pairs, typically for configuration settings.
+
+### Conclusion:
+- Legacy classes are still in use but are considered outdated in favor of newer, more flexible classes like `ArrayList`, `HashMap`, and `HashSet`.
+
+## 275. In which version of Java was ArrayList introduced?
+### **ArrayList Introduction in Java**:
+
+- **ArrayList** was introduced in **Java 1.2** as part of the **Java Collections Framework**.
+- Before Java 1.2, classes like `Vector` were commonly used for dynamic arrays.
+
+### Conclusion:
+- **ArrayList** became the preferred choice for resizable arrays starting from Java 1.2.
+
+## 276. Compare and contrast arrays, ArrayList, and LinkedList in Java.
+### **Comparison of Arrays, ArrayList, and LinkedList in Java**:
+
+- **Array**: Fixed-size, contiguous memory, O(1) for random access, not dynamic in size, memory-efficient for known size.
+- **ArrayList**: Dynamic size, O(1) for random access, O(n) for insertions/deletions (shifting), resizes automatically.
+- **LinkedList**: Doubly linked list, O(n) for random access, O(1) for insertions/deletions at head/tail, more memory due to pointers.
+
+### Conclusion:
+- **Array** is optimal for fixed-size data, **ArrayList** for dynamic arrays, and **LinkedList** for frequent insertions/deletions.
+
+## 277. What is meant by insertion order in Java?
+### **Insertion Order in Java**:
+
+- **Insertion order** refers to the order in which elements are added to a collection.
+- In some collections, elements are stored in the order they were added, while others may not preserve this order.
+
+#### Collections that preserve insertion order:
+1. **ArrayList**: Maintains the order in which elements are added.
+2. **LinkedHashMap**: Maintains insertion order of keys.
+3. **LinkedHashSet**: Maintains insertion order of elements.
+
+#### Collections that do not preserve insertion order:
+1. **HashMap**: Does not guarantee order.
+2. **HashSet**: Does not guarantee order.
+
+### Conclusion:
+- **Insertion order** is preserved in certain collections like `ArrayList`, `LinkedHashMap`, and `LinkedHashSet`.
+
+## 278. How do you sort an ArrayList in Java?
+### **Sorting an ArrayList in Java**:
+
+You can sort an `ArrayList` using the following methods:
+
+1. **Using `Collections.sort()`**:
+   ```java
+   ArrayList<Integer> list = new ArrayList<>(Arrays.asList(5, 3, 8, 1));
+   Collections.sort(list);  // Sorts in ascending order
+   ```
+
+2. **Using a custom Comparator**:
+   ```java
+   ArrayList<String> list = new ArrayList<>(Arrays.asList("Apple", "Banana", "Cherry"));
+   Collections.sort(list, (s1, s2) -> s1.length() - s2.length());  // Sort by length of strings
+   ```
+
+3. **Using `List.sort()`** (Java 8 and later):
+   ```java
+   ArrayList<Integer> list = new ArrayList<>(Arrays.asList(5, 3, 8, 1));
+   list.sort(Comparator.naturalOrder());  // Sorts in ascending order
+   ```
+
+### Conclusion:
+- **`Collections.sort()`** is the standard way to sort an `ArrayList`. For custom sorting, use a `Comparator`.
+
+## 279. Is ArrayList synchronized in Java?
+### **Is ArrayList Synchronized in Java?**
+
+- **No, ArrayList is not synchronized** in Java.
+- It is not thread-safe, meaning multiple threads modifying an `ArrayList` concurrently can cause data inconsistencies.
+
+### Conclusion:
+- For thread-safety, use `Vector`, `CopyOnWriteArrayList`, or manually synchronize the `ArrayList`.
+
+## 280. How can you make an ArrayList synchronized in Java?
+### **Making an ArrayList Synchronized in Java**
+
+You can make an `ArrayList` synchronized using the `Collections.synchronizedList()` method:
+
+```java
+ArrayList<Integer> list = new ArrayList<>(Arrays.asList(1, 2, 3, 4));
+List<Integer> synchronizedList = Collections.synchronizedList(list);
+```
+
+### Conclusion:
+- `Collections.synchronizedList()` wraps the `ArrayList` with a synchronized version, making it thread-safe for concurrent access.
