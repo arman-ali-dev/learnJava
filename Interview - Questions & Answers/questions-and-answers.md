@@ -4571,3 +4571,616 @@ List<Integer> synchronizedList = Collections.synchronizedList(list);
 
 ### Conclusion:
 - `Collections.synchronizedList()` wraps the `ArrayList` with a synchronized version, making it thread-safe for concurrent access.
+
+## 281. Can you provide examples of situations where ArrayList is commonly used in Java?
+### **Common Use Cases for ArrayList in Java**
+
+1. **Storing Dynamic Data**:
+   - When the size of the collection is not known in advance and can grow or shrink, e.g., storing user inputs or results from a database query.
+
+2. **Random Access to Elements**:
+   - When you need fast access to elements by index, e.g., a list of items in an e-commerce app.
+
+3. **Handling Variable-Length Data**:
+   - When you need a resizable array, e.g., storing logs, records, or event histories that may change in length.
+
+4. **Efficient Search/Update Operations**:
+   - When searching for an element or updating a specific index is common, e.g., managing a list of products or students.
+
+### Conclusion:
+- **ArrayList** is ideal when you need resizable storage with fast random access and are not heavily modifying the collection (no frequent insertions or deletions).
+
+## 282. What is a Stack, and what is a Vector class in Java?
+### **Stack in Java**
+
+- A **Stack** is a collection that follows the **LIFO** (Last In, First Out) principle.
+- Operations include:
+  - `push(E e)` – Adds an element to the top.
+  - `pop()` – Removes and returns the top element.
+  - `peek()` – Returns the top element without removing it.
+- Example:
+  ```java
+  Stack<Integer> stack = new Stack<>();
+  stack.push(10);
+  stack.push(20);
+  stack.pop();  // Returns 20
+  ```
+
+### **Vector in Java**
+
+- A **Vector** is a dynamic array that grows automatically when elements are added.
+- It implements the `List` interface and is synchronized.
+- Operations include:
+  - `add(E e)` – Adds an element.
+  - `get(int index)` – Retrieves an element at a specific index.
+  - `remove(Object o)` – Removes the first occurrence of an element.
+- Example:
+  ```java
+  Vector<String> vector = new Vector<>();
+  vector.add("Java");
+  vector.add("Python");
+  ```
+
+### Conclusion:
+- **Stack** is used for LIFO operations, and **Vector** is a thread-safe dynamic array that grows as needed.
+
+## 283. Why are Stack and Vector classes used less frequently compared to List classes in Java?
+### **Why Stack and Vector are Used Less Frequently Compared to List Classes in Java**
+
+1. **Synchronization Overhead**:
+   - Both **Stack** and **Vector** are synchronized, which makes them thread-safe but also slower due to synchronization overhead.
+   - Modern alternatives like **ArrayList** and **LinkedList** (non-synchronized) are preferred in single-threaded contexts for better performance.
+
+2. **Improved Alternatives**:
+   - **Stack** has been replaced by **Deque** implementations (like **ArrayDeque**) for stack operations, offering better performance without synchronization overhead.
+   - **Vector** has been replaced by **ArrayList**, which provides similar functionality but without synchronization, making it more efficient in most use cases.
+
+3. **Lack of Flexibility**:
+   - **Vector** has a fixed growth policy (doubling its size), which may not be ideal in all cases, whereas **ArrayList** grows dynamically at a more controlled rate.
+
+4. **Deemphasized in Modern Java**:
+   - **Stack** and **Vector** are considered legacy classes and are now rarely used in modern Java applications.
+
+### Conclusion:
+- **Stack** and **Vector** are less commonly used because more efficient, flexible, and non-synchronized alternatives like **ArrayList** and **Deque** are available.
+
+## 284. Which implemented class of the List interface is typically used to design a Queue in Java?
+### **Implemented Class of List Interface for Queue Design in Java**
+
+- **LinkedList** is typically used to design a **Queue** in Java.
+  - Implements the **Queue** interface and supports both FIFO (First In, First Out) operations.
+  - Provides methods like:
+    - `offer(E e)` – Adds an element to the queue.
+    - `poll()` – Removes and returns the front element.
+    - `peek()` – Returns the front element without removing it.
+
+### Conclusion:
+- **LinkedList** is ideal for implementing queues due to its efficient addition and removal of elements from both ends.
+
+## 285. What is the purpose of the RandomAccess interface implemented by List classes in Java?
+### **Purpose of the RandomAccess Interface in Java**
+
+- The **RandomAccess** interface is a marker interface used to indicate that a class supports fast (constant-time) random access to its elements.
+- Implementing **RandomAccess** allows **List** classes to provide faster indexing with methods like `get(int index)` and `set(int index, E element)`.
+
+### Conclusion:
+- **RandomAccess** is used to optimize performance for **List** implementations like **ArrayList**, where accessing elements by index is efficient.
+
+## 286. Which List class is preferred in a multi-threaded application in Java?
+### **Preferred List Class in Multi-threaded Applications in Java**
+
+- **CopyOnWriteArrayList** is preferred in multi-threaded applications.
+  - It provides thread-safety by creating a new copy of the list on each write operation, ensuring that reads are not blocked by writes.
+  - Ideal for scenarios where read operations are frequent and write operations are infrequent.
+  - Methods like `add()`, `remove()`, and `set()` create a new copy of the list, ensuring consistency across threads.
+
+### Conclusion:
+- **CopyOnWriteArrayList** is the best choice for multi-threaded environments with more read operations than writes, providing thread-safety without external synchronization.
+
+## 287. What is the difference between "new ArrayList<>()" and "new ArrayList<>(size)" in Java, and can you explain with examples?
+### **Difference Between `new ArrayList<>()` and `new ArrayList<>(size)` in Java**
+
+1. **`new ArrayList<>()`**:
+   - Initializes an **ArrayList** with a default initial capacity (usually 10).
+   - Example:
+     ```java
+     ArrayList<Integer> list = new ArrayList<>();
+     // Initially capacity is 10, increases as elements are added
+     ```
+
+2. **`new ArrayList<>(size)`**:
+   - Initializes an **ArrayList** with the specified **initial capacity**. The list will not resize until it exceeds this capacity.
+   - Example:
+     ```java
+     ArrayList<Integer> list = new ArrayList<>(20);
+     // Initial capacity is 20, won't resize until more than 20 elements are added
+     ```
+
+### Conclusion:
+- Use **`new ArrayList<>()`** for dynamic growth with default initial capacity, and **`new ArrayList<>(size)`** when you know the number of elements in advance to optimize memory allocation.
+
+## 288. Which package do collection classes belong to in Java?
+### **Package for Collection Classes in Java**
+
+- All collection classes in Java are part of the **java.util** package.
+  - Examples: 
+    - **ArrayList**, **LinkedList**, **HashMap**, **TreeSet**, **PriorityQueue**, etc.
+  
+### Conclusion:
+- The **java.util** package provides various collection classes and interfaces to store and manipulate groups of objects.
+
+## 289. Explain the difference between "import java.util.*" and "import java.util.ArrayList;" in Java.
+### **Difference Between `import java.util.*` and `import java.util.ArrayList;` in Java**
+
+1. **`import java.util.*;`**:
+   - Imports all classes and interfaces from the **java.util** package.
+   - Allows access to any class within **java.util**, such as **ArrayList**, **HashMap**, **HashSet**, etc.
+   - Example:
+     ```java
+     import java.util.*;
+     ArrayList<Integer> list = new ArrayList<>();
+     ```
+
+2. **`import java.util.ArrayList;`**:
+   - Imports only the **ArrayList** class from the **java.util** package.
+   - Only **ArrayList** can be used directly in the code, other classes in **java.util** would need individual imports.
+   - Example:
+     ```java
+     import java.util.ArrayList;
+     ArrayList<Integer> list = new ArrayList<>();
+     ```
+
+### Conclusion:
+- **`import java.util.*;`** imports all classes in **java.util**, while **`import java.util.ArrayList;`** imports only the **ArrayList** class specifically.
+
+## 290. What is an Iterable, and what is an Iterator in Java?
+### **Iterable and Iterator in Java**
+
+1. **Iterable**:
+   - An interface that represents a collection of objects that can be iterated (looped) over.
+   - Classes implementing **Iterable** must define the `iterator()` method, which returns an **Iterator** object.
+   - Example:
+     ```java
+     public class MyCollection implements Iterable<Integer> {
+         @Override
+         public Iterator<Integer> iterator() {
+             // Returns an iterator for the collection
+         }
+     }
+     ```
+
+2. **Iterator**:
+   - An interface used to iterate over the elements of a collection, one at a time.
+   - Provides methods like:
+     - `hasNext()` – Checks if more elements are available.
+     - `next()` – Returns the next element.
+     - `remove()` – Removes the current element from the collection.
+   - Example:
+     ```java
+     Iterator<Integer> iterator = list.iterator();
+     while (iterator.hasNext()) {
+         System.out.println(iterator.next());
+     }
+     ```
+
+### Conclusion:
+- **Iterable** is used by collections to allow iteration, while **Iterator** is used to traverse through the elements in a collection.
+
+## 291. When should you use an Iterator instead of a "for each" loop in Java?
+### **When to Use Iterator Instead of "For Each" Loop in Java**
+
+1. **Use Iterator when:**
+   - **Element Removal**: You need to **remove** elements while iterating through the collection. **Iterator** provides the `remove()` method for safe removal.
+   - **Complex Iteration**: You require more **control** over the iteration process (e.g., skipping elements, modifying the collection during iteration).
+   - **Custom Iteration Logic**: You need to implement custom iteration behavior (e.g., traversing in reverse order).
+
+   Example:
+   ```java
+   Iterator<Integer> iterator = list.iterator();
+   while (iterator.hasNext()) {
+       Integer num = iterator.next();
+       if (num % 2 == 0) {
+           iterator.remove(); // Removing even numbers
+       }
+   }
+   ```
+
+2. **Use "For Each" loop when:**
+   - The collection is not being modified during iteration.
+   - You simply need to **iterate over all elements** in the collection without removing or altering them.
+
+   Example:
+   ```java
+   for (Integer num : list) {
+       System.out.println(num);
+   }
+   ```
+
+### Conclusion:
+- Use **Iterator** for more control, especially when modifying the collection, and use **"for each" loop** for simple, straightforward iterations.
+
+## 292. How can you iterate through a List in reverse order in Java?
+### **Iterating Through a List in Reverse Order in Java**
+
+1. **Using `ListIterator`**:
+   - **ListIterator** allows reverse iteration using the `hasPrevious()` and `previous()` methods.
+   - Example:
+     ```java
+     List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+     ListIterator<Integer> iterator = list.listIterator(list.size());
+     while (iterator.hasPrevious()) {
+         System.out.println(iterator.previous());
+     }
+     ```
+
+2. **Using `for` loop**:
+   - You can manually iterate through the list in reverse order by adjusting the index.
+   - Example:
+     ```java
+     List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+     for (int i = list.size() - 1; i >= 0; i--) {
+         System.out.println(list.get(i));
+     }
+     ```
+
+3. **Using `Collections.reverse()`**:
+   - You can reverse the list and then iterate through it normally.
+   - Example:
+     ```java
+     List<Integer> list = Arrays.asList(1, 2, 3, 4, 5);
+     Collections.reverse(list);
+     for (Integer num : list) {
+         System.out.println(num);
+     }
+     ```
+
+### Conclusion:
+- Use **`ListIterator`** for optimal reverse iteration, or a **`for` loop** for more control. You can also use **`Collections.reverse()`** for simple cases.
+
+## 293. What are the differences between an Array and an ArrayList in Java?
+### **Differences Between an Array and an ArrayList in Java**
+
+- **Size**: Arrays have a fixed size, while ArrayLists have a dynamic size that grows automatically.
+- **Type**: Arrays can hold any type, including primitives, while ArrayLists can only hold objects (reference types).
+- **Performance**: Arrays offer better performance for basic operations, while ArrayLists may have overhead due to resizing.
+- **Methods**: Arrays don’t have built-in methods for manipulation, while ArrayLists offer many built-in methods (add, remove, etc.).
+- **Null Elements**: Both can store `null` elements.
+- **Resizing**: Arrays cannot be resized, while ArrayLists automatically resize when capacity is exceeded.
+
+### Conclusion:
+- Use **Array** for fixed size and performance; use **ArrayList** for flexibility and resizing needs.
+
+## 294. In which situations is an Array or an ArrayList best suited in Java?
+### **Situations Best Suited for Array vs. ArrayList in Java**
+
+- **Use an Array when**:
+  - The size of the collection is known in advance and does not change.
+  - You need to store primitive types (e.g., `int`, `char`) for better performance.
+  - Performance is critical and resizing or dynamic growth is not necessary.
+  - You need a multi-dimensional collection (e.g., 2D arrays).
+
+- **Use an ArrayList when**:
+  - The size of the collection is dynamic and can change during runtime.
+  - You need to store objects and benefit from built-in methods (e.g., `add()`, `remove()`, `clear()`).
+  - You require more flexibility, such as easy addition or removal of elements.
+  - You prefer easier handling of growing data collections with automatic resizing.
+
+### Conclusion:
+- **Array** is best for fixed size and primitive types.
+- **ArrayList** is better for dynamic, flexible collections of objects.
+
+## 295. Why does an array start with an index of 0 in Java?
+### **Why does an Array start with an Index of 0 in Java?**
+
+Arrays in Java (and most programming languages) start with an index of 0 due to historical reasons and efficiency:
+- **Historical Influence**: Many early programming languages, like C, started array indexing at 0, and this tradition was carried forward.
+- **Memory Address Calculation**: Starting from index 0 simplifies the calculation of memory addresses. The element at index `i` is located at `baseAddress + (i * sizeOfElement)`, and with 0-based indexing, the first element is exactly at `baseAddress`.
+- **Performance**: 0-based indexing can be more efficient, as it avoids the need for adjusting the index in memory calculations.
+
+### Conclusion:
+- 0-based indexing is an efficient convention that simplifies memory management and improves performance.
+
+## 296. Can you add any type of element to an ArrayList in Java?
+### **Can You Add Any Type of Element to an ArrayList in Java?**
+
+No, you cannot add any type of element to an ArrayList in Java. The type of elements in an ArrayList is determined by its generic type. 
+
+- **For objects**: You can only add objects of the specified type or its subclasses.
+- **For primitives**: You can’t add primitive types like `int`, `char`, etc., directly, but you can use their wrapper classes (`Integer`, `Character`, etc.) due to autoboxing.
+
+### Example:
+```java
+ArrayList<Integer> list = new ArrayList<>();
+list.add(10); // Allowed
+list.add("String"); // Compile-time error
+```
+
+### Conclusion:
+- ArrayLists are type-safe, meaning you can only add elements of the specified type or its subclasses.
+
+## 297. How can you make an ArrayList type-safe in Java?
+### **How Can You Make an ArrayList Type-Safe in Java?**
+
+To make an **ArrayList type-safe**, use **Generics**. Generics allow you to specify the type of elements an ArrayList can hold, ensuring that only elements of the specified type are added, thus preventing `ClassCastException`.
+
+### Example:
+```java
+// Type-safe ArrayList
+ArrayList<String> list = new ArrayList<>();
+list.add("Hello"); // Allowed
+list.add(123); // Compile-time error: incompatible types
+```
+
+### Key Points:
+- **Generics** enforce type safety at compile time.
+- You specify the type using angle brackets (`<>`), e.g., `ArrayList<String>`, `ArrayList<Integer>`, etc.
+
+### Conclusion:
+- Using Generics, you can ensure that only the specified type of elements can be added to the ArrayList, making it type-safe.
+
+## 298. What is the time complexity of operations for Array and ArrayList in Java? For example, searching with an index is O(1), but without an index, it's O(n) in the worst case.
+### **Time Complexity of Operations for Array and ArrayList in Java**
+
+#### **Array**:
+- **Access by index**: `O(1)` – Arrays allow direct access via indices.
+- **Search (without index)**: `O(n)` – You need to iterate through all elements in the worst case.
+- **Insert/Remove (middle/end)**: `O(n)` – Shifting elements is required.
+- **Insert/Remove (at start)**: `O(n)` – Shifting all elements.
+
+#### **ArrayList**:
+- **Access by index**: `O(1)` – ArrayLists allow direct access via indices (backed by arrays).
+- **Search (without index)**: `O(n)` – Linear search.
+- **Insert/Remove (middle/end)**: `O(n)` – Shifting elements for insertion/removal.
+- **Insert/Remove (at start)**: `O(n)` – Shifting all elements.
+
+### Key Points:
+- **Array**: Fast for access, but resizing or inserting/removing elements can be slow.
+- **ArrayList**: Dynamic resizing, but also has overhead for resizing and shifting elements.
+
+### Conclusion:
+- **Arrays** are ideal for fixed-size collections and fast indexing.
+- **ArrayLists** are flexible and good for dynamic sizes but may be slower for certain operations (like insert/remove).
+
+## 299. What is the understanding of the basic methods in the Collection interface in Java?
+### **Basic Methods in the Collection Interface in Java**
+
+The `Collection` interface is the root interface in the Java Collections Framework. Here are some basic methods defined in it:
+
+1. **add(E e)**: 
+   - Adds the specified element to the collection.
+   - Returns `true` if the collection changed as a result.
+
+2. **remove(Object o)**:
+   - Removes a single occurrence of the specified element.
+   - Returns `true` if the collection contained the specified element.
+
+3. **size()**:
+   - Returns the number of elements in the collection.
+
+4. **isEmpty()**:
+   - Checks if the collection is empty.
+   - Returns `true` if the collection contains no elements.
+
+5. **contains(Object o)**:
+   - Checks if the collection contains the specified element.
+   - Returns `true` if the element is present.
+
+6. **clear()**:
+   - Removes all elements from the collection.
+
+7. **iterator()**:
+   - Returns an iterator to traverse the collection.
+
+8. **toArray()**:
+   - Converts the collection into an array.
+
+### Conclusion:
+These methods provide basic functionalities for manipulating and querying collections in Java, such as adding/removing elements, checking for emptiness, and iterating over elements.
+
+## 300. What are the extra methods available in each interface, for example, List, in Java?
+### **Extra Methods Available in Each Collection Interface (e.g., List) in Java**
+
+#### **List Interface** (extends Collection):
+- **add(int index, E element)**: 
+   - Inserts the specified element at the specified position in the list.
+  
+- **remove(int index)**: 
+   - Removes the element at the specified position.
+
+- **get(int index)**: 
+   - Returns the element at the specified position in the list.
+
+- **set(int index, E element)**: 
+   - Replaces the element at the specified position.
+
+- **indexOf(Object o)**: 
+   - Returns the index of the first occurrence of the specified element.
+
+- **lastIndexOf(Object o)**: 
+   - Returns the index of the last occurrence of the specified element.
+
+- **subList(int fromIndex, int toIndex)**: 
+   - Returns a view of the portion of the list between the specified `fromIndex` (inclusive) and `toIndex` (exclusive).
+
+#### **Set Interface** (extends Collection):
+- **addAll(Collection<? extends E> c)**: 
+   - Adds all elements from another collection to the set.
+  
+- **retainAll(Collection<?> c)**: 
+   - Retains only the elements that are present in both sets.
+
+- **removeAll(Collection<?> c)**: 
+   - Removes from the set all elements that are contained in another collection.
+
+#### **Queue Interface** (extends Collection):
+- **offer(E e)**: 
+   - Adds the specified element to the queue.
+
+- **poll()**: 
+   - Retrieves and removes the head of the queue.
+
+- **peek()**: 
+   - Retrieves but does not remove the head of the queue.
+
+#### **Deque Interface** (extends Queue):
+- **addFirst(E e)**: 
+   - Inserts the specified element at the front of the deque.
+
+- **addLast(E e)**: 
+   - Inserts the specified element at the end of the deque.
+
+- **removeFirst()**: 
+   - Removes and returns the first element of the deque.
+
+- **removeLast()**: 
+   - Removes and returns the last element of the deque.
+
+### Conclusion:
+Each collection interface adds specific methods based on its intended use, such as index-based operations for `List`, element ordering for `Queue`, or uniqueness for `Set`.
+
+## 301. What is an Iterable, and why is it important in Java?
+### **Iterable in Java**
+
+- **Definition**:  
+  The `Iterable` interface is the root interface for all collection classes in Java. It represents a collection of elements that can be iterated (looped) through.
+
+- **Key Method**:
+  - `iterator()`:  
+    Returns an `Iterator` object, which allows you to iterate through the elements of the collection one by one.
+
+- **Importance**:
+  - **For-each loop**:  
+    Any class implementing `Iterable` can be used in the enhanced `for-each` loop in Java, providing a convenient way to loop through elements.
+  
+  - **Polymorphism**:  
+    It allows collections (like `List`, `Set`, `Queue`, etc.) to be treated uniformly, regardless of their specific implementations, enabling code reuse and simplicity.
+  
+  - **Flexibility**:  
+    Since `Iterable` is implemented by all collection classes, you can iterate through any collection in Java (like `ArrayList`, `HashSet`, `TreeMap`, etc.) using the same approach.
+
+### Example:
+```java
+List<String> list = new ArrayList<>();
+list.add("A");
+list.add("B");
+list.add("C");
+
+for (String s : list) {
+    System.out.println(s);  // Iterates through the list using Iterable
+}
+```
+
+## 302. How do you understand extra methods available in each interface, such as List, in Java?
+### **Extra Methods in Interfaces like `List` in Java**
+
+- **List Interface**:  
+  The `List` interface extends `Collection` and represents an ordered collection that allows duplicate elements. It provides additional methods specific to lists.
+
+- **Key Extra Methods in `List`**:
+  - `add(int index, E element)`:  
+    Inserts the specified element at the specified position in the list.
+  
+  - `get(int index)`:  
+    Returns the element at the specified position in the list.
+  
+  - `remove(int index)`:  
+    Removes the element at the specified position in the list.
+  
+  - `set(int index, E element)`:  
+    Replaces the element at the specified position in the list with the specified element.
+  
+  - `indexOf(Object o)`:  
+    Returns the index of the first occurrence of the specified element in the list.
+  
+  - `lastIndexOf(Object o)`:  
+    Returns the index of the last occurrence of the specified element in the list.
+
+- **Why These Methods Matter**:  
+  These methods allow you to manipulate elements by their positions, making `List` a useful interface when order matters and when elements need to be accessed by index.
+
+### Example:
+```java
+List<String> list = new ArrayList<>();
+list.add("Apple");
+list.add("Banana");
+list.add(1, "Orange");  // Adds "Orange" at index 1
+
+System.out.println(list.get(1));  // Outputs: Orange
+```
+
+## 303. What is an Iterable in Java?
+### **Iterable in Java**
+
+- **Definition**:  
+  `Iterable` is an interface in Java that represents a collection of elements that can be iterated over. It is the root interface for all collection classes in Java.
+
+- **Key Method**:
+  - `iterator()`:  
+    Returns an `Iterator` object that can be used to iterate over the elements of the collection.
+
+- **Importance**:
+  - **For-each Loop**:  
+    Any class implementing `Iterable` can be used in the enhanced `for-each` loop, allowing easy iteration through elements.
+  
+  - **Uniformity**:  
+    Since all collection types like `List`, `Set`, and `Queue` implement `Iterable`, they can all be iterated in the same way.
+
+### Example:
+```java
+List<String> list = new ArrayList<>();
+list.add("Apple");
+list.add("Banana");
+
+for (String fruit : list) {
+    System.out.println(fruit);  // Iterates through the list
+}
+```
+
+## 304. In which situations is an Array preferred in Java?
+### **When to Use an Array in Java**
+
+- **Fixed Size**:  
+  Arrays are preferred when you know the exact number of elements in advance and the size will not change dynamically.
+  
+- **Performance**:  
+  Arrays provide faster access to elements (O(1) time complexity for index-based access), making them ideal for performance-critical applications.
+  
+- **Memory Efficiency**:  
+  Arrays are more memory-efficient compared to other collection types, especially when the size is fixed.
+  
+- **Primitive Types**:  
+  When dealing with primitive types (like `int[]`, `char[]`), arrays avoid the overhead of autoboxing and provide better performance.
+
+- **Low Overhead**:  
+  Since arrays don’t have the extra functionality of collection classes, they incur less memory overhead.
+
+### Example:
+```java
+int[] numbers = new int[10];  // Fixed-size array
+numbers[0] = 1;  // Direct access
+```
+
+## 305. In which situations is an ArrayList preferred in Java?
+### **When to Use an ArrayList in Java**
+
+- **Dynamic Size**:  
+  Use `ArrayList` when the number of elements is not known in advance and you expect the size to change dynamically (elements added or removed).
+
+- **Random Access**:  
+  `ArrayList` is ideal when you need fast random access to elements (O(1) time complexity for index-based access).
+
+- **Built-in Methods**:  
+  If you need additional functionality like automatic resizing, sorting, and easier element manipulation, `ArrayList` provides convenient methods.
+
+- **Non-primitive Elements**:  
+  If you're storing non-primitive types (like objects), `ArrayList` offers a flexible way to store and manage them.
+
+- **Frequent Insertions/Deletions at the End**:  
+  Insertion and deletion at the end of the `ArrayList` are faster (amortized O(1) time complexity), making it suitable for situations like dynamic list management.
+
+### Example:
+```java
+ArrayList<String> fruits = new ArrayList<>();
+fruits.add("Apple");  // Dynamic size
+fruits.add("Banana");
+```
